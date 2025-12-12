@@ -1,4 +1,5 @@
 module LOGIC_BLOCK(
+    input logic power_en,
     input [31:0] A,
     input [31:0] B,
     input [2:0] CMD,

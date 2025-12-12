@@ -1,5 +1,6 @@
 module MULT32 (
     input logic clk, reset_n,
+    input logic power_en,
     input logic [31:0] A,
     input logic [31:0] B,
     output logic [39:0] P_REG,

@@ -1,6 +1,7 @@
 module ADDER32 (
 	input  clk,
 	input  reset_n,
+    input logic power_en,
 	input  MODE_SEL,
     input  C0,
     input  [31:0] A,

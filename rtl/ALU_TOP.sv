@@ -1,15 +1,21 @@
 module ALU_TOP(
     input clk,
     input reset_n,
+
+    //operands & opcode
     input [31:0] A,
     input [31:0] B,
     input [4:0] CMD,
-    input [1:0] brach_pred,
-    
+
+    //performance control
+    input [1:0] branch,
+    input [2:0] low_power,
+
+    //outputs
     output wire [31:0] Y,
     output logic [31:0] result_aux,
     output logic [7:0] flag_reg
-    );
+);
 //flag register
 // [7]PF, [6]0, [5]0, [4]0, [3]OF, [2]CF, [1]SF, [0]ZF
 logic PF_flag;
