@@ -18,9 +18,15 @@ localparam CMD_ROL = 3'b100; // Shift Right Logical
 localparam CMD_ROR = 3'b101; // Shift Right Arithmetic
 localparam CMD_BYT = 3'b111; // Byte Swap
 
-    logic [32:0] temp_res;
+logic [32:0] temp_res;
 
-    always_comb begin
+always_comb begin
+    // --- POWER GATING CLAMP/ISOLATION LOGIC ---
+    if (!power_en) begin
+        Y = 32'h0;      // Clamp output to 0 when sleeping (essential Isolation Cell function)
+        CF_flag = 1'b0;
+    end 
+    else begin
         case (CMD)
             CMD_SLL: begin
                 temp_res = {1'b0, A} << B;
@@ -66,5 +72,6 @@ localparam CMD_BYT = 3'b111; // Byte Swap
             end
         endcase
     end
+end
 
 endmodule
