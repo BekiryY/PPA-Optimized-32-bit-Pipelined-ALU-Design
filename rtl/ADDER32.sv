@@ -15,9 +15,12 @@ logic [31:0] G;
 
 //Registered values for pipeline
 logic [15:0] P_REG; 
-logic [15:0] G_REG; 
+logic [15:0] G_REG;
+logic [15:0] P_lower_REG; // ADDED: Register for lower P bits to align with C_REG
+
+logic C0_REG;       //C0 register (Carry-in) (different than C[0])
 logic [14:0] C_REG; //C[15] explicitly defined as C15_REG
-logic C15_REG; 
+logic C15_REG; 	 	//C15 register 
 
 //MODE_SEL = 0 for addition
 //MODE_SEL = 1 for subtraction
@@ -41,17 +44,20 @@ always @(posedge clk or negedge reset_n) begin
 	if (!reset_n) begin
 		P_REG <= 0;
 		G_REG <= 0;
+        P_lower_REG <= 0; // Reset new register
+		C0_REG <= 0;
 		C_REG <= 0;
 		C15_REG <= 0;
 	end 
 	else begin
 		P_REG <= P[31:16];
 		G_REG <= G[31:16];
+        P_lower_REG <= P[15:0]; // Capture P[15:0] for next stage
+		C0_REG <= C0;
 		C_REG <= C[14:0];
 		C15_REG <= C[15];
 	end
 end
-
 
 // CLA16 Instance for Lower 16 bits
 CLA16 CLA16_0 (
@@ -70,8 +76,8 @@ CLA16 CLA16_1 (
 );
 
 SUM16 SUM16_0 (
-.P(P[15:0]),
-.C({C[14:0], C0}),
+.P(P_lower_REG), // Use registered P to match C_REG timing
+.C({C_REG[14:0], C0_REG}),
 .S(Y[15:0])
 );
 
