@@ -8,27 +8,15 @@ module MULT32 (
     // 1. Break inputs into bytes
     logic [7:0] a[3:0]; // a[0] is A[7:0], a[1] is A[15:8]...
     logic [7:0] b[3:0];
-    logic [31:0] A_REG;
-    logic [31:0] B_REG;
-    
-    assign a[0] = A_REG[7:0],   a[1] = A_REG[15:8],  a[2] = A_REG[23:16], a[3] = A_REG[31:24];
-    assign b[0] = B_REG[7:0],   b[1] = B_REG[15:8],  b[2] = B_REG[23:16], b[3] = B_REG[31:24];
+
+    assign a[0] = A[7:0],   a[1] = A[15:8],  a[2] = A[23:16], a[3] = A[31:24];
+    assign b[0] = B[7:0],   b[1] = B[15:8],  b[2] = B[23:16], b[3] = B[31:24];
 
     // --- STAGE 1: The 16 Multipliers ---
     // We store the results in a 2D array for easy indexing
     logic [15:0] partials [3:0][3:0]; 
     logic [15:0] partials_reg [3:0][3:0]; 
 
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            A_REG <= 0;
-            B_REG <= 0;
-        end 
-        else begin
-            A_REG <= A;
-            B_REG <= B;
-        end
-    end
 
     genvar i, j;
     generate

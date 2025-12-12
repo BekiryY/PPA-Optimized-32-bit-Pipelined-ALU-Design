@@ -4,6 +4,8 @@ module ALU_TOP(
     input [31:0] A,
     input [31:0] B,
     input [4:0] CMD,
+    input [1:0] brach_pred,
+    
     output wire [31:0] Y,
     output logic [31:0] result_aux,
     output logic [7:0] flag_reg

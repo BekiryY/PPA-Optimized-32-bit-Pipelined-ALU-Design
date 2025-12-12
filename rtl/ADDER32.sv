@@ -13,8 +13,6 @@ logic [31:0] C;
 logic [31:0] P;
 logic [31:0] G;
 logic C0_REG;
-logic [31:0] A_REG;
-logic [31:0] B_REG;
 logic [15:0] P_REG; 
 logic [15:0] G_REG; 
 logic C15_REG; 
@@ -26,23 +24,21 @@ logic [15:0] sum_lower_comb;
 assign B_XORED = B ^ {32{MODE_SEL}};
 
 PG16 PG16_0 (
-.A(A_REG[15:0]),
-.B(B_REG[15:0]),
+.A(A[15:0]),
+.B(B_XORED[15:0]),
 .P(P[15:0]),
 .G(G[15:0])
 );
 
 PG16 PG16_1 (
-.A(A_REG[31:16]),
-.B(B_REG[31:16]),
+.A(A[31:16]),
+.B(B_XORED[31:16]),
 .P(P[31:16]),
 .G(G[31:16])
 );
 
 always @(posedge clk or negedge reset_n) begin
 	if (!reset_n) begin
-		A_REG <= 0;
-		B_REG <= 0;
 		P_REG <= 0;
 		G_REG <= 0;
 		C15_REG <= 0;
@@ -50,8 +46,6 @@ always @(posedge clk or negedge reset_n) begin
 		sum_lower_reg <= 0;
 	end 
 	else begin
-		A_REG <= A;
-		B_REG <= B_XORED;
 		P_REG <= P[31:16];
 		G_REG <= G[31:16];
 		C15_REG <= C[15];
@@ -60,60 +54,24 @@ always @(posedge clk or negedge reset_n) begin
 	end
 end
 
-CLA4 CLA4_0 (
-.P(P[3:0]),
-.G(G[3:0]),
-.C0(C0_REG),
-.C(C[3:0])
+// CLA16 Instance for Lower 16 bits
+CLA16 CLA16_0 (
+    .P(P[15:0]),
+    .G(G[15:0]),
+    .C0(C0_REG),
+    .C(C[15:0]),
+    .Pg(), // Not used at top level
+    .Gg()  // Not used at top level
 );
 
-CLA4 CLA4_1 (
-.P(P[7:4]),
-.G(G[7:4]),
-.C0(C[3]),
-.C(C[7:4])
-);
-
-CLA4 CLA4_2 (
-.P(P[11:8]),
-.G(G[11:8]),
-.C0(C[7]),
-.C(C[11:8])
-);
-
-CLA4 CLA4_3 (
-.P(P[15:12]),
-.G(G[15:12]),
-.C0(C[11]),
-.C(C[15:12])
-);
-
-CLA4 CLA4_4 (
-.P(P_REG[3:0]),
-.G(G_REG[3:0]),
-.C0(C15_REG),
-.C(C[19:16])
-);
-
-CLA4 CLA4_5 (
-.P(P_REG[7:4]),
-.G(G_REG[7:4]),
-.C0(C[19]),
-.C(C[23:20])
-);
-
-CLA4 CLA4_6 (
-.P(P_REG[11:8]),
-.G(G_REG[11:8]),
-.C0(C[23]),
-.C(C[27:24])
-);
-
-CLA4 CLA4_7 (
-.P(P_REG[15:12]),
-.G(G_REG[15:12]),
-.C0(C[27]),
-.C(C[31:28])
+// CLA16 Instance for Upper 16 bits
+CLA16 CLA16_1 (
+    .P(P_REG[15:0]),
+    .G(G_REG[15:0]),
+    .C0(C15_REG),
+    .C(C[31:16]),
+    .Pg(),
+    .Gg()
 );
 
 SUM16 SUM16_0 (
@@ -142,23 +100,71 @@ assign G = A & B;
 assign	P = A ^ B;
 endmodule
 
+module CLA16(
+    input [15:0] P,
+    input [15:0] G,
+    input C0,
+    output [15:0] C,
+    output Pg,
+    output Gg
+);
+    logic [3:0] Pg_int;
+    logic [3:0] Gg_int;
+    logic [2:0] C_int; // Internal carries between CLA4 blocks
+
+    // Lookahead Carry Unit Logic
+    assign C_int[0] = Gg_int[0] | (Pg_int[0] & C0);
+    assign C_int[1] = Gg_int[1] | (Pg_int[1] & Gg_int[0]) | (Pg_int[1] & Pg_int[0] & C0);
+    assign C_int[2] = Gg_int[2] | (Pg_int[2] & Gg_int[1]) | (Pg_int[2] & Pg_int[1] & Gg_int[0]) | (Pg_int[2] & Pg_int[1] & Pg_int[0] & C0);
+
+    // Group Propagate and Generate
+    assign Pg = &Pg_int;
+    assign Gg = Gg_int[3] | (Pg_int[3] & Gg_int[2]) | (Pg_int[3] & Pg_int[2] & Gg_int[1]) | (Pg_int[3] & Pg_int[2] & Pg_int[1] & Gg_int[0]);
+
+    CLA4 CLA4_0 (
+        .P(P[3:0]), .G(G[3:0]), .C0(C0),
+        .C(C[3:0]), .Pg(Pg_int[0]), .Gg(Gg_int[0])
+    );
+
+    CLA4 CLA4_1 (
+        .P(P[7:4]), .G(G[7:4]), .C0(C_int[0]),
+        .C(C[7:4]), .Pg(Pg_int[1]), .Gg(Gg_int[1])
+    );
+
+    CLA4 CLA4_2 (
+        .P(P[11:8]), .G(G[11:8]), .C0(C_int[1]),
+        .C(C[11:8]), .Pg(Pg_int[2]), .Gg(Gg_int[2])
+    );
+
+    CLA4 CLA4_3 (
+        .P(P[15:12]), .G(G[15:12]), .C0(C_int[2]),
+        .C(C[15:12]), .Pg(Pg_int[3]), .Gg(Gg_int[3])
+    );
+endmodule
+
 module CLA4(
     input [3:0] P,
     input [3:0] G,
     input C0,
-    output [3:0] C
+    output [3:0] C,
+    output Pg,
+    output Gg
     );
-// C[0] (Carry-out of stage 0, or C1) = G[0] + P[0] * C0
-assign C[0] = G[0] | (P[0] & C0);
+    // Group Propagate and Generate for this 4-bit block
+    assign Pg = &P;
+    assign Gg = G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]);
 
-// C[1] (Carry-out of stage 1, or C2) = G[1] + P[1]*G[0] + P[1]*P[0]*C0
-assign C[1] = G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0);
+    // C[0] (Carry-out of stage 0, or C1) = G[0] + P[0] * C0
+    assign C[0] = G[0] | (P[0] & C0);
 
-// C[2] (Carry-out of stage 2, or C3) = G[2] + P[2]*G[1] + P[2]*P[1]*G[0] + P[2]*P[1]*P[0]*C0
-assign C[2] = G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0);
+    // C[1] (Carry-out of stage 1, or C2) = G[1] + P[1]*G[0] + P[1]*P[0]*C0
+    assign C[1] = G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0);
 
-// C[3] (Carry-out of stage 3, or C4) = G[3] + P[3]*G[2] + P[3]*P[2]*G[1] + P[3]*P[2]*P[1]*G[0] + P[3]*P[2]*P[1]*P[0]*C0
-assign C[3] = G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]) | (P[3] & P[2] & P[1] & P[0] & C0);
+    // C[2] (Carry-out of stage 2, or C3) = G[2] + P[2]*G[1] + P[2]*P[1]*G[0] + P[2]*P[1]*P[0]*C0
+    assign C[2] = G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0);
+
+    // C[3] (Carry-out of stage 3, or C4) = G[3] + P[3]*G[2] + P[3]*P[2]*G[1] + P[3]*P[2]*P[1]*G[0] + P[3]*P[2]*P[1]*P[0]*C0
+    assign C[3] = G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]) | (P[3] & P[2] & P[1] & P[0] & C0);
 endmodule
 
 module SUM16(
