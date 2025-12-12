@@ -1,4 +1,4 @@
-module MULT32_8x8_Pipe (
+module MULT32 (
     input clk, reset_n,
     input [31:0] A,
     input [31:0] B,

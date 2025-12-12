@@ -37,6 +37,9 @@ logic ZF_flag;
 // 10001	A <<< B	        SLA         Shift Left Arithmetic
 // 10010	A >> B	        SRL         Shift Right Logical
 // 10011	A >>> B	        SRA         Shift Right Arithmetic
+// 10100	A  B	        ROR         Rotate Right
+// 10101	A  B	        ROL         Rotate Left
+// 10111    A  B	        BYT         Byte swap
 //
 //logic unit (11xxx)
 // 11000	~A	            NOT         Bitwise NOT
@@ -89,23 +92,11 @@ end
 //10xxx selects shifter
 //11xxx selects logic_block
 
-//2-4 decoder
-always @(*) begin
-    case (CMD[4:3])
-        2'b00: Y = adder.Y;
-        2'b01: Y = mult.Y;
-        2'b10: Y = shifter.Y;
-        2'b11: Y = logic_block.Y;
-    endcase
-end
-
-
-//4-1 final MUX
 // Tristate buffers for output selection
-assign Y = (CMD[4:3] == 2'b00) ? MUX_i[0] : 32'bz;   //adder32
-assign Y = (CMD[4:3] == 2'b01) ? MUX_i[1] : 32'bz;   //mult32
-assign Y = (CMD[4:3] == 2'b10) ? MUX_i[2] : 32'bz;   //shifter
-assign Y = (CMD[4:3] == 2'b11) ? MUX_i[3] : 32'bz;   //logic_block
+assign Y = (CMD[4:3] == 2'b00) ? adder.Y : 32'bz;   //adder32
+assign Y = (CMD[4:3] == 2'b01) ? mult.Y : 32'bz;   //mult32
+assign Y = (CMD[4:3] == 2'b10) ? shifter.Y : 32'bz;   //shifter
+assign Y = (CMD[4:3] == 2'b11) ? logic_block.Y : 32'bz;   //logic_block
 
 // Flag Register Update (including CF)
 always @(posedge clk or negedge reset_n) begin
@@ -151,7 +142,7 @@ ADDER32 adder(
     .Y({CF_adder, MUX_i[0]})
 );
 
-MULT32_8x8_Pipe mult(
+MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
     .A(A),
