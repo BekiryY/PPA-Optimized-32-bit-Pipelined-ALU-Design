@@ -117,9 +117,9 @@ module MULT32 (
         if (!reset_n) 
             valid_pipe <= 5'd0;
         else 
-            valid_pipe <= {valid_pipe[3:0], start_i & power_en};
+            valid_pipe <= {valid_pipe[4:0], start_i & power_en};
     end
-    assign valid_o = valid_pipe[3];
+    assign valid_o = valid_pipe[4];
 
 endmodule
 

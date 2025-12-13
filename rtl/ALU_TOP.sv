@@ -8,6 +8,7 @@ module ALU_TOP(
     input [4:0] CMD,
 
     //performance control
+    input idle,
     input [1:0] branch,
     input [2:0] low_power,
 
@@ -102,7 +103,7 @@ end
 
 // Tristate buffers for output selection
 assign Y = (CMD[4:3] == 2'b00) ? adder.Y : 32'bz;   //adder32
-assign Y = (CMD[4:3] == 2'b01) ? mult.Y : 32'bz;   //mult32
+assign Y = (CMD[4:3] == 2'b01) ? mult.P[31:0] : 32'bz;   //mult32 (Lower 32 bits)
 assign Y = (CMD[4:3] == 2'b10) ? shifter.Y : 32'bz;   //shifter
 assign Y = (CMD[4:3] == 2'b11) ? logic_block.Y : 32'bz;   //logic_block
 
@@ -125,6 +126,47 @@ always @(posedge clk or negedge reset_n) begin
 end
 
 
+logic [3:0] power_en;
+logic [2:0] cnt_adder;   // Max 4 cycles
+logic [2:0] cnt_mult;    // Max 7 cycles
+logic [1:0] cnt_shifter; // Max 3 cycles
+logic [1:0] cnt_logic;   // Max 3 cycles
+
+always @(posedge clk or negedge reset_n) begin
+    if (!reset_n) begin
+        cnt_adder <= 0;
+        cnt_mult <= 0;
+        cnt_shifter <= 0;
+        cnt_logic <= 0;
+    end else begin
+        // Adder Control (00) -> 4 cycles
+        if (branch == 2'b00) cnt_adder <= 3'd4;
+        else if (cnt_adder > 0) cnt_adder <= cnt_adder - 1;
+
+        // Multiplier Control (01) -> 7 cycles
+        if (branch == 2'b01) cnt_mult <= 3'd7;
+        else if (cnt_mult > 0) cnt_mult <= cnt_mult - 1;
+
+        // Shifter Control (10) -> 3 cycles
+        if (branch == 2'b10) cnt_shifter <= 2'd3;
+        else if (cnt_shifter > 0) cnt_shifter <= cnt_shifter - 1;
+
+        // Logic Block Control (11) -> 3 cycles
+        if (branch == 2'b11) cnt_logic <= 2'd3;
+        else if (cnt_logic > 0) cnt_logic <= cnt_logic - 1;
+    end
+end
+
+assign power_en[0] = (cnt_adder > 0);
+assign power_en[1] = (cnt_mult > 0);
+assign power_en[2] = (cnt_shifter > 0);
+assign power_en[3] = (cnt_logic > 0);
+
+
+//here that counts that 4 or 7 or 3
+
+
+
 logic [31:0] count;
 //counter
 always @(posedge clk or negedge reset_n) begin
@@ -143,6 +185,7 @@ end
 ADDER32 adder(
     .clk(clk),
     .reset_n(reset_n),
+    .power_en(power_en[0]),
     .A(A),
     .B(B),
     .MODE_SEL(adder_mode),
@@ -153,9 +196,12 @@ ADDER32 adder(
 MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
+    .power_en(power_en[1]),
+    .start_i(branch == 2'b01),
     .A(A),
     .B(B),
-    .Y({result_aux, MUX_i[1]})
+    .P({result_aux, MUX_i[1]}),
+    .valid_o()
 );
 
 //used for SHL, SHR, SLA, SRA
@@ -163,6 +209,7 @@ MULT32 mult(
 SHIFTER shifter(
     .clk(clk),
     .reset_n(reset_n),
+    .power_en(power_en[2]),
     .A(A),
     .B(B[4:0]),
     .CMD(CMD[1:0]),
@@ -175,6 +222,7 @@ SHIFTER shifter(
 LOGIC_BLOCK logic_block(
     .clk(clk),
     .reset_n(reset_n),
+    .power_en(power_en[3]),
     .A(A),
     .B(B),
     .CMD(CMD[2:0]), 
