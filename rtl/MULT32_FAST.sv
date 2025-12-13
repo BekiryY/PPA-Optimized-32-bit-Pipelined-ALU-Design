@@ -1,23 +1,24 @@
 module MULT32 (
     input logic clk, reset_n,
     input logic power_en,
+    
+    //Inputs
+    input logic start_i,
     input logic [31:0] A,
     input logic [31:0] B,
-    output logic [39:0] P_REG,
-    output logic [63:0] P
+    
+    //Outputs
+    output logic [63:0] P_REG,
+    output logic valid_o
 );
 
     // --- 1. Signal Decomposition ---
     logic [15:0] A_H, A_L, B_H, B_L;
-
-    assign A_H = A[31:16];
-    assign A_L = A[15:0];
-    assign B_H = B[31:16];
-    assign B_L = B[15:0];
+    assign A_H = A[31:16]; assign A_L = A[15:0];
+    assign B_H = B[31:16]; assign B_L = B[15:0];
 
     //--------------------STAGE 1--------------------
-    // --- 2. Instantiate 16x16 Multipliers (Parallel) ---
-    // These modules take 3 clock cycles to produce a valid result.
+    // Instantiating 16x16 Multipliers
     logic [31:0] P_HH_raw, P_HL_raw, P_LH_raw, P_LL_raw;
 
     MULT16 u_hh (.clk(clk), .reset_n(reset_n), .A(A_H), .B(B_H), .P(P_HH_raw));
@@ -25,84 +26,98 @@ module MULT32 (
     MULT16 u_lh (.clk(clk), .reset_n(reset_n), .A(A_L), .B(B_H), .P(P_LH_raw));
     MULT16 u_ll (.clk(clk), .reset_n(reset_n), .A(A_L), .B(B_L), .P(P_LL_raw));
 
-    // --- 3. Pipeline Stage 3 (Registering 16x16 Outputs) ---
-    // Breaking the timing path after the 16x16 adders.
+    // Pipeline Registers (End of Stage 1)
     logic [31:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG;
-    logic [23:0] P_HH_REG_REG;
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
+            P_LL_REG <= 0; 
+            P_HL_REG <= 0; 
+            P_LH_REG <= 0; 
             P_HH_REG <= 0;
-        end
-        else begin
-            P_LL_REG <= P_LL_raw;
+        end else begin
+            P_LL_REG <= P_LL_raw; 
             P_HL_REG <= P_HL_raw;
-            P_LH_REG <= P_LH_raw;
+            P_LH_REG <= P_LH_raw; 
             P_HH_REG <= P_HH_raw;
         end
     end
-    
+
     //---------------------STAGE 2----------------------------
-    // --- 4. Term Alignment and Summation ---
+    // Logic: Calculate Middle Sum and Lower-Middle Addition
     
-    // Middle Sum: P_HL + P_LH
-    // 32-bit + 32-bit = 33-bit result
+    // 1. Middle Sum (33 bits)
     logic [32:0] P_MID_SUM;
-    logic [8:0] P_MID_SUM_REG;
     assign P_MID_SUM = P_HL_REG + P_LH_REG;
 
-    // --- Final Alignment (The 48-bit Adder) ---
-    // P = (P_HH << 32) + (P_MID << 16) + P_LL
+    // 2. The "First 24" Adder (Bits 16 to 39)
+    // FIX 1: Alignment Correction
+    // We are summing terms valid for bits [39:16].
+    // - P_LL[31:16]:  Aligned to LSB of this adder (Bit 16)
+    // - P_MID[23:0]:  Aligned to LSB of this adder (Bit 16)
+    // - P_HH[7:0]:    Starts at Bit 32. Relative to Bit 16, this is +16.
     
-    // Bits [15:0] are passed directly from P_LL (LSB Bypass)
-    assign P[15:0] = P_LL_REG[15:0];
-
-    // Upper Summation (Bits 16 to 63)
-    // We sum three terms starting at bit position 16.
+    logic [24:0] P_first_24_comb; // 25 bits to capture carry out
     
-    // Term 1: Upper half of P_LL (16 bits)
-    // Value: P_LL_REG[31:16]
-    
-    // Term 2: P_MID_SUM (33 bits)
-    // Value: P_MID_SUM (Aligned to bit 16)
+    assign P_first_24_comb = {P_HH_REG[7:0], 16'b0}  // Shifted high!
+                           + P_MID_SUM[23:0] 
+                           + {8'b0, P_LL_REG[31:16]};
 
-    // Term 3: P_HH (32 bits)
-    // Value: P_HH_REG (Shifted left by 16 relative to this adder's start)
-    
-    // We use concatenation to align P_HH correctly for the addition.
-    // P_HH_REG becomes the top 32 bits, padding the bottom 16 bits with 0.
-    
-    // The calculation for P[63:16] (48 bits wide):
-
-    logic [24:0] P_first_24;
-    logic [24:0] P_first_24_REG;
-
-    assign P_first_24 = P_HH_REG[7:0] + P_MID_SUM[23:0] + P_LL_REG[31:16];
-
-    assign P[39:16] = P_first_24[23:0];
+    // Pipeline Registers (End of Stage 2)
+    // We must pass EVERYTHING needed for the final stage through registers.
+    logic [24:0] P_first_24_REG;   // Result of the stage 2 adder
+    logic [23:0] P_HH_UPPER_REG;   // Pass P_HH[31:8] to next stage
+    logic [8:0]  P_MID_UPPER_REG;  // Pass P_MID[32:24] to next stage
+    logic [15:0] P_LL_FINAL_REG;   // FIX 2: Delay LSBs to match timing!
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_REG <= 0;
-            P_first_24_REG <= 0;
-            P_HH_REG_REG <= 0;
-            P_MID_SUM_REG <= 0;
-        end
-        else begin
-            P_REG <= P[39:0];
-            P_first_24_REG <= P_first_24;
-            P_HH_REG_REG <= P_HH_REG[31:8];
-            P_MID_SUM_REG <= P_MID_SUM[32:24];
+            P_first_24_REG  <= 0;
+            P_HH_UPPER_REG  <= 0;
+            P_MID_UPPER_REG <= 0;
+            P_LL_FINAL_REG  <= 0;
+        end else begin
+            P_first_24_REG  <= P_first_24_comb;
+            P_HH_UPPER_REG  <= P_HH_REG[31:8];
+            P_MID_UPPER_REG <= P_MID_SUM[32:24];
+            P_LL_FINAL_REG  <= P_LL_REG[15:0]; // Delaying LSBs
         end
     end
 
     //---------------------STAGE 3----------------------------
-    // --- 5. Final Addition ---
+    // Final Addition and Output Assembly
+    
+    // 1. Final Upper Addition (Bits 40 to 63)
+    // Inputs: P_HH upper part, P_MID upper part, and Carry from Stage 2.
+    logic [23:0] P_upper_sum;
+    
 
-    assign P[63:40] = P_HH_REG_REG + P_MID_SUM_REG + P_first_24_REG[24];
+    
+    // 2. Assemble Final Output
+    // All parts are now aligned to the same clock cycle (Stage 3).
+    assign P[15:0]  = P_LL_FINAL_REG;         // Delayed LSBs
+    assign P[39:16] = P_first_24_REG[23:0];   // Middle result
+    assign P[63:40] = P_HH_UPPER_REG 
+                       + {15'b0, P_MID_UPPER_REG} 
+                       + {23'b0, P_first_24_REG[24]}; // Add Carry
+
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            P_REG <= 0;
+        end else begin
+            P_REG <= P;
+        end
+    end
+
+    // Valid Signal Pipeline (Depth = 4)
+    logic [3:0] valid_pipe;
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) 
+            valid_pipe <= 4'd0;
+        else 
+            valid_pipe <= {valid_pipe[2:0], start_i & power_en};
+    end
+    assign valid_o = valid_pipe[3];
 
 endmodule
 

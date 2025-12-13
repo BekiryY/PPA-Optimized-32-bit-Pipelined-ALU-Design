@@ -1,6 +1,5 @@
 module ADDER32 (
-	input  clk,
-	input  reset_n,
+	input  clk, reset_n,
     input logic power_en,
 	input  MODE_SEL,
     input  C0,
@@ -13,12 +12,12 @@ logic [31:0] B_XORED;
 logic [31:0] C;
 logic [31:0] P;
 logic [31:0] G;
+logic [32:0] Y_intermediate; //for power_en 
 
 //Registered values for pipeline
 logic [15:0] P_REG; 
 logic [15:0] G_REG;
 logic [15:0] P_lower_REG; // ADDED: Register for lower P bits to align with C_REG
-
 logic C0_REG;       //C0 register (Carry-in) (different than C[0])
 logic [14:0] C_REG; //C[15] explicitly defined as C15_REG
 logic C15_REG; 	 	//C15 register 
@@ -79,16 +78,25 @@ CLA16 CLA16_1 (
 SUM16 SUM16_0 (
 .P(P_lower_REG), // Use registered P to match C_REG timing
 .C({C_REG[14:0], C0_REG}),
-.S(Y[15:0])
+.S(Y_intermediate[15:0])
 );
 
 SUM16 SUM16_1 (
 .P(P_REG[15:0]),
 .C({C[30:16], C15_REG}),
-.S(Y[31:16])
+.S(Y_intermediate[31:16])
 );
 
-assign Y[32] = C[31]; //Carry out of the ALU
+always_comb begin
+    // --- POWER GATING CLAMP/ISOLATION LOGIC ---
+    if (!power_en) begin
+        Y = 32'h0;      // Clamp outpuwt to 0 when sleeping (essential Isolation Cell function)
+    end 
+    else begin
+        Y[31:0] = Y_intermediate[31:0];
+        Y[32] = C[31];      //Carry out of the ADDER
+    end
+end
 
 endmodule
 
