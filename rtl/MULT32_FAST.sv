@@ -95,6 +95,8 @@ module MULT32 (
     
     // 2. Assemble Final Output
     // All parts are now aligned to the same clock cycle (Stage 3).
+    
+    logic [63:0] P; // combinational result
     assign P[15:0]  = P_LL_FINAL_REG;         // Delayed LSBs
     assign P[39:16] = P_first_24_REG[23:0];   // Middle result
     assign P[63:40] = P_HH_UPPER_REG 
@@ -110,12 +112,12 @@ module MULT32 (
     end
 
     // Valid Signal Pipeline (Depth = 4)
-    logic [3:0] valid_pipe;
+    logic [4:0] valid_pipe;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) 
-            valid_pipe <= 4'd0;
+            valid_pipe <= 5'd0;
         else 
-            valid_pipe <= {valid_pipe[2:0], start_i & power_en};
+            valid_pipe <= {valid_pipe[3:0], start_i & power_en};
     end
     assign valid_o = valid_pipe[3];
 

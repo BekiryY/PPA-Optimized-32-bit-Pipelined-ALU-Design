@@ -8,7 +8,7 @@ module MULT32_FAST_TB;
     logic power_en;
     logic [31:0] A;
     logic [31:0] B;
-    logic [63:0] P;
+    logic [63:0] P_REG;
     logic valid_o;
     logic start_i;
 
@@ -20,7 +20,7 @@ module MULT32_FAST_TB;
         .power_en(power_en),
         .A(A),
         .B(B),
-        .P(P),
+        .P_REG(P_REG),
         .start_i(start_i),
         .valid_o(valid_o)
     );
@@ -116,12 +116,12 @@ module MULT32_FAST_TB;
             // Check usage of non-blocking assignments or wait slightly
             #1; 
 
-            if (P !== expected) begin
-                $error("FAIL: A=%0d, B=%0d | Expected P=%0d | Got P=%0d | Valid=%b", in_a, in_b, expected, P, valid_o);
+            if (P_REG !== expected) begin
+                $error("FAIL: A=%0d, B=%0d | Expected P_REG=%0d | Got P=%0d | Valid=%b", in_a, in_b, expected, P_REG, valid_o);
             end else if (!valid_o) begin
                 $error("FAIL: Valid signal not asserted!");
             end else begin
-                $display("PASS: A=%0d, B=%0d | P=%0d | Valid=%b", in_a, in_b, P, valid_o);
+                $display("PASS: A=%0d, B=%0d | P_REG=%0d | Valid=%b", in_a, in_b, P_REG, valid_o);
             end
             
             // Hold for visual inspection if needed, then prepare for next
