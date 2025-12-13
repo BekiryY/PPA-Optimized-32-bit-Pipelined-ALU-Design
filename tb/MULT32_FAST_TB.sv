@@ -8,7 +8,7 @@ module MULT32_FAST_TB;
     logic power_en;
     logic [31:0] A;
     logic [31:0] B;
-    logic [63:0] P_REG;
+    logic [63:0] P;
     logic valid_o;
     logic start_i;
 
@@ -20,7 +20,7 @@ module MULT32_FAST_TB;
         .power_en(power_en),
         .A(A),
         .B(B),
-        .P_REG(P_REG),
+        .P(P),
         .start_i(start_i),
         .valid_o(valid_o)
     );
@@ -107,12 +107,9 @@ module MULT32_FAST_TB;
             #1.5;
             start_i <= 1'b0; // Pulse start_i
 
-            // Wait for 4 pipeline stages
-            // Cycle 1: MULT8 registers latch
-            // Cycle 2: MULT16 registers latch
-            // Cycle 3: MULT32 Stage 2 registers latch
-            // Cycle 4: MULT32 Stage 3 (Final) registers latch -> Output valid
-            // Cycle 4: MULT32 Stage 3 (Final) registers latch -> Output valid
+            // Wait for remaining pipeline stages
+            // We already waited 1 cycle (the start_i pulse cycle).
+            // Total latency is 4, so we need to wait 3 more cycles.
             repeat (3) @(posedge clk);
             
             
