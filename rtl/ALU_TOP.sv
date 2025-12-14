@@ -17,14 +17,6 @@ module ALU_TOP(
     output logic [31:0] result_aux,
     output logic [7:0] flag_reg
 );
-//flag register
-// [7]PF, [6]0, [5]0, [4]0, [3]OF, [2]CF, [1]SF, [0]ZF
-logic PF_flag;
-logic OF_flag;
-logic CF_flag;
-logic SF_flag;
-logic ZF_flag;
-
 //SHIFTER + LOGIC BLOCK + MULT32 + ADDER32
 //   7    +      8      +   1    +   6    TOTAL OF 22FUNCS
 
@@ -60,24 +52,30 @@ logic ZF_flag;
 // 11110	~(A & B)	    NAND        Bitwise NAND
 // 11111	A == B	        EQ          Equality check
 //
-//nop (110xx)
-// 110xx    NOP             NOP         No Operation
-//
-//future (111xx)
-// 111x    FUTURE          FUTURE      Reserved for Future
 
 //for testing
 //logic [63:0]total;
 //assign total = {result_aux, MUX_i[1]}; 
 
+
+
+//flag register
+// [7]PF, [6]0, [5]0, [4]0, [3]OF, [2]CF, [1]SF, [0]ZF
+logic PF_flag;
+logic OF_flag;
+logic CF_flag;
+logic SF_flag;
+logic ZF_flag;
+
+//carry related signals
 logic C0;
 logic CF_reg;
 logic CF_adder;
 logic CF_shifter;
 
-logic adder_mode;
-
 assign flag_reg = {PF_flag, 3'b0, OF_flag, CF_reg, SF_flag, ZF_flag};
+
+logic adder_mode;
 
 assign CF_flag = (CMD[4:2] == 3'b011) ? CF_shifter : CF_adder;
 
@@ -163,12 +161,8 @@ assign power_en[2] = (cnt_shifter > 0);
 assign power_en[3] = (cnt_logic > 0);
 
 
-//here that counts that 4 or 7 or 3
-
-
-
-logic [31:0] count;
 //counter
+logic [31:0] count;
 always @(posedge clk or negedge reset_n) begin
     if(!reset_n) begin
         count <= 0;
@@ -183,14 +177,14 @@ end
 //used for <, >, ADD, SUB, ADDC, SUBC
 //1 PHYSICAL, 6 IMPLEMENTED
 ADDER32 adder(
-    .clk(clk),
+.clk(clk),
     .reset_n(reset_n),
     .power_en(power_en[0]),
     .A(A),
     .B(B),
     .MODE_SEL(adder_mode),
     .C0(C0),
-    .Y({CF_adder, MUX_i[0]})
+    .Y({CF_adder, })
 );
 
 MULT32 mult(
@@ -200,12 +194,12 @@ MULT32 mult(
     .start_i(branch == 2'b01),
     .A(A),
     .B(B),
-    .P({result_aux, MUX_i[1]}),
+    .P_REG({result_aux, }),
     .valid_o()
 );
 
-//used for SHL, SHR, SLA, SRA
-//4 PHYSICAL, 4 IMPLEMENTED
+//used for SHL, SHR, SLA, SRA, ROR, ROL, BYT
+//4 PHYSICAL, 7 IMPLEMENTED
 SHIFTER shifter(
     .clk(clk),
     .reset_n(reset_n),
@@ -213,7 +207,7 @@ SHIFTER shifter(
     .A(A),
     .B(B[4:0]),
     .CMD(CMD[1:0]),
-    .Y(MUX_i[3]),
+    .Y(),
     .CF_flag(CF_shifter)
 );
 
@@ -226,7 +220,7 @@ LOGIC_BLOCK logic_block(
     .A(A),
     .B(B),
     .CMD(CMD[2:0]), 
-    .Y(MUX_i[2])
+    .Y()
 );
 
 endmodule
