@@ -1,4 +1,4 @@
-module MULT32_COMB (
+module MULT32_LP (
     input power_en,
     input [31:0] A,
     input [31:0] B,

@@ -1,0 +1,30 @@
+------------------------THE .UPF FILE FOR POWER GATING--------------------------------
+
+# 1. Define the primary power and ground rails
+create_power_domain PD_TOP
+set_domain_supply_net PD_TOP -primary_power_pin VDD -primary_ground_pin VSS
+
+# 2. Define the GATED power domain
+create_power_domain PD_MULT -elements {MULT32}
+# This virtual net will be driven by the power switches
+set_domain_supply_net PD_MULT -primary_power_pin VDD_VIRTUAL -primary_ground_pin VSS
+
+# 3. Specify the Power Switch location (Genus/Innovus will place this)
+create_power_switch PS_MULT
+    -domain PD_MULT
+    -input_supply_port {VDD}
+    -output_supply_port {VDD_VIRTUAL}
+    -control_port {switch_control} # This will be derived from power_en
+
+# 4. Define the isolation requirement
+set_isolation -domain PD_MULT -elements {P_REG} -power_net VDD_VIRTUAL -location output
+# This forces isolation cells at the output of the gated domain
+
+# 5. Define the state retention requirement
+set_retention -domain PD_MULT -elements {P_LL_REG P_HL_REG ... etc.}
+    -supply_net {VDD} # Retention cells draw power from the always-on VDD
+    -retention_power_net {VDD_ALWAYS_ON} # Needs a separate, always-on supply
+
+
+
+set_max_capacitance 0.5 [current_design]

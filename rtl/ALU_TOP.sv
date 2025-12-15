@@ -123,7 +123,7 @@ end
 //-------------------------------POWER GATING---------------------------------
 //handling of idling and power gating dynamically depending on the stage counts
 
-logic [3:0] power_en;
+logic [5:0] power_en;
 logic [3:0] sreg_adder;   // 4 cycles
 logic [6:0] sreg_mult;    // 7 cycles
 logic [2:0] sreg_shifter; // 3 cycles
@@ -157,7 +157,7 @@ end
 //disabling the particular block if staged out or idle
 always_comb begin
     power_en[0] = sreg_adder[0]   | ((branch == 2'b00) && !idle);
-    power_en[1] = (sreg_mult[0]   | ((branch == 2'b01) && !idle)) && (low_power < 2); // Disable pipelined mult in low power
+    power_en[1] = (sreg_mult[0]   | ((branch == 2'b01) && !idle)) && (low_power); // Disable pipelined mult in low power
     power_en[2] = sreg_shifter[0] | ((branch == 2'b10) && !idle);
     power_en[3] = sreg_logic[0]   | ((branch == 2'b11) && !idle);
 end
@@ -226,7 +226,7 @@ MULT32_COMB mult_low_power(
     .power_en(power_en[1] && low_power),
     .A(A_comb),
     .B(B_comb),
-    .Y(mult_comb_out)
+    .Y(mult_lp_out)
 );
 
 //used for SHL, SHR, SLA, SRA, ROR, ROL, BYT

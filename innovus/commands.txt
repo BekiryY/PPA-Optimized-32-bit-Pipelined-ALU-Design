@@ -1,0 +1,6 @@
+
+-------------genus-----------------
+-------------innovus---------------
+read_upf <filename.upf>
+read_power_intent <filename.upf>
+
