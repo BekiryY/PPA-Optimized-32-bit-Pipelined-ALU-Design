@@ -117,42 +117,47 @@ always @(posedge clk or negedge reset_n) begin
     end
 end
 
+//-------------------------------POWER GATING---------------------------------
+//handling of idling and power gating dynamically depending on the stage counts
 
 logic [3:0] power_en;
-logic [2:0] cnt_adder;   // Max 4 cycles
-logic [2:0] cnt_mult;    // Max 7 cycles
-logic [1:0] cnt_shifter; // Max 3 cycles
-logic [1:0] cnt_logic;   // Max 3 cycles
+logic [3:0] sreg_adder;   // 4 cycles
+logic [6:0] sreg_mult;    // 7 cycles
+logic [2:0] sreg_shifter; // 3 cycles
+logic [2:0] sreg_logic;   // 3 cycles
 
 always @(posedge clk or negedge reset_n) begin
     if (!reset_n) begin
-        cnt_adder <= 0;
-        cnt_mult <= 0;
-        cnt_shifter <= 0;
-        cnt_logic <= 0;
+        sreg_adder <= 0;
+        sreg_mult <= 0;
+        sreg_shifter <= 0;
+        sreg_logic <= 0;
     end else begin
-        // Adder Control (00) -> 4 cycles
-        if (branch == 2'b00) cnt_adder <= 3'd4;
-        else if (cnt_adder > 0) cnt_adder <= cnt_adder - 1;
+        // Default: Shift right
+        sreg_adder <= sreg_adder >> 1;
+        sreg_mult <= sreg_mult >> 1;
+        sreg_shifter <= sreg_shifter >> 1;
+        sreg_logic <= sreg_logic >> 1;
 
-        // Multiplier Control (01) -> 7 cycles
-        if (branch == 2'b01) cnt_mult <= 3'd7;
-        else if (cnt_mult > 0) cnt_mult <= cnt_mult - 1;
-
-        // Shifter Control (10) -> 3 cycles
-        if (branch == 2'b10) cnt_shifter <= 2'd3;
-        else if (cnt_shifter > 0) cnt_shifter <= cnt_shifter - 1;
-
-        // Logic Block Control (11) -> 3 cycles
-        if (branch == 2'b11) cnt_logic <= 2'd3;
-        else if (cnt_logic > 0) cnt_logic <= cnt_logic - 1;
+        // Load if active request and not idle
+        if (!idle) begin
+            case (branch)
+                2'b00: sreg_adder <= 4'b1111;
+                2'b01: sreg_mult <= 7'b1111111;
+                2'b10: sreg_shifter <= 3'b111;
+                2'b11: sreg_logic <= 3'b111;
+            endcase
+        end
     end
 end
 
-assign power_en[0] = (cnt_adder > 0);
-assign power_en[1] = (cnt_mult > 0);
-assign power_en[2] = (cnt_shifter > 0);
-assign power_en[3] = (cnt_logic > 0);
+//disabling the particular block if staged out or idle
+always_comb begin
+    power_en[0] = sreg_adder[0]   | ((branch == 2'b00) && !idle);
+    power_en[1] = sreg_mult[0]    | ((branch == 2'b01) && !idle);
+    power_en[2] = sreg_shifter[0] | ((branch == 2'b10) && !idle);
+    power_en[3] = sreg_logic[0]   | ((branch == 2'b11) && !idle);
+end
 
 
 //counter
