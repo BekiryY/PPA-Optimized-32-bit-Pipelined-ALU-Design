@@ -29,24 +29,34 @@ module MULT32 (
     // Pipeline Registers (End of Stage 1)
     logic [31:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG;
 
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            P_LL_REG <= 0; 
-            P_HL_REG <= 0; 
-            P_LH_REG <= 0; 
-            P_HH_REG <= 0;
-        end else if (power_en) begin
-            P_LL_REG <= P_LL_raw; 
-            P_HL_REG <= P_HL_raw;
-            P_LH_REG <= P_LH_raw; 
-            P_HH_REG <= P_HH_raw;
-        end else begin
-            P_LL_REG <= 0; 
-            P_HL_REG <= 0; 
-            P_LH_REG <= 0; 
-            P_HH_REG <= 0;
-        end
-    end
+    dffre_32bit dffre_32bit_inst_0 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_HH_raw),
+        .Q(P_HH_REG)
+    );
+    dffre_32bit dffre_32bit_inst_1 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_HL_raw),
+        .Q(P_HL_REG)
+    );
+    dffre_32bit dffre_32bit_inst_2 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_LH_raw),
+        .Q(P_LH_REG)
+    );
+    dffre_32bit dffre_32bit_inst_3 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_LL_raw),
+        .Q(P_LL_REG)
+    );
 
     //---------------------STAGE 2----------------------------
     // Logic: Calculate Middle Sum and Lower-Middle Addition
@@ -75,25 +85,34 @@ module MULT32 (
     logic [8:0]  P_MID_UPPER_REG;  // Pass P_MID[32:24] to next stage
     logic [15:0] P_LL_FINAL_REG;   // FIX 2: Delay LSBs to match timing!
 
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            P_first_24_REG  <= 0;
-            P_HH_UPPER_REG  <= 0;
-            P_MID_UPPER_REG <= 0;
-            P_LL_FINAL_REG  <= 0;
-        end else if (power_en) begin
-            P_first_24_REG  <= P_first_24_comb;
-            P_HH_UPPER_REG  <= P_HH_REG[31:8];
-            P_MID_UPPER_REG <= P_MID_SUM[32:24];
-            P_LL_FINAL_REG  <= P_LL_REG[15:0]; // Delaying LSBs
-        end else begin
-            P_first_24_REG  <= 0;
-            P_HH_UPPER_REG  <= 0;
-            P_MID_UPPER_REG <= 0;
-            P_LL_FINAL_REG  <= 0;
-        end
-    end
-
+    dffre_32bit dffre_32bit_inst_4 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_first_24_comb),
+        .Q(P_first_24_REG)
+    );
+    dffre_32bit dffre_32bit_inst_5 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_HH_REG[31:8]),
+        .Q(P_HH_UPPER_REG)
+    );
+    dffre_32bit dffre_32bit_inst_6 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_MID_SUM[32:24]),
+        .Q(P_MID_UPPER_REG)
+    );
+    dffre_32bit dffre_32bit_inst_7 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_LL_REG[15:0]),
+        .Q(P_LL_FINAL_REG)
+    );
     //---------------------STAGE 3----------------------------
     // Final Addition and Output Assembly
     
@@ -111,15 +130,20 @@ module MULT32 (
                        + {15'b0, P_MID_UPPER_REG} 
                        + {23'b0, P_first_24_REG[24]}; // Add Carry
 
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            P_REG <= 0;
-        end else if (power_en) begin
-            P_REG <= P;
-        end else begin
-            P_REG <= 0;
-        end
-    end
+    dffre_32bit dffre_32bit_inst_8 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P[31:0]),
+        .Q(P_REG[31:0])
+    );
+    dffre_32bit dffre_32bit_inst_9 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P[63:32]),
+        .Q(P_REG[63:32])
+    );
 
     // Valid Signal Pipeline (Depth = 4)
     logic [4:0] valid_pipe;
@@ -163,25 +187,34 @@ module MULT16 (
     // summation logic of 8x8 chaining directly into the summation of 16x16.
     logic [15:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG;
 
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
-        end
-        else if (power_en) begin
-            P_LL_REG <= P_LL_raw;
-            P_HL_REG <= P_HL_raw;
-            P_LH_REG <= P_LH_raw;
-            P_HH_REG <= P_HH_raw;
-        end else begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
-        end
-    end
+    dffre_16bit dffre_16bit_inst_0 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_HH_raw),
+        .Q(P_HH_REG)
+    );
+    dffre_16bit dffre_16bit_inst_1 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_HL_raw),
+        .Q(P_HL_REG)
+    );
+    dffre_16bit dffre_16bit_inst_2 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_LH_raw),
+        .Q(P_LH_REG)
+    );
+    dffre_16bit dffre_16bit_inst_3 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_LL_raw),
+        .Q(P_LL_REG)
+    );
 
     //--------------------------STAGE 3--------------------------
     // --- 4. Term Alignment and Summation ---
@@ -259,25 +292,34 @@ module MULT8 (
     MULT4 u_lh (.power_en(power_en), .A(A_L), .B(B_H), .P(P_LH)); // P_LH: (A_L * B_H)
     MULT4 u_ll (.power_en(power_en), .A(A_L), .B(B_L), .P(P_LL)); // P_LL: (A_L * B_L)
 
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
-        end
-        else if (power_en) begin
-            P_LL_REG <= P_LL;
-            P_HL_REG <= P_HL;
-            P_LH_REG <= P_LH;
-            P_HH_REG <= P_HH;
-        end else begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
-        end
-    end
+     dffre_16bit dffre_16bit_inst_11 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_HH),
+        .Q(P_HH_REG)
+    );
+    dffre_16bit dffre_16bit_inst_12 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_HL),
+        .Q(P_HL_REG)
+    );
+    dffre_16bit dffre_16bit_inst_13 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_LH),
+        .Q(P_LH_REG)
+    );
+    dffre_16bit dffre_16bit_inst_14 (
+        .clk(clk),
+        .reset_n(reset_n),
+        .power_en(power_en),
+        .D(P_LL),
+        .Q(P_LL_REG)
+    );
 
     //--------------------------STAGE 2--------------------------
     // --- 2. Term Alignment and Summation Reduction ---
