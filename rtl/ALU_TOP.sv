@@ -10,7 +10,10 @@ module ALU_TOP(
     //performance control
     input idle,
     input [1:0] branch,
-    input [2:0] low_power,
+    input low_power,
+    //low power table
+    //0 - normal (upto 1.66GHZ)
+    //1 - low power (upto 120MHZ)
 
     //outputs
     output wire [31:0] Y,
@@ -154,7 +157,7 @@ end
 //disabling the particular block if staged out or idle
 always_comb begin
     power_en[0] = sreg_adder[0]   | ((branch == 2'b00) && !idle);
-    power_en[1] = sreg_mult[0]    | ((branch == 2'b01) && !idle);
+    power_en[1] = (sreg_mult[0]   | ((branch == 2'b01) && !idle)) && (low_power < 2); // Disable pipelined mult in low power
     power_en[2] = sreg_shifter[0] | ((branch == 2'b10) && !idle);
     power_en[3] = sreg_logic[0]   | ((branch == 2'b11) && !idle);
 end
@@ -198,12 +201,32 @@ ADDER32 adder(
 MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en[1]),
+    .power_en(power_en[1] && !low_power),
     .start_i(branch == 2'b01),
     .A(A),
     .B(B),
     .P_REG(mult_out),
     .valid_o()
+);
+
+// Low Power Combinational Multiplier
+// Gating inputs to save dynamic power when not in use
+logic [31:0] A_comb, B_comb;
+always_comb begin
+    if (low_power) begin
+        A_comb = A;
+        B_comb = B;
+    end else begin
+        A_comb = 0;
+        B_comb = 0;
+    end
+end
+
+MULT32_COMB mult_low_power(
+    .power_en(power_en[1] && low_power),
+    .A(A_comb),
+    .B(B_comb),
+    .Y(mult_comb_out)
 );
 
 //used for SHL, SHR, SLA, SRA, ROR, ROL, BYT
