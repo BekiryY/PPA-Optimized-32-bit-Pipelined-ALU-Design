@@ -43,7 +43,7 @@ module ALU_TOP(
 // 10011	A >>> B	        SRA         Shift Right Arithmetic
 // 10100	A  B	        ROR         Rotate Right
 // 10101	A  B	        ROL         Rotate Left
-// 10111    A  B	        BYT         Byte swap
+// 10110    A  B	        BYT         Byte swap
 //
 //logic unit (11xxx)
 // 11000	~A	            NOT         Bitwise NOT
@@ -63,6 +63,8 @@ logic OF_flag;
 logic CF_flag;
 logic SF_flag;
 logic ZF_flag;
+
+logic clk_low; //DUMB SIGNAL FOR EASIER ANALYSIS IN GENUS
 
 //carry related signals
 logic C0;
@@ -117,10 +119,12 @@ always @(posedge clk or negedge reset_n) begin
         ZF_flag <= 1'b0;
     end
     else begin
-        PF_flag <= |Y;
+        PF_flag <= ^Y;
         ZF_flag <= (Y == 32'h0);
         SF_flag <= Y[31];
-        OF_flag <= (Y[31] ^ Y[30]) & (Y[29] ^ Y[28]); // Basic OF check
+        // Standard Overflow: (Operand1_Sign == Operand2_Sign) && (Result_Sign != Operand1_Sign)
+        // Operand2_eff is B inverted if subtracting.
+        OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)) & (Y[31] != A[31]); 
         CF_reg  <= CF_flag; // Store the carry from Adder
     end
 end
@@ -149,12 +153,21 @@ always @(posedge clk or negedge reset_n) begin
 
         // Load if active request and not idle
         if (!idle) begin
-            case (branch)
-                2'b00: sreg_adder <= 4'b1111;
-                2'b01: sreg_mult <= 7'b1111111;
-                2'b10: sreg_shifter <= 3'b111;
-                2'b11: sreg_logic <= 3'b111;
-            endcase
+            if (low_power) begin
+                case (branch)
+                    2'b00: sreg_adder <= 4'b0111;
+                    2'b01: sreg_mult <= 7'b0000111;
+                    2'b10: sreg_shifter <= 3'b111;
+                    2'b11: sreg_logic <= 3'b111;
+                endcase
+            end else begin
+                case (branch)
+                    2'b00: sreg_adder <= 4'b1111;
+                    2'b01: sreg_mult <= 7'b1111111;
+                    2'b10: sreg_shifter <= 3'b111;
+                    2'b11: sreg_logic <= 3'b111;
+                endcase
+            end
         end
     end
 end
@@ -209,6 +222,7 @@ ADDER32 adder(
 );
 
 ADDER32_LP adder_lp(
+    .clk_low(clk_low),
     .power_en(power_en[0] && low_power),
     .MODE_SEL(adder_mode),
     .C0(C0), // Note: C0 logic might need review if it depends on piped signals, but looks combinatorial in ALU_TOP
@@ -241,7 +255,8 @@ always_comb begin
     end
 end
 
-MULT32_COMB MULT32_LP(
+MULT32_LP MULT32_LP(
+    .clk_low(clk_low),
     .power_en(power_en[1] && low_power),
     .A(A_comb),
     .B(B_comb),
@@ -251,8 +266,6 @@ MULT32_COMB MULT32_LP(
 //used for SHL, SHR, SLA, SRA, ROR, ROL, BYT
 //4 PHYSICAL, 7 IMPLEMENTED
 SHIFTER shifter(
-    .clk(clk),
-    .reset_n(reset_n),
     .power_en(power_en[2]),
     .A(A),
     .B(B[4:0]),
@@ -264,8 +277,6 @@ SHIFTER shifter(
 //used for AND, OR, XOR, NOT, NAND, NOR, XNOR, ==
 //4 PHYSICAL, 8 IMPLEMENTED
 LOGIC_BLOCK logic_block(
-    .clk(clk),
-    .reset_n(reset_n),
     .power_en(power_en[3]),
     .A(A),
     .B(B),
