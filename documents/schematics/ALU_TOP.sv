@@ -241,7 +241,7 @@ always_comb begin
     end
 end
 
-MULT32_COMB MULT32_LP(
+MULT32_COMB MULT32_lP(
     .power_en(power_en[1] && low_power),
     .A(A_comb),
     .B(B_comb),
