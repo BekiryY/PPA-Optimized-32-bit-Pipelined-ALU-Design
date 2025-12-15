@@ -241,7 +241,7 @@ always_comb begin
     end
 end
 
-MULT32_COMB MULT32_lP(
+MULT32_LP MULT32_LP(
     .power_en(power_en[1] && low_power),
     .A(A_comb),
     .B(B_comb),
@@ -264,8 +264,8 @@ SHIFTER shifter(
 //used for AND, OR, XOR, NOT, NAND, NOR, XNOR, ==
 //4 PHYSICAL, 8 IMPLEMENTED
 LOGIC_BLOCK logic_block(
-    .clk(clk),
-    .reset_n(reset_n),
+    //.clk(clk),
+    //.reset_n(reset_n),
     .power_en(power_en[3]),
     .A(A),
     .B(B),

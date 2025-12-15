@@ -8,6 +8,11 @@ module ALU_TB;
     logic [31:0] A;
     logic [31:0] B;
     logic [4:0] CMD;
+
+    // Performance control
+    logic idle;
+    logic [1:0] branch;
+    logic low_power;
     
     // Outputs
     logic [31:0] Y;
@@ -21,6 +26,9 @@ module ALU_TB;
         .A(A),
         .B(B),
         .CMD(CMD),
+        .idle(idle),
+        .branch(branch),
+        .low_power(low_power),
         .Y(Y),
         .result_aux(result_aux),
         .flag_reg(flag_reg)
@@ -42,6 +50,9 @@ module ALU_TB;
         A = 0;
         B = 0;
         CMD = 0;
+        idle = 0;
+        branch = 0;
+        low_power = 0;
         cmd_counter = 0;
 
         // Reset Pulse
@@ -53,6 +64,7 @@ module ALU_TB;
         // 1. Sequentially do few additions (CMD = 00000)
         // ---------------------------------------------------------
         CMD = 5'b00000;
+        branch = CMD[4:3]; // 00 -> Adder
         for (i = 0; i < 5; i++) begin
             @(posedge clk);
             #1;
@@ -65,6 +77,7 @@ module ALU_TB;
         // 2. Then do few subtractions (CMD = 00001)
         // ---------------------------------------------------------
         CMD = 5'b00001;
+        branch = CMD[4:3]; // 00 -> Adder
         for (i = 0; i < 5; i++) begin
             @(posedge clk);
             #1;
@@ -78,13 +91,9 @@ module ALU_TB;
         // Increase opcode by 1 every N=5 cycles, random data
         // ---------------------------------------------------------
         
-        // Start from opcode 0 again, or continue? 
-        // Request says "increase the opcode by 1", likely implies starting from 0 or current.
-        // Let's start from 0 to sweep all operations.
         CMD = 5'd0; 
         
         // Loop enough times to cover opcodes (32 opcodes * 5 cycles = 160 iterations min)
-        // Let's do 200 iterations
         for (i = 0; i < 200; i++) begin
             @(posedge clk);
             #1;
@@ -100,8 +109,42 @@ module ALU_TB;
                 cmd_counter = cmd_counter + 1;
             end
             
+            // Drive branch based on CMD
+            branch = CMD[4:3];
+
             #1; // wait a bit after clock edge
         end
+
+        // ---------------------------------------------------------
+        // 4. Test Low Power Mode
+        // ---------------------------------------------------------
+        $display("Testing Low Power Mode with Adder...");
+        low_power = 1;
+        CMD = 5'b00000; // ADD
+        branch = CMD[4:3];
+        for (i = 0; i < 5; i++) begin
+            @(posedge clk);
+            #1;
+            A = $urandom;
+            B = $urandom;
+            #1; 
+        end
+        low_power = 0; // Disable low power
+
+        // ---------------------------------------------------------
+        // 5. Test Idle Mode
+        // ---------------------------------------------------------
+        $display("Testing Idle Mode...");
+        idle = 1;
+        for (i = 0; i < 10; i++) begin
+           @(posedge clk);
+           #1;
+           // In idle, inputs shouldn't matter as much, checking stabilization
+           A = $urandom; 
+           B = $urandom;
+           #1;
+        end
+        idle = 0;
 
         // Finish simulation
         $finish;

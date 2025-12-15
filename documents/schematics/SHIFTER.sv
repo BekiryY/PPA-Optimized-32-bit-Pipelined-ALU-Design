@@ -1,6 +1,8 @@
 `timescale 1ns / 1ps
 
 module SHIFTER (
+    input clk,
+    input reset_n,
     input logic power_en,
     input  logic [31:0] A,          // Operand
     input  logic [4:0]  B,          // Shift Amount
