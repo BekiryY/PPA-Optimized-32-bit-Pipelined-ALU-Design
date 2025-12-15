@@ -50,13 +50,22 @@ always @(posedge clk or negedge reset_n) begin
 		C15_REG <= 0;
 	end 
 	else begin
-		P_REG <= P[31:16];
-		G_REG <= G[31:16];
-        P_lower_REG <= P[15:0]; // Capture P[15:0] for next stage
-		C0_REG <= C0;
-		C_REG <= C[14:0];
-		C15_REG <= C[15];
-	end
+        if (!power_en) begin
+            P_REG <= 0;
+            G_REG <= 0;
+            P_lower_REG <= 0; // Reset new register
+            C0_REG <= 0;
+            C_REG <= 0;
+            C15_REG <= 0;
+        end else begin
+            P_REG <= P[31:16];
+            G_REG <= G[31:16];
+            P_lower_REG <= P[15:0]; // Capture P[15:0] for next stage
+            C0_REG <= C0;
+            C_REG <= C[14:0];
+            C15_REG <= C[15];
+    	end
+    end
 end
 
 // CLA16 Instance for Lower 16 bits
@@ -101,6 +110,7 @@ end
 endmodule
 
 module PG16(
+    input power_en,
 	input [15:0] A,
 	input [15:0] B,
 	output [15:0] P,
@@ -111,17 +121,19 @@ assign	P = A ^ B;
 endmodule
 
 module carry_calculator(
+    input power_en,
     input [3:0] P, // Group Propagate
     input [3:0] G, // Group Generate
     input C0,
     output [2:0] C_int // Looks ahead for C1, C2, C3 (block inputs)
 );
-    assign C_int[0] = G[0] | (P[0] & C0);
-    assign C_int[1] = G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0);
-    assign C_int[2] = G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0);
+    assign C_int[0] = power_en ? (G[0] | (P[0] & C0)) : 1'b0;
+    assign C_int[1] = power_en ? (G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0)) : 1'b0;
+    assign C_int[2] = power_en ? (G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0)) : 1'b0;
 endmodule
 
 module CLA16(
+    input power_en,
     input [15:0] P,
     input [15:0] G,
     input C0,
@@ -153,6 +165,7 @@ module CLA16(
 
     // Use carry_calculator for C_int
     carry_calculator cc_inst (
+        .power_en(power_en),
         .P(Pg_int),
         .G(Gg_int),
         .C0(C0),
@@ -185,6 +198,7 @@ module CLA16(
 endmodule
 
 module CLA4(
+    input power_en,
     input [3:0] P,
     input [3:0] G,
     input C0,
@@ -192,22 +206,24 @@ module CLA4(
     );
     
     // C[0] (Carry-out of stage 0, or C1) = G[0] + P[0] * C0
-    assign C[0] = G[0] | (P[0] & C0);
+    assign C[0] = power_en ? (G[0] | (P[0] & C0)) : 1'b0;
 
     // C[1] (Carry-out of stage 1, or C2) = G[1] + P[1]*G[0] + P[1]*P[0]*C0
-    assign C[1] = G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0);
+    assign C[1] = power_en ? (G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0)) : 1'b0;
 
     // C[2] (Carry-out of stage 2, or C3) = G[2] + P[2]*G[1] + P[2]*P[1]*G[0] + P[2]*P[1]*P[0]*C0
-    assign C[2] = G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0);
+    assign C[2] = power_en ? (G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0)) : 1'b0;
 
     // C[3] (Carry-out of stage 3, or C4) = G[3] + P[3]*G[2] + P[3]*P[2]*G[1] + P[3]*P[2]*P[1]*G[0] + P[3]*P[2]*P[1]*P[0]*C0
-    assign C[3] = G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]) | (P[3] & P[2] & P[1] & P[0] & C0);
+    assign C[3] = power_en ? (G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]) | (P[3] & P[2] & P[1] & P[0] & C0)) : 1'b0;
 endmodule
 
 module SUM16(
+    input power_en,
     input [15:0] P,
     input [15:0] C,
     output [15:0] S
     );
-assign S = C ^ P;
+    
+assign S = power_en ? (C ^ P) : 16'b0;
 endmodule

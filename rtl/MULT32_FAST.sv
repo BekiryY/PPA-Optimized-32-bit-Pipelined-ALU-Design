@@ -40,6 +40,11 @@ module MULT32 (
             P_HL_REG <= P_HL_raw;
             P_LH_REG <= P_LH_raw; 
             P_HH_REG <= P_HH_raw;
+        end else begin
+            P_LL_REG <= 0; 
+            P_HL_REG <= 0; 
+            P_LH_REG <= 0; 
+            P_HH_REG <= 0;
         end
     end
 
@@ -81,6 +86,11 @@ module MULT32 (
             P_HH_UPPER_REG  <= P_HH_REG[31:8];
             P_MID_UPPER_REG <= P_MID_SUM[32:24];
             P_LL_FINAL_REG  <= P_LL_REG[15:0]; // Delaying LSBs
+        end else begin
+            P_first_24_REG  <= 0;
+            P_HH_UPPER_REG  <= 0;
+            P_MID_UPPER_REG <= 0;
+            P_LL_FINAL_REG  <= 0;
         end
     end
 
@@ -106,6 +116,8 @@ module MULT32 (
             P_REG <= 0;
         end else if (power_en) begin
             P_REG <= P;
+        end else begin
+            P_REG <= 0;
         end
     end
 
@@ -163,6 +175,11 @@ module MULT16 (
             P_HL_REG <= P_HL_raw;
             P_LH_REG <= P_LH_raw;
             P_HH_REG <= P_HH_raw;
+        end else begin
+            P_LL_REG <= 0;
+            P_HL_REG <= 0;
+            P_LH_REG <= 0;
+            P_HH_REG <= 0;
         end
     end
 
@@ -254,6 +271,11 @@ module MULT8 (
             P_HL_REG <= P_HL;
             P_LH_REG <= P_LH;
             P_HH_REG <= P_HH;
+        end else begin
+            P_LL_REG <= 0;
+            P_HL_REG <= 0;
+            P_LH_REG <= 0;
+            P_HH_REG <= 0;
         end
     end
 
