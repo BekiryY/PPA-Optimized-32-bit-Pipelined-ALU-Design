@@ -12,13 +12,6 @@ module ADDER32_LP (
     // Handle 2's complement inversion for subtraction
     assign B_mux = B ^ {32{MODE_SEL}};
 
-    always_comb begin
-        if (power_en) begin
-            // Simple behavioral addition - synthesis will optimize for low power/area at low freq
-            Y = {1'b0, A} + {1'b0, B_mux} + {32'b0, C0};
-        end else begin
-            Y = 33'b0;
-        end
-    end
-
+    // Simple behavioral addition - synthesis will optimize for low power/area at low freq
+    assign Y = power_en ? {1'b0, A} + {1'b0, B_mux} + {32'b0, C0} : 33'b0;
 endmodule

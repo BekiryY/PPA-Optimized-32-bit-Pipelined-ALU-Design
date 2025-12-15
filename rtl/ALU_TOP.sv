@@ -74,7 +74,7 @@ assign flag_reg = {PF_flag, 3'b0, OF_flag, CF_reg, SF_flag, ZF_flag};
 
 logic adder_mode;
 
-assign CF_flag = (CMD[4:2] == 3'b011) ? CF_shifter : CF_adder;
+assign CF_flag = (CMD[4:2] == 3'b011) ? CF_shifter : final_adder_carry;
 
 assign adder_mode = CMD[0] | CMD[1];
 
@@ -97,8 +97,13 @@ end
 //11xxx selects logic_block
 
 // Tristate buffers for output selection
-assign Y = (CMD[4:3] == 2'b00) ? adder_out[31:0] : 32'bz;   //adder32
-assign Y = (CMD[4:3] == 2'b01) ? mult_out[31:0] : 32'bz;   //mult32 (Lower 32 bits)
+logic [31:0] final_adder_out;
+assign final_adder_out = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
+logic final_adder_carry;
+assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
+
+assign Y = (CMD[4:3] == 2'b00) ? final_adder_out : 32'bz;   //adder32
+assign Y = (CMD[4:3] == 2'b01) ? final_mult_out[31:0] : 32'bz;   //mult32 (Lower 32 bits)
 assign Y = (CMD[4:3] == 2'b10) ? shifter_out : 32'bz;   //shifter
 assign Y = (CMD[4:3] == 2'b11) ? logic_out : 32'bz;   //logic_block
 
@@ -157,7 +162,7 @@ end
 //disabling the particular block if staged out or idle
 always_comb begin
     power_en[0] = sreg_adder[0]   | ((branch == 2'b00) && !idle);
-    power_en[1] = (sreg_mult[0]   | ((branch == 2'b01) && !idle)) && (low_power); // Disable pipelined mult in low power
+    power_en[1] = (sreg_mult[0]   | ((branch == 2'b01) && !idle));
     power_en[2] = sreg_shifter[0] | ((branch == 2'b10) && !idle);
     power_en[3] = sreg_logic[0]   | ((branch == 2'b11) && !idle);
 end
@@ -178,24 +183,38 @@ end
 
 // Internal wires for module outputs
 logic [31:0] adder_out;
+logic [32:0] adder_lp_out;
 logic [63:0] mult_out;
+logic [63:0] mult_lp_out;
 logic [31:0] shifter_out;
 logic [31:0] logic_out;
 
 // Assignments from internal wires
-assign result_aux = mult_out[63:32];
+logic [63:0] final_mult_out;
+assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
+
+assign result_aux = final_mult_out[63:32];
 
 //used for <, >, ADD, SUB, ADDC, SUBC
 //1 PHYSICAL, 6 IMPLEMENTED
 ADDER32 adder(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en[0]),
+    .power_en(power_en[0] && !low_power),
     .A(A),
     .B(B),
     .MODE_SEL(adder_mode),
     .C0(C0),
     .Y({CF_adder, adder_out})
+);
+
+ADDER32_LP adder_lp(
+    .power_en(power_en[0] && low_power),
+    .MODE_SEL(adder_mode),
+    .C0(C0), // Note: C0 logic might need review if it depends on piped signals, but looks combinatorial in ALU_TOP
+    .A(A_comb),
+    .B(B_comb),
+    .Y(adder_lp_out)
 );
 
 MULT32 mult(
