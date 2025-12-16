@@ -32,6 +32,9 @@ module ALU_TOP(
 // 00011	A < B	        LT	        Less than
 // 00100	A + B + C	    ADDC	    Addition with carry
 // 00101	A - B - C	    SUBC	    Subtraction with borrow
+// 00110	A - B	        SUB		    Subtraction 
+// 00111	A - B	        SUB		    Subtraction
+//
 //
 //multiplier unit (01xxx)
 // 01xxx	A * B	        MUL	        Multiplication
@@ -89,6 +92,8 @@ always_comb begin
         3'b011: C0 = 1'b1;          // LT (assuming subtraction)
         3'b100: C0 = CF_reg;        // ADDC
         3'b101: C0 = CF_reg;        // SUBC
+        3'b011: C0 = 1'b1;          // SUB
+        3'b101: C0 = 1'b1;          // SUB
         default:  C0 = 1'b0;
     endcase
 end
