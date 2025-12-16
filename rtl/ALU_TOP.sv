@@ -132,7 +132,7 @@ end
 //-------------------------------POWER GATING---------------------------------
 //handling of idling and power gating dynamically depending on the stage counts
 
-logic [5:0] power_en;
+logic power_en_adder, power_en_mult, power_en_shifter, power_en_logic;
 logic [3:0] sreg_adder;   // 4 cycles
 logic [6:0] sreg_mult;    // 7 cycles
 logic [2:0] sreg_shifter; // 3 cycles
@@ -173,11 +173,12 @@ always @(posedge clk or negedge reset_n) begin
 end
 
 //disabling the particular block if staged out or idle
+
 always_comb begin
-    power_en[0] = sreg_adder[0]   | ((branch == 2'b00) && !idle);
-    power_en[1] = (sreg_mult[0]   | ((branch == 2'b01) && !idle));
-    power_en[2] = sreg_shifter[0] | ((branch == 2'b10) && !idle);
-    power_en[3] = sreg_logic[0]   | ((branch == 2'b11) && !idle);
+    power_en_adder = sreg_adder[0]   | ((branch == 2'b00) && !idle);
+    power_en_mult = (sreg_mult[0]   | ((branch == 2'b01) && !idle));
+    power_en_shifter = sreg_shifter[0] | ((branch == 2'b10) && !idle);
+    power_en_logic = sreg_logic[0]   | ((branch == 2'b11) && !idle);
 end
 
 
@@ -213,7 +214,7 @@ assign result_aux = final_mult_out[63:32];
 ADDER32 adder(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en[0] && !low_power),
+    .power_en(power_en_adder && !low_power),
     .A(A),
     .B(B),
     .MODE_SEL(adder_mode),
@@ -223,7 +224,7 @@ ADDER32 adder(
 
 ADDER32_LP adder_lp(
     .clk_low(clk_low),
-    .power_en(power_en[0] && low_power),
+    .power_en(power_en_adder && low_power),
     .MODE_SEL(adder_mode),
     .C0(C0), // Note: C0 logic might need review if it depends on piped signals, but looks combinatorial in ALU_TOP
     .A(A_comb),
@@ -234,7 +235,7 @@ ADDER32_LP adder_lp(
 MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en[1] && !low_power),
+    .power_en(power_en_mult && !low_power),
     .start_i(branch == 2'b01),
     .A(A),
     .B(B),
@@ -257,7 +258,7 @@ end
 
 MULT32_LP MULT32_LP(
     .clk_low(clk_low),
-    .power_en(power_en[1] && low_power),
+    .power_en(power_en_mult && low_power),
     .A(A_comb),
     .B(B_comb),
     .Y(mult_lp_out)
@@ -266,7 +267,7 @@ MULT32_LP MULT32_LP(
 //used for SHL, SHR, SLA, SRA, ROR, ROL, BYT
 //4 PHYSICAL, 7 IMPLEMENTED
 SHIFTER shifter(
-    .power_en(power_en[2]),
+    .power_en(power_en_shifter),
     .A(A),
     .B(B[4:0]),
     .CMD(CMD[2:0]),
@@ -277,7 +278,7 @@ SHIFTER shifter(
 //used for AND, OR, XOR, NOT, NAND, NOR, XNOR, ==
 //4 PHYSICAL, 8 IMPLEMENTED
 LOGIC_BLOCK logic_block(
-    .power_en(power_en[3]),
+    .power_en(power_en_logic),
     .A(A),
     .B(B),
     .CMD(CMD[2:0]), 

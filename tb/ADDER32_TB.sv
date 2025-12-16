@@ -5,6 +5,7 @@ module ADDER32_TB;
     // Inputs
     logic clk;
     logic reset_n;
+    logic power_en; // Added power_en to control power gating
     logic MODE_SEL; // Added MODE_SEL
     logic C0;
     logic [31:0] A;
@@ -23,6 +24,7 @@ module ADDER32_TB;
     ADDER32 uut (
         .clk(clk), 
         .reset_n(reset_n), 
+        .power_en(power_en), // Connected power_en
         .MODE_SEL(MODE_SEL), // Connected MODE_SEL
         .C0(C0), 
         .A(A), 
@@ -60,12 +62,12 @@ module ADDER32_TB;
     task check_outputs();
         logic [32:0] expected_Y;
         begin
-            // Expected for combinational logic (immediate calculation based on current inputs)
-            // Account for 1-cycle pipeline latency: Y reflects inputs from the previous cycle (A_q, B_q, C0_q, MODE_SEL_q)
+            // Expected for combinational logic
+            // Hardware implements A + (MODE_SEL ? ~B : B) + C0
             if (MODE_SEL_q) 
-                 expected_Y = A_q - B_q - C0_q; // Subtraction logic if needed, simplistically
+                 expected_Y = A_q + ~B_q + C0_q; // Subtraction: A - B - 1 + C0
             else
-                 expected_Y = A_q + B_q + C0_q;
+                 expected_Y = A_q + B_q + C0_q;  // Addition: A + B + C0
             
             // Allow a small delta for combinational propagation if needed, 
             // but since we check after #1 hold time + wait, it should be stable.
@@ -83,6 +85,7 @@ module ADDER32_TB;
     initial begin
         // Initialize Inputs
         reset_n = 0;
+        power_en = 1; // Enable power by default
         MODE_SEL = 0; // Set to ADD
         C0 = 0;
         A = 0;
@@ -115,13 +118,13 @@ module ADDER32_TB;
         @(posedge clk); #5;
         check_outputs();
 
-        // Test Case 4: Simple Subtraction
-        drive_inputs(32'h0000_0005, 32'h0000_0002, 0, 1);
+        // Test Case 4: Simple Subtraction (A - B) -> C0=1
+        drive_inputs(32'h0000_0005, 32'h0000_0002, 1, 1);
         @(posedge clk); #5;
         check_outputs();
 
-        // Test Case 5: Subtraction with borrow
-        drive_inputs(32'h0000_0001, 32'h0000_0002, 0, 1);
+        // Test Case 5: Subtraction with borrow (A - B) -> C0=1
+        drive_inputs(32'h0000_0001, 32'h0000_0002, 1, 1);
         @(posedge clk); #5;
         check_outputs();
 

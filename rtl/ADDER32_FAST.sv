@@ -70,6 +70,7 @@ end
 
 // CLA16 Instance for Lower 16 bits
 CLA16 CLA16_0 (
+    .power_en(power_en),
     .P(P[15:0]),
     .G(G[15:0]),
     .C0(C0),
@@ -78,6 +79,7 @@ CLA16 CLA16_0 (
 
 // CLA16 Instance for Upper 16 bits
 CLA16 CLA16_1 (
+    .power_en(power_en),
     .P(P_REG[15:0]),
     .G(G_REG[15:0]),
     .C0(C15_REG),
@@ -85,12 +87,14 @@ CLA16 CLA16_1 (
 );
 
 SUM16 SUM16_0 (
+.power_en(power_en),
 .P(P_lower_REG), // Use registered P to match C_REG timing
 .C({C_REG[14:0], C0_REG}),
 .S(Y_intermediate[15:0])
 );
 
 SUM16 SUM16_1 (
+.power_en(power_en),
 .P(P_REG[15:0]),
 .C({C[30:16], C15_REG}),
 .S(Y_intermediate[31:16])
@@ -177,21 +181,25 @@ module CLA16(
     assign Gg = Gg_int[3] | (Pg_int[3] & Gg_int[2]) | (Pg_int[3] & Pg_int[2] & Gg_int[1]) | (Pg_int[3] & Pg_int[2] & Pg_int[1] & Gg_int[0]);
 
     CLA4 CLA4_0 (
+        .power_en(power_en),
         .P(P[3:0]), .G(G[3:0]), .C0(C0),
         .C(C[3:0])
     );
 
     CLA4 CLA4_1 (
+        .power_en(power_en),
         .P(P[7:4]), .G(G[7:4]), .C0(C_int[0]),
         .C(C[7:4])
     );
 
     CLA4 CLA4_2 (
+        .power_en(power_en),
         .P(P[11:8]), .G(G[11:8]), .C0(C_int[1]),
         .C(C[11:8])
     );
 
     CLA4 CLA4_3 (
+        .power_en(power_en),
         .P(P[15:12]), .G(G[15:12]), .C0(C_int[2]),
         .C(C[15:12])
     );
