@@ -21,10 +21,10 @@ module MULT32 (
     // Instantiating 16x16 Multipliers
     logic [31:0] P_HH_raw, P_HL_raw, P_LH_raw, P_LL_raw;
 
-    MULT16 u_hh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_H), .P(P_HH_raw));
-    MULT16 u_hl (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_L), .P(P_HL_raw));
-    MULT16 u_lh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_H), .P(P_LH_raw));
-    MULT16 u_ll (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_L), .P(P_LL_raw));
+    MULT16 MULT16_HH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_H), .P(P_HH_raw));
+    MULT16 MULT16_HL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_L), .P(P_HL_raw));
+    MULT16 MULT16_LH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_H), .P(P_LH_raw));
+    MULT16 MULT16_LL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_L), .P(P_LL_raw));
 
     // Pipeline Registers (End of Stage 1)
     logic [31:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG;
@@ -154,10 +154,10 @@ module MULT16 (
     // These modules take 2 clock cycles to produce a valid result.
     logic [15:0] P_HH_raw, P_HL_raw, P_LH_raw, P_LL_raw;
 
-    MULT8 u_hh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_H), .P(P_HH_raw));
-    MULT8 u_hl (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_L), .P(P_HL_raw));
-    MULT8 u_lh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_H), .P(P_LH_raw));
-    MULT8 u_ll (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_L), .P(P_LL_raw));
+    MULT8 MULT8_HH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_H), .P(P_HH_raw));
+    MULT8 MULT8_HL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_L), .P(P_HL_raw));
+    MULT8 MULT8_LH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_H), .P(P_LH_raw));
+    MULT8 MULT8_LL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_L), .P(P_LL_raw));
 
     // We register the outputs of the 8x8 mults to prevent the 
     // summation logic of 8x8 chaining directly into the summation of 16x16.
@@ -254,10 +254,10 @@ module MULT8 (
     // All four 4x4 multiplications run in parallel.
     logic [7:0] P_HH, P_HL, P_LH, P_LL; // All are 8-bit products
     logic [7:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG; // Pipeline registers
-    MULT4 u_hh (.power_en(power_en), .A(A_H), .B(B_H), .P(P_HH)); // P_HH: (A_H * B_H)
-    MULT4 u_hl (.power_en(power_en), .A(A_H), .B(B_L), .P(P_HL)); // P_HL: (A_H * B_L)
-    MULT4 u_lh (.power_en(power_en), .A(A_L), .B(B_H), .P(P_LH)); // P_LH: (A_L * B_H)
-    MULT4 u_ll (.power_en(power_en), .A(A_L), .B(B_L), .P(P_LL)); // P_LL: (A_L * B_L)
+    MULT4 MULT4_HH (.power_en(power_en), .A(A_H), .B(B_H), .P(P_HH)); // P_HH: (A_H * B_H)
+    MULT4 MULT4_HL (.power_en(power_en), .A(A_H), .B(B_L), .P(P_HL)); // P_HL: (A_H * B_L)
+    MULT4 MULT4_LH (.power_en(power_en), .A(A_L), .B(B_H), .P(P_LH)); // P_LH: (A_L * B_H)
+    MULT4 MULT4_LL (.power_en(power_en), .A(A_L), .B(B_L), .P(P_LL)); // P_LL: (A_L * B_L)
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin

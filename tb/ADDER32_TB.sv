@@ -38,8 +38,6 @@ module ADDER32_TB;
 
     // Test variables
     int error_count = 0;
-    $display("%d", MODE_SEL);
-    $display("%d", C0);
 
     // Task to drive inputs
     task drive_inputs(input [31:0] in_a, input [31:0] in_b, input in_c0, input in_mode_sel);

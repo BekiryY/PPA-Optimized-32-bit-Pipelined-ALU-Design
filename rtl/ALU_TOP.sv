@@ -34,7 +34,7 @@ module ALU_TOP(
 // 00101	A - B - C	    SUBC	    Subtraction with borrow
 //
 //multiplier unit (01xxx)
-// 01000	A * B	        MUL	        Multiplication
+// 01xxx	A * B	        MUL	        Multiplication
 //
 //shifter unit (10xxx)
 // 10000	A << B	        SLL         Shift Left Logical
