@@ -61,12 +61,32 @@ module MULT32 (
     // - P_LL[31:16]:  Aligned to LSB of this adder (Bit 16)
     // - P_MID[23:0]:  Aligned to LSB of this adder (Bit 16)
     // - P_HH[7:0]:    Starts at Bit 32. Relative to Bit 16, this is +16.
-    
+    // Pipeline Registers for Alignment (Stage 2 Split)
+    logic [32:0] P_MID_SUM_REG;
+    logic [31:0] P_HH_REG_d1;
+    logic [31:0] P_LL_REG_d1;
+
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            P_MID_SUM_REG <= 0;
+            P_HH_REG_d1 <= 0;
+            P_LL_REG_d1 <= 0;
+        end else if (power_en) begin
+            P_MID_SUM_REG <= P_MID_SUM;
+            P_HH_REG_d1 <= P_HH_REG;
+            P_LL_REG_d1 <= P_LL_REG;
+        end else begin
+            P_MID_SUM_REG <= 0;
+            P_HH_REG_d1 <= 0;
+            P_LL_REG_d1 <= 0;
+        end
+    end
+
     logic [24:0] P_first_24_comb; // 25 bits to capture carry out
     
-    assign P_first_24_comb = {P_HH_REG[7:0], 16'b0}  // Shifted high!
-                           + P_MID_SUM[23:0] 
-                           + {8'b0, P_LL_REG[31:16]};
+    assign P_first_24_comb = {P_HH_REG_d1[7:0], 16'b0}  // Shifted high!
+                           + P_MID_SUM_REG[23:0] 
+                           + {8'b0, P_LL_REG_d1[31:16]};
 
     // Pipeline Registers (End of Stage 2)
     // We must pass EVERYTHING needed for the final stage through registers.
@@ -82,10 +102,11 @@ module MULT32 (
             P_MID_UPPER_REG <= 0;
             P_LL_FINAL_REG  <= 0;
         end else if (power_en) begin
-            P_first_24_REG  <= P_first_24_comb;
-            P_HH_UPPER_REG  <= P_HH_REG[31:8];
-            P_MID_UPPER_REG <= P_MID_SUM[32:24];
-            P_LL_FINAL_REG  <= P_LL_REG[15:0]; // Delaying LSBs
+            P_first_24_REG  <= P_first_24_comb; 
+            // Use delayed versions to align with P_first_24_REG (which is now T+2 aligned)
+            P_HH_UPPER_REG  <= P_HH_REG_d1[31:8];
+            P_MID_UPPER_REG <= P_MID_SUM_REG[32:24];
+            P_LL_FINAL_REG  <= P_LL_REG_d1[15:0]; 
         end else begin
             P_first_24_REG  <= 0;
             P_HH_UPPER_REG  <= 0;
@@ -121,15 +142,16 @@ module MULT32 (
         end
     end
 
-    // Valid Signal Pipeline (Depth = 4)
-    logic [4:0] valid_pipe;
+    // Valid Signal Pipeline (Depth = 7)
+    // 5 (original) + 1 (MULT16 extra) + 1 (MULT32 extra) = 7 stages
+    logic [6:0] valid_pipe;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) 
-            valid_pipe <= 5'd0;
+            valid_pipe <= 7'd0;
         else 
-            valid_pipe <= {valid_pipe[4:0], start_i & power_en};
+            valid_pipe <= {valid_pipe[5:0], start_i & power_en};
     end
-    assign valid_o = valid_pipe[4] & power_en;
+    assign valid_o = valid_pipe[6] & power_en;
 
 endmodule
 
@@ -195,38 +217,40 @@ module MULT16 (
 
     // We need to sum three terms in the overlap region.
     
-    // Term 1: P_LL upper byte
-    logic [7:0] T1;
-    assign T1 = P_LL_REG[15:8];
-
-    
     // Middle Sum: P_HL + P_LH
     // 16-bit + 16-bit = 17-bit result
     logic [16:0] P_MID_SUM;
     assign P_MID_SUM = P_HL_REG + P_LH_REG;
 
-    // Term 2: P_MID_SUM (17 bits)
-    // This starts at bit 8, so it aligns with T1 at the bottom.
-    logic [16:0] T2;
-    assign T2 = P_MID_SUM;
-
-    // Term 3: P_HH (16 bits)
-    // This starts at bit 16. Relative to bit 8 (our summation start), 
-    // it is shifted left by 8.
-    logic [23:0] T3;
-    assign T3 = {P_HH_REG, 8'b0}; 
-
     // Calculation:
-    // P[31:8] = T3 + T2 + T1
-    // (Note: T1 is 8 bits, T2 is 17 bits, T3 is effectively 24 bits relative to this window)
-    
     // The addition width is 24 bits (from bit 8 to bit 31).
+    // Registers for Pipelining Middle Sum
+    logic [16:0] P_MID_SUM_REG;
+    logic [15:0] P_HH_REG_d1;
+    logic [15:0] P_LL_REG_d1;
+
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            P_MID_SUM_REG <= 0;
+            P_HH_REG_d1 <= 0;
+            P_LL_REG_d1 <= 0;
+        end else if (power_en) begin
+            P_MID_SUM_REG <= P_MID_SUM;
+            P_HH_REG_d1 <= P_HH_REG;
+            P_LL_REG_d1 <= P_LL_REG;
+        end else begin
+            P_MID_SUM_REG <= 0;
+            P_HH_REG_d1 <= 0;
+            P_LL_REG_d1 <= 0;
+        end
+    end
+
     always_comb begin
         if (!power_en) begin
             P = 32'h00000000;
         end else begin
-            P[7:0] = P_LL_REG[7:0];
-            P[31:8] = T3 + T2 + {16'b0, T1};
+            P[7:0] = P_LL_REG_d1[7:0];
+            P[31:8] = {P_HH_REG_d1, 8'b0} + P_MID_SUM_REG + {16'b0, P_LL_REG_d1[15:8]};
         end
     end
     

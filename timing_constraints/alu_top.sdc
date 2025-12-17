@@ -25,10 +25,10 @@ set_mode HP_MODE
 # Using 80ps of input delay bc system is fast (45nm)
 # This is the maximum time allowed from the clock edge until the signal reaches the ADDER32 inputs.
 # flop propagation delay + wiring -> 60 + 20 
-set_input_delay -max 0.08 -clock clk [get_ports {A[*] B[*] CMD[*], idle, branch[*], low_power,}]
+set_input_delay -max 0.08 -clock clk [get_ports {A[*], B[*], CMD[*], idle, branch[*], low_power}]
 
 # Add a hold check (set_input_delay -min)
-set_input_delay -min 0.04 -clock clk [get_ports {A[*] B[*] CMD[*], idle, branch[*], low_power,}]
+set_input_delay -min 0.04 -clock clk [get_ports {A[*], B[*], CMD[*], idle, branch[*], low_power}]
 
 # Output Delays------------------------------------------------------
 # Assuming outputs need to be stable before the next setup time (e.g., setup time + wire delay)
@@ -48,6 +48,5 @@ set_max_capacitance 0.3 [current_design]
 set_timing_derate -early 0.90
 set_timing_derate -late 1.16
 
------------------------------LOW POWER-------------------------------
 
 
