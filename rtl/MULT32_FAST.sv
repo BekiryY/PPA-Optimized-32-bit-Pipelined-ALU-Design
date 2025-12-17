@@ -19,6 +19,7 @@ module MULT32 (
 
     //--------------------STAGE 1--------------------
     // Instantiating 16x16 Multipliers
+    // These modules takes 4 clock cycles to complete
     logic [31:0] P_HH_raw, P_HL_raw, P_LH_raw, P_LL_raw;
 
     MULT16 MULT16_HH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_H), .P(P_HH_raw));
@@ -49,7 +50,8 @@ module MULT32 (
     end
 
     //---------------------STAGE 2----------------------------
-    // Logic: Calculate Middle Sum and Lower-Middle Addition
+    // 32bit intermediate addition Calculate Middle Sum and Lower-Middle Addition
+    // this will take 1 clock cycles to complete
     
     // 1. Middle Sum (33 bits)
     logic [32:0] P_MID_SUM;
@@ -81,6 +83,10 @@ module MULT32 (
             P_LL_REG_d1 <= 0;
         end
     end
+
+    //---------------------STAGE 3----------------------------
+    // 24bit final addition P[40:17]
+    // this will take 1 clock cycles to complete
 
     logic [24:0] P_first_24_comb; // 25 bits to capture carry out
     
@@ -115,9 +121,10 @@ module MULT32 (
         end
     end
 
-    //---------------------STAGE 3----------------------------
-    // Final Addition and Output Assembly
-    
+    //---------------------STAGE 4----------------------------
+    // Final 24bit Addition and Output Assembly
+    // this will take 1 clock cycle to complete
+
     // 1. Final Upper Addition (Bits 40 to 63)
     // Inputs: P_HH upper part, P_MID upper part, and Carry from Stage 2.
     logic [23:0] P_upper_sum;
@@ -131,6 +138,9 @@ module MULT32 (
     assign P[63:40] = P_HH_UPPER_REG 
                        + {15'b0, P_MID_UPPER_REG} 
                        + {23'b0, P_first_24_REG[24]}; // Add Carry
+
+    //---------------------STAGE 5----------------------------
+    //registerin the output (wasting a cycle for accounting for non optimal output delay)
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
@@ -205,8 +215,9 @@ module MULT16 (
         end
     end
 
-    //--------------------------STAGE 3--------------------------
-    // --- 4. Term Alignment and Summation ---
+    //--------------------------STAGE 2--------------------------
+    // --- 2.    Term Alignment and Summation ---
+    // here will take 1 clock cycle to complete
 
     // --- Final Alignment ---
     // P_LL contributes to bits [15:0]
@@ -244,6 +255,9 @@ module MULT16 (
             P_LL_REG_d1 <= 0;
         end
     end
+    //--------------------------STAGE 3--------------------------
+    // final 24bit addition
+    // here will take 1 clock cycle to complete
 
     always_comb begin
         if (!power_en) begin
@@ -253,7 +267,6 @@ module MULT16 (
             P[31:8] = {P_HH_REG_d1, 8'b0} + P_MID_SUM_REG + {16'b0, P_LL_REG_d1[15:8]};
         end
     end
-    
 
 endmodule
 
@@ -306,29 +319,20 @@ module MULT8 (
     //--------------------------STAGE 2--------------------------
     // --- 2. Term Alignment and Summation Reduction ---
     // The critical path is the final 12-bit addition.
- 
-    // Term 1 (P_LL): 8'h00 | P_LL
-    logic [7:0] T1;
-    assign T1 = P_LL_REG;
 
-    // Term 2 (P_MID): (P_HL + P_LH) shifted left by 4
     // We must first compute P_HL + P_LH. This requires a fast 9-bit adder.
     logic [8:0] P_MID_SUM;
     assign P_MID_SUM = P_HL_REG + P_LH_REG; 
-    logic [8:0] T2;
-    assign T2 = P_MID_SUM;
-
-    logic [11:0] T3;
-    assign T3 = {P_HH_REG, 4'h0}; // Shift left by 4
     
     always_comb begin
         if (!power_en) begin
             P = 16'h0000;
         end else begin
-            P[3:0] = T1[3:0];
-            P[15:4] =  T3 + T2 + T1[7:4];
+            P[3:0] = P_LL_REG[3:0];
+            P[15:4] =  {P_HH_REG, 8'h00} + {P_MID_SUM[8:0], 4'h00} + {P_LL_REG[7:4], 4'h00};
         end
     end
+
 endmodule
 
 module MULT4 (
@@ -339,11 +343,6 @@ module MULT4 (
     // Explicit Operand Isolation
     // When power_en is 0, inputs to the multiplier logic are forced to 0.
     // This prevents dynamic switching power in the multiplier logic.
-    logic [3:0] A_gated, B_gated;
-    assign A_gated = A & {4{power_en}};
-    assign B_gated = B & {4{power_en}};
+    assign P = power_en ? A * B: 8'h00;
 
-    always_comb begin
-        P = A_gated * B_gated;
-    end
 endmodule

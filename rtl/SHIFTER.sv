@@ -20,7 +20,7 @@ localparam CMD_BYT = 3'b110; // Byte Swap
 
 logic [32:0] temp_res;
 
-i
+
         case (CMD)
             CMD_SLL: begin
                 temp_res = {1'b0, A} << B;
