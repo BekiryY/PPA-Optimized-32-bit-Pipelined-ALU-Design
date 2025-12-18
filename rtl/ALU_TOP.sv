@@ -59,19 +59,12 @@ module ALU_TOP(
 // 11111	A == B	        EQ          Equality check
 //
 
-//flag register
-// [7]PF, [6]0, [5]0, [4]0, [3]OF, [2]CF, [1]SF, [0]ZF
-
-logic OF_flag;
-logic CF_flag;
-logic SF_flag;
-logic ZF_flag;
-
 
 //carry related signals
 logic C0;
 logic CF_reg;
 logic PF_reg;
+logic ZF_reg;
 logic CF_adder;
 logic CF_shifter;
 
@@ -79,7 +72,14 @@ logic final_adder_carry;
 logic [31:0] final_adder_out;
 logic [31:0] Y_reg;
 
-assign flag_reg = {PF_flag, 3'b0, OF_flag, CF_reg, SF_flag, ZF_flag};
+//flag register
+// [7]PF, [6]0, [5]0, [4]0, [3]OF, [2]CF, [1]SF, [0]ZF
+logic OF_flag;
+logic CF_flag;
+logic SF_flag;
+logic ZF_flag;
+//unfortunately pf_reg and cf_reg values are 1 cycle more delayed after Y
+assign flag_reg = {PF_reg, 3'b0, OF_flag, CF_reg, SF_flag, ZF_reg};
 
 logic adder_mode;
 
@@ -136,11 +136,12 @@ always @(posedge clk or negedge reset_n) begin
     else begin
         Y_reg <= Y;
         PF_reg <= ^Y_reg;
-        ZF_flag <= (Y == 32'h0);
+        ZF_reg <= (Y_reg == 32'h0);
         SF_flag <= Y[31];
         // Standard Overflow: (Operand1_Sign == Operand2_Sign) && (Result_Sign != Operand1_Sign)
         // Operand2_eff is B inverted if subtracting.
-        OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)) & (Y[31] != A[31]); 
+        //OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)) & (Y[31] != A[31]); 
+        OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)); 
         CF_reg  <= CF_flag; // Store the carry from Adder
     end
 end
