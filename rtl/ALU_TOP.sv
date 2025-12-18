@@ -77,8 +77,7 @@ logic [31:0] Y_reg;
 logic OF_flag;
 logic CF_flag;
 logic SF_flag;
-logic ZF_flag;
-//unfortunately pf_reg and cf_reg values are 1 cycle more delayed after Y
+//unfortunately pf_reg, zf_reg and cf_reg values are 1 cycle more delayed after Y
 assign flag_reg = {PF_reg, 3'b0, OF_flag, CF_reg, SF_flag, ZF_reg};
 
 logic adder_mode;
@@ -130,7 +129,7 @@ always @(posedge clk or negedge reset_n) begin
         OF_flag <= 1'b0; 
         CF_reg <= 1'b0;
         SF_flag <= 1'b0;
-        ZF_flag <= 1'b0;
+        ZF_reg <= 1'b0;
         Y_reg <= 32'h0;
     end
     else begin
