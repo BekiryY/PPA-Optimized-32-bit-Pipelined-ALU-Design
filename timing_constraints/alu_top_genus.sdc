@@ -1,9 +1,5 @@
 # SDC File for ALU_TOP
 # Two Analysis Modes: HP and LP
-# Target Frequency HP: 1.66GHz 
-# Period HP = 1/1660MHz = 0.6024 ns
-# Target Frequency LP: 0.12GHz 
-# Period LP = 1/120MHz = 8.333 ns
 
 # Set the SDC version
 set sdc_version 2.0
@@ -12,11 +8,12 @@ set sdc_version 2.0
 set_time_unit -nanoseconds
 set_load_unit -picofarads
 
+#2.81GHz for triggering TDS and path optimization of Genus
+create_clock -name clk -period 0.335 [get_ports clk]
+
 # NOTE: Clock uncertainty is explicitly set to 0 as requested.
 # WARNING: This is highly unrealistic for physical implementation.
 set_clock_uncertainty 0.050 [get_clocks clk]
-
-create_clock -name clk -period 0.6024 [get_ports clk]
 
 set_case_analysis 0 [get_ports low_power]
 set_mode HP_MODE

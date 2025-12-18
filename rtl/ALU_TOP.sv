@@ -214,12 +214,19 @@ assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
 
 assign result_aux = final_mult_out[63:32];
 
+assign power_en_adder_lp = power_en_adder && low_power;
+assign power_en_mult_lp = power_en_mult && low_power;
+assign power_en_adder_fast = power_en_adder && !low_power;
+assign power_en_mult_fast = power_en_mult && !low_power;
+
+
+
 //used for <, >, ADD, SUB, ADDC, SUBC
 //1 PHYSICAL, 6 IMPLEMENTED
 ADDER32 adder(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en_adder && !low_power),
+    .power_en(power_en_adder_fast),
     .A(A),
     .B(B),
     .MODE_SEL(adder_mode),
@@ -229,7 +236,7 @@ ADDER32 adder(
 
 ADDER32_LP adder_lp(
     .clk_low(clk_low),
-    .power_en(power_en_adder && low_power),
+    .power_en(power_en_adder_lp),
     .MODE_SEL(adder_mode),
     .C0(C0), // Note: C0 logic might need review if it depends on piped signals, but looks combinatorial in ALU_TOP
     .A(A_comb),
@@ -240,7 +247,7 @@ ADDER32_LP adder_lp(
 MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en_mult && !low_power),
+    .power_en(power_en_mult_fast),
     .start_i(branch == 2'b01),
     .A(A),
     .B(B),
@@ -263,7 +270,7 @@ end
 
 MULT32_LP MULT32_LP(
     .clk_low(clk_low),
-    .power_en(power_en_mult && low_power),
+    .power_en(power_en_mult_lp),
     .A(A_comb),
     .B(B_comb),
     .Y(mult_lp_out)
