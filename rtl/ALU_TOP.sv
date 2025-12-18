@@ -268,7 +268,7 @@ always_comb begin
     end
 end
 
-MULT32_LP MULT32_LP(
+MULT32_LP mult_lp(
     .clk_low(clk_low),
     .power_en(power_en_mult_lp),
     .A(A_comb),
