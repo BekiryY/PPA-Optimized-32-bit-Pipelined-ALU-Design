@@ -1,5 +1,4 @@
 module MULT32_LP (
-    input clk_low,
     input power_en,
     input [31:0] A,
     input [31:0] B,

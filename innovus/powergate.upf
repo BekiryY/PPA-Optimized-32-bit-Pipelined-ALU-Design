@@ -1,201 +1,119 @@
 upf_version 1.0
 
 # =============================================================================
-# 1. ALWAYS ON DOMAIN (The "Default Bucket")
+# 1. GLOBAL SUPPLY DEFINITIONS (Always-On Rails)
 # =============================================================================
-# -include_scope puts everything NOT listed later into this domain.
-# This automatically handles your top-level glue logic, FSMs, and power_en wires.
-create_power_domain PD_TOP -include_scope
-set_domain_supply_net PD_TOP -primary_power_pin VDD -primary_ground_pin VSS
+create_supply_port VDD
+create_supply_port VSS
 
-# =============================================================================
-# 2. GATED DOMAINS (Repeat this block for MOD_0 through MOD_5)
-# =============================================================================
+create_supply_net  VDD
+create_supply_net  VSS
 
-#--------------module list---------------
-# adder32     power_en_adder
-# adder32_lp  power_en_adder_lp
-# mult32      power_en_mult
-# mult32_lp   power_en_mult_lp
-# shifter     power_en_shifter
-# logic_block power_en_logic
-#----------------------------------------
-
-
-# --- MODULE 0 ---
-create_power_domain PD_MOD_0 -elements {adder} 
-set_domain_supply_net PD_MOD_0 -primary_power_pin VDD_V_0 -primary_ground_pin VSS
-
-# The Switch: Connects real VDD to virtual VDD_V_0
-create_power_switch PS_0 \
-    -domain PD_MOD_0 \
-    -input_supply_port {vdd_in VDD} \
-    -output_supply_port {vdd_out VDD_V_0} \
-    -control_port {ctrl power_en_adder} \ 
-    -on_state {ON_STATE vdd_in {ctrl}} \
-    -off_state {OFF_STATE { !ctrl }}
-
-# The Isolation: Clamps outputs to 0 when power is off
-set_isolation ISO_0 \
-    -domain PD_MOD_0 \
-    -isolation_power_net VDD \
-    -isolation_ground_net VSS \
-    -clamp_value 0 \
-    -applies_to outputs
-
-# The Control: When switch_ctrl_0 is LOW, activate isolation
-set_isolation_control ISO_0 \
-    -domain PD_MOD_0 \
-    -isolation_signal power_en_adder \
-    -isolation_sense low
-
-# --- MODULE 1 ---
-create_power_domain PD_MOD_1 -elements {adder_lp} 
-set_domain_supply_net PD_MOD_1 -primary_power_pin VDD_V_1 -primary_ground_pin VSS
-
-# The Switch: Connects real VDD to virtual VDD_V_1
-create_power_switch PS_1 \
-    -domain PD_MOD_1 \
-    -input_supply_port {vdd_in VDD} \
-    -output_supply_port {vdd_out VDD_V_1} \
-    -control_port {ctrl power_en_adder_lp} \
-    -on_state {ON_STATE vdd_in {ctrl}} \
-    -off_state {OFF_STATE { !ctrl }}
-
-# The Isolation: Clamps outputs to 0 when power is off
-set_isolation ISO_1 \
-    -domain PD_MOD_1 \
-    -isolation_power_net VDD \
-    -isolation_ground_net VSS \
-    -clamp_value 0 \
-    -applies_to outputs
-
-# The Control: When switch_ctrl_1 is LOW, activate isolation
-set_isolation_control ISO_1 \
-    -domain PD_MOD_1 \
-    -isolation_signal power_en_adder_lp \
-    -isolation_sense low
-
-# --- MODULE 2 ---
-create_power_domain PD_MOD_2 -elements {mult} 
-set_domain_supply_net PD_MOD_2 -primary_power_pin VDD_V_2 -primary_ground_pin VSS
-
-# The Switch: Connects real VDD to virtual VDD_V_2
-create_power_switch PS_2 \
-    -domain PD_MOD_2 \
-    -input_supply_port {vdd_in VDD} \
-    -output_supply_port {vdd_out VDD_V_2} \
-    -control_port {ctrl power_en_mult} \
-    -on_state {ON_STATE vdd_in {ctrl}} \
-    -off_state {OFF_STATE { !ctrl }}
-
-# The Isolation: Clamps outputs to 0 when power is off
-set_isolation ISO_2 \
-    -domain PD_MOD_2 \
-    -isolation_power_net VDD \
-    -isolation_ground_net VSS \
-    -clamp_value 0 \
-    -applies_to outputs
-
-# The Control: When switch_ctrl_2 is LOW, activate isolation
-set_isolation_control ISO_2 \
-    -domain PD_MOD_2 \
-    -isolation_signal power_en_mult \
-    -isolation_sense low
-
-# --- MODULE 3 ---
-create_power_domain PD_MOD_3 -elements {mult_lp} 
-set_domain_supply_net PD_MOD_3 -primary_power_pin VDD_V_3 -primary_ground_pin VSS
-
-# The Switch: Connects real VDD to virtual VDD_V_3
-create_power_switch PS_3 \
-    -domain PD_MOD_3 \
-    -input_supply_port {vdd_in VDD} \
-    -output_supply_port {vdd_out VDD_V_3} \
-    -control_port {ctrl power_en_mult_lp} \
-    -on_state {ON_STATE vdd_in {ctrl}} \
-    -off_state {OFF_STATE { !ctrl }}
-
-# The Isolation: Clamps outputs to 0 when power is off
-set_isolation ISO_3 \
-    -domain PD_MOD_3 \
-    -isolation_power_net VDD \
-    -isolation_ground_net VSS \
-    -clamp_value 0 \
-    -applies_to outputs
-
-# The Control: When switch_ctrl_3 is LOW, activate isolation
-set_isolation_control ISO_3 \
-    -domain PD_MOD_3 \
-    -isolation_signal power_en_mult_lp \
-    -isolation_sense low
-
-# --- MODULE 4 ---
-create_power_domain PD_MOD_4 -elements {shifter} 
-set_domain_supply_net PD_MOD_4 -primary_power_pin VDD_V_4 -primary_ground_pin VSS
-
-# The Switch: Connects real VDD to virtual VDD_V_4
-create_power_switch PS_4 \
-    -domain PD_MOD_4 \
-    -input_supply_port {vdd_in VDD} \
-    -output_supply_port {vdd_out VDD_V_4} \
-    -control_port {ctrl power_en_shifter} \
-    -on_state {ON_STATE vdd_in {ctrl}} \
-    -off_state {OFF_STATE { !ctrl }}
-
-# The Isolation: Clamps outputs to 0 when power is off
-set_isolation ISO_4 \
-    -domain PD_MOD_4 \
-    -isolation_power_net VDD \
-    -isolation_ground_net VSS \
-    -clamp_value 0 \
-    -applies_to outputs
-
-# The Control: When switch_ctrl_4 is LOW, activate isolation
-set_isolation_control ISO_4 \
-    -domain PD_MOD_4 \
-    -isolation_signal power_en_shifter \
-    -isolation_sense low
-
-# --- MODULE 5 ---
-create_power_domain PD_MOD_5 -elements {logic_block} 
-set_domain_supply_net PD_MOD_5 -primary_power_pin VDD_V_5 -primary_ground_pin VSS
-
-# The Switch: Connects real VDD to virtual VDD_V_5
-create_power_switch PS_5 \
-    -domain PD_MOD_5 \
-    -input_supply_port {vdd_in VDD} \
-    -output_supply_port {vdd_out VDD_V_5} \
-    -control_port {ctrl power_en_logic} \
-    -on_state {ON_STATE vdd_in {ctrl}} \
-    -off_state {OFF_STATE { !ctrl }}
-
-# The Isolation: Clamps outputs to 0 when power is off
-set_isolation ISO_5 \
-    -domain PD_MOD_5 \
-    -isolation_power_net VDD \
-    -isolation_ground_net VSS \
-    -clamp_value 0 \
-    -applies_to outputs
-
-# The Control: When switch_ctrl_5 is LOW, activate isolation
-set_isolation_control ISO_5 \
-    -domain PD_MOD_5 \
-    -isolation_signal power_en_logic \
-    -isolation_sense low
-
-# =============================================================================
-# 3. CONNECTIVITY (Tie it all together)
-# =============================================================================
-# 1. Connect global ports to global nets
 connect_supply_net VDD -ports {VDD}
 connect_supply_net VSS -ports {VSS}
 
-# 2. Connect the Virtual Nets to the Domain Ports
-# This is required so Innovus knows "VDD_V_0" belongs to "PD_MOD_0"
-connect_supply_net VDD_V_0 -ports {PD_MOD_0/VDD_V_0}
-connect_supply_net VDD_V_1 -ports {PD_MOD_1/VDD_V_1}
-connect_supply_net VDD_V_2 -ports {PD_MOD_2/VDD_V_2}
-connect_supply_net VDD_V_3 -ports {PD_MOD_3/VDD_V_3}
-connect_supply_net VDD_V_4 -ports {PD_MOD_4/VDD_V_4}
-connect_supply_net VDD_V_5 -ports {PD_MOD_5/VDD_V_5}
+# =============================================================================
+# 2. ALWAYS ON DOMAIN (Top Level)
+# =============================================================================
+create_power_domain PD_TOP -include_scope
+set_domain_supply_net PD_TOP -primary_power_net VDD -primary_ground_net VSS
+
+# =============================================================================
+# 3. GATED MODULE DOMAINS (MOD_0 to MOD_5)
+# =============================================================================
+
+# --- MODULE 0: Adder ---
+create_power_domain PD_MOD_0 -elements {adder}
+create_supply_net VDD_V_0 -domain PD_MOD_0
+set_domain_supply_net PD_MOD_0 -primary_power_net VDD_V_0 -primary_ground_net VSS
+
+create_power_switch PS_0 -domain PD_MOD_0 \
+    -input_supply_port  {vin VDD} \
+    -output_supply_port {vout VDD_V_0} \
+    -control_port       {ctrl power_en_adder} \
+    -on_state           {ON_STATE vin {ctrl}} \
+    -off_state          {OFF_STATE {!ctrl}}
+
+set_isolation ISO_0 -domain PD_MOD_0 -isolation_power_net VDD -isolation_ground_net VSS \
+    -clamp_value 0 -applies_to outputs
+set_isolation_control ISO_0 -domain PD_MOD_0 -isolation_signal power_en_adder -isolation_sense low
+
+# --- MODULE 1: Adder LP ---
+create_power_domain PD_MOD_1 -elements {adder_lp}
+create_supply_net VDD_V_1 -domain PD_MOD_1
+set_domain_supply_net PD_MOD_1 -primary_power_net VDD_V_1 -primary_ground_net VSS
+
+create_power_switch PS_1 -domain PD_MOD_1 \
+    -input_supply_port  {vin VDD} \
+    -output_supply_port {vout VDD_V_1} \
+    -control_port       {ctrl power_en_adder_lp} \
+    -on_state           {ON_STATE vin {ctrl}} \
+    -off_state          {OFF_STATE {!ctrl}}
+
+set_isolation ISO_1 -domain PD_MOD_1 -isolation_power_net VDD -isolation_ground_net VSS \
+    -clamp_value 0 -applies_to outputs
+set_isolation_control ISO_1 -domain PD_MOD_1 -isolation_signal power_en_adder_lp -isolation_sense low
+
+# --- MODULE 2: Multiplier ---
+create_power_domain PD_MOD_2 -elements {mult}
+create_supply_net VDD_V_2 -domain PD_MOD_2
+set_domain_supply_net PD_MOD_2 -primary_power_net VDD_V_2 -primary_ground_net VSS
+
+create_power_switch PS_2 -domain PD_MOD_2 \
+    -input_supply_port  {vin VDD} \
+    -output_supply_port {vout VDD_V_2} \
+    -control_port       {ctrl power_en_mult} \
+    -on_state           {ON_STATE vin {ctrl}} \
+    -off_state          {OFF_STATE {!ctrl}}
+
+set_isolation ISO_2 -domain PD_MOD_2 -isolation_power_net VDD -isolation_ground_net VSS \
+    -clamp_value 0 -applies_to outputs
+set_isolation_control ISO_2 -domain PD_MOD_2 -isolation_signal power_en_mult -isolation_sense low
+
+# --- MODULE 3: Multiplier LP ---
+create_power_domain PD_MOD_3 -elements {mult_lp}
+create_supply_net VDD_V_3 -domain PD_MOD_3
+set_domain_supply_net PD_MOD_3 -primary_power_net VDD_V_3 -primary_ground_net VSS
+
+create_power_switch PS_3 -domain PD_MOD_3 \
+    -input_supply_port  {vin VDD} \
+    -output_supply_port {vout VDD_V_3} \
+    -control_port       {ctrl power_en_mult_lp} \
+    -on_state           {ON_STATE vin {ctrl}} \
+    -off_state          {OFF_STATE {!ctrl}}
+
+set_isolation ISO_3 -domain PD_MOD_3 -isolation_power_net VDD -isolation_ground_net VSS \
+    -clamp_value 0 -applies_to outputs
+set_isolation_control ISO_3 -domain PD_MOD_3 -isolation_signal power_en_mult_lp -isolation_sense low
+
+# --- MODULE 4: Shifter ---
+create_power_domain PD_MOD_4 -elements {shifter}
+create_supply_net VDD_V_4 -domain PD_MOD_4
+set_domain_supply_net PD_MOD_4 -primary_power_net VDD_V_4 -primary_ground_net VSS
+
+create_power_switch PS_4 -domain PD_MOD_4 \
+    -input_supply_port  {vin VDD} \
+    -output_supply_port {vout VDD_V_4} \
+    -control_port       {ctrl power_en_shifter} \
+    -on_state           {ON_STATE vin {ctrl}} \
+    -off_state          {OFF_STATE {!ctrl}}
+
+set_isolation ISO_4 -domain PD_MOD_4 -isolation_power_net VDD -isolation_ground_net VSS \
+    -clamp_value 0 -applies_to outputs
+set_isolation_control ISO_4 -domain PD_MOD_4 -isolation_signal power_en_shifter -isolation_sense low
+
+# --- MODULE 5: Logic Block ---
+create_power_domain PD_MOD_5 -elements {logic_block}
+create_supply_net VDD_V_5 -domain PD_MOD_5
+set_domain_supply_net PD_MOD_5 -primary_power_net VDD_V_5 -primary_ground_net VSS
+
+create_power_switch PS_5 -domain PD_MOD_5 \
+    -input_supply_port  {vin VDD} \
+    -output_supply_port {vout VDD_V_5} \
+    -control_port       {ctrl power_en_logic} \
+    -on_state           {ON_STATE vin {ctrl}} \
+    -off_state          {OFF_STATE {!ctrl}}
+
+set_isolation ISO_5 -domain PD_MOD_5 -isolation_power_net VDD -isolation_ground_net VSS \
+    -clamp_value 0 -applies_to outputs
+set_isolation_control ISO_5 -domain PD_MOD_5 -isolation_signal power_en_logic -isolation_sense low

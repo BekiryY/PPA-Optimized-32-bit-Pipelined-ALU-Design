@@ -21,6 +21,12 @@ localparam CMD_BYT = 3'b110; // Byte Swap
 logic [32:0] temp_res;
 
 
+always_comb begin
+    if (!power_en) begin
+        Y = 32'b0;
+        CF_flag = 1'b0;
+    end
+    else begin
         case (CMD)
             CMD_SLL: begin
                 temp_res = {1'b0, A} << B;

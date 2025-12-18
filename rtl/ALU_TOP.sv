@@ -61,19 +61,23 @@ module ALU_TOP(
 
 //flag register
 // [7]PF, [6]0, [5]0, [4]0, [3]OF, [2]CF, [1]SF, [0]ZF
-logic PF_flag;
+
 logic OF_flag;
 logic CF_flag;
 logic SF_flag;
 logic ZF_flag;
 
-logic clk_low; //DUMB SIGNAL FOR EASIER ANALYSIS IN GENUS
 
 //carry related signals
 logic C0;
 logic CF_reg;
+logic PF_reg;
 logic CF_adder;
 logic CF_shifter;
+
+logic final_adder_carry;
+logic [31:0] final_adder_out;
+logic [31:0] Y_reg;
 
 assign flag_reg = {PF_flag, 3'b0, OF_flag, CF_reg, SF_flag, ZF_flag};
 
@@ -98,17 +102,22 @@ always_comb begin
     endcase
 end
 
+// Internal wires for module outputs
+logic [31:0] adder_out;
+logic [32:0] adder_lp_out;
+logic [63:0] mult_out;
+logic [63:0] mult_lp_out;
+logic [31:0] shifter_out;
+logic [31:0] logic_out;
+
+// Tristate buffers for output selection
+assign final_adder_out = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
+assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
+
 //00xxx selects adder32
 //01xxx selects mult32
 //10xxx selects shifter
 //11xxx selects logic_block
-
-// Tristate buffers for output selection
-logic [31:0] final_adder_out;
-assign final_adder_out = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
-logic final_adder_carry;
-assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
-
 assign Y = (CMD[4:3] == 2'b00) ? final_adder_out : 32'bz;   //adder32
 assign Y = (CMD[4:3] == 2'b01) ? final_mult_out[31:0] : 32'bz;   //mult32 (Lower 32 bits)
 assign Y = (CMD[4:3] == 2'b10) ? shifter_out : 32'bz;   //shifter
@@ -117,14 +126,16 @@ assign Y = (CMD[4:3] == 2'b11) ? logic_out : 32'bz;   //logic_block
 // Flag Register Update (including CF)
 always @(posedge clk or negedge reset_n) begin
     if(!reset_n) begin
-        PF_flag <= 1'b0;
+        PF_reg <= 1'b0;
         OF_flag <= 1'b0; 
         CF_reg <= 1'b0;
         SF_flag <= 1'b0;
         ZF_flag <= 1'b0;
+        Y_reg <= 32'h0;
     end
     else begin
-        PF_flag <= ^Y;
+        Y_reg <= Y;
+        PF_reg <= ^Y_reg;
         ZF_flag <= (Y == 32'h0);
         SF_flag <= Y[31];
         // Standard Overflow: (Operand1_Sign == Operand2_Sign) && (Result_Sign != Operand1_Sign)
@@ -138,8 +149,10 @@ end
 //handling of idling and power gating dynamically depending on the stage counts
 
 logic power_en_adder, power_en_mult, power_en_shifter, power_en_logic;
+//brach prediction comes 2 cycles earlier so 
+//the amount of on-cycle is (pipeline stage count + 2)
 logic [3:0] sreg_adder;   // 4 cycles
-logic [6:0] sreg_mult;    // 7 cycles
+logic [8:0] sreg_mult;    // 9 cycles
 logic [2:0] sreg_shifter; // 3 cycles
 logic [2:0] sreg_logic;   // 3 cycles
 
@@ -200,14 +213,6 @@ end
 
 //-----------------Instantiation of components--------------------------
 
-// Internal wires for module outputs
-logic [31:0] adder_out;
-logic [32:0] adder_lp_out;
-logic [63:0] mult_out;
-logic [63:0] mult_lp_out;
-logic [31:0] shifter_out;
-logic [31:0] logic_out;
-
 // Assignments from internal wires
 logic [63:0] final_mult_out;
 assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
@@ -220,6 +225,18 @@ assign power_en_adder_fast = power_en_adder && !low_power;
 assign power_en_mult_fast = power_en_mult && !low_power;
 
 
+// Low Power Combinational Multiplier
+// Gating inputs to save dynamic power when not in use
+logic [31:0] A_comb, B_comb;
+always_comb begin
+    if (low_power) begin
+        A_comb = A;
+        B_comb = B;
+    end else begin
+        A_comb = 0;
+        B_comb = 0;
+    end
+end
 
 //used for <, >, ADD, SUB, ADDC, SUBC
 //1 PHYSICAL, 6 IMPLEMENTED
@@ -234,8 +251,8 @@ ADDER32 adder(
     .Y({CF_adder, adder_out})
 );
 
+
 ADDER32_LP adder_lp(
-    .clk_low(clk_low),
     .power_en(power_en_adder_lp),
     .MODE_SEL(adder_mode),
     .C0(C0), // Note: C0 logic might need review if it depends on piped signals, but looks combinatorial in ALU_TOP
@@ -255,21 +272,7 @@ MULT32 mult(
     .valid_o()
 );
 
-// Low Power Combinational Multiplier
-// Gating inputs to save dynamic power when not in use
-logic [31:0] A_comb, B_comb;
-always_comb begin
-    if (low_power) begin
-        A_comb = A;
-        B_comb = B;
-    end else begin
-        A_comb = 0;
-        B_comb = 0;
-    end
-end
-
 MULT32_LP mult_lp(
-    .clk_low(clk_low),
     .power_en(power_en_mult_lp),
     .A(A_comb),
     .B(B_comb),

@@ -1,5 +1,4 @@
 module ADDER32_LP (
-    input clk_low,
     input power_en,
     input MODE_SEL,
     input C0,
