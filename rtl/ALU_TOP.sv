@@ -6,6 +6,7 @@ module ALU_TOP(
     input [31:0] A,
     input [31:0] B,
     input [4:0] CMD,
+    input input_valid,
 
     //performance control
     input idle,
@@ -18,6 +19,7 @@ module ALU_TOP(
     //outputs
     output wire [31:0] Y,
     output logic [31:0] result_aux,
+    output logic output_valid,
     output logic [7:0] flag_reg
 );
 //SHIFTER + LOGIC BLOCK + MULT32 + ADDER32
@@ -109,6 +111,11 @@ logic [63:0] mult_lp_out;
 logic [31:0] shifter_out;
 logic [31:0] logic_out;
 
+// Gated inputs
+logic [31:0] A_gated, B_gated;
+assign A_gated = input_valid ? A : 32'd0;
+assign B_gated = input_valid ? B : 32'd0;
+
 // Tristate buffers for output selection
 assign final_adder_out = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
 assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
@@ -117,10 +124,10 @@ assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
 //01xxx selects mult32
 //10xxx selects shifter
 //11xxx selects logic_block
-assign Y = (CMD[4:3] == 2'b00) ? final_adder_out : 32'bz;   //adder32
-assign Y = (CMD[4:3] == 2'b01) ? final_mult_out[31:0] : 32'bz;   //mult32 (Lower 32 bits)
-assign Y = (CMD[4:3] == 2'b10) ? shifter_out : 32'bz;   //shifter
-assign Y = (CMD[4:3] == 2'b11) ? logic_out : 32'bz;   //logic_block
+assign Y = (CMD[4:3] == 2'b00 && output_valid) ? final_adder_out : 32'bz;   //adder32
+assign Y = (CMD[4:3] == 2'b01 && output_valid) ? final_mult_out[31:0] : 32'bz;   //mult32 (Lower 32 bits)
+assign Y = (CMD[4:3] == 2'b10 && output_valid) ? shifter_out : 32'bz;   //shifter
+assign Y = (CMD[4:3] == 2'b11 && output_valid) ? logic_out : 32'bz;   //logic_block
 
 // Flag Register Update (including CF)
 always @(posedge clk or negedge reset_n) begin
@@ -169,19 +176,19 @@ always @(posedge clk or negedge reset_n) begin
         sreg_shifter <= sreg_shifter >> 1;
         sreg_logic <= sreg_logic >> 1;
 
-        // Load if active request and not idle
-        if (!idle) begin
+        // Load if active request and not idle and valid
+        if (!idle && input_valid) begin
             if (low_power) begin
                 case (branch)
                     2'b00: sreg_adder <= 4'b0111;
-                    2'b01: sreg_mult <= 7'b0000111;
+                    2'b01: sreg_mult <= 9'b00000111;
                     2'b10: sreg_shifter <= 3'b111;
                     2'b11: sreg_logic <= 3'b111;
                 endcase
             end else begin
                 case (branch)
                     2'b00: sreg_adder <= 4'b1111;
-                    2'b01: sreg_mult <= 7'b1111111;
+                    2'b01: sreg_mult <= 9'b111111111;
                     2'b10: sreg_shifter <= 3'b111;
                     2'b11: sreg_logic <= 3'b111;
                 endcase
@@ -193,10 +200,10 @@ end
 //disabling the particular block if staged out or idle
 
 always_comb begin
-    power_en_adder = sreg_adder[0]   | ((branch == 2'b00) && !idle);
-    power_en_mult = (sreg_mult[0]   | ((branch == 2'b01) && !idle));
-    power_en_shifter = sreg_shifter[0] | ((branch == 2'b10) && !idle);
-    power_en_logic = sreg_logic[0]   | ((branch == 2'b11) && !idle);
+    power_en_adder = sreg_adder[0]   | ((branch == 2'b00) && !idle && input_valid);
+    power_en_mult = (sreg_mult[0]   | ((branch == 2'b01) && !idle && input_valid));
+    power_en_shifter = sreg_shifter[0] | ((branch == 2'b10) && !idle && input_valid);
+    power_en_logic = sreg_logic[0]   | ((branch == 2'b11) && !idle && input_valid);
 end
 
 
@@ -211,13 +218,39 @@ always @(posedge clk or negedge reset_n) begin
     end
 end
 
+// Output Valid Handling
+logic v_add_r;
+logic [6:0] v_mul_r;
+
+always @(posedge clk or negedge reset_n) begin
+    if(!reset_n) begin
+        v_add_r <= 1'b0;
+        v_mul_r <= 7'd0;
+    end else begin
+        v_add_r <= input_valid & (CMD[4:3] == 2'b00);
+        v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01)};
+    end
+end
+
+always_comb begin
+    if (low_power) begin
+        output_valid = input_valid; // Combinational in LP
+    end else begin
+        case (CMD[4:3])
+            2'b00: output_valid = v_add_r;      // Adder (1 cycle)
+            2'b01: output_valid = v_mul_r[6];   // Mult (7 cycles)
+            default: output_valid = input_valid;// Shifter/Logic (0 cycles)
+        endcase
+    end
+end
+
 //-----------------Instantiation of components--------------------------
 
 // Assignments from internal wires
 logic [63:0] final_mult_out;
 assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
 
-assign result_aux = final_mult_out[63:32];
+assign result_aux = (output_valid && CMD[4:3] == 2'b01) ? final_mult_out[63:32] : 32'd0;
 
 assign power_en_adder_lp = power_en_adder && low_power;
 assign power_en_mult_lp = power_en_mult && low_power;
@@ -230,8 +263,8 @@ assign power_en_mult_fast = power_en_mult && !low_power;
 logic [31:0] A_comb, B_comb;
 always_comb begin
     if (low_power) begin
-        A_comb = A;
-        B_comb = B;
+        A_comb = A_gated;
+        B_comb = B_gated;
     end else begin
         A_comb = 0;
         B_comb = 0;
@@ -239,13 +272,13 @@ always_comb begin
 end
 
 //used for <, >, ADD, SUB, ADDC, SUBC
-//1 PHYSICAL, 6 IMPLEMENTED
+//6 IMPLEMENTED
 ADDER32 adder(
     .clk(clk),
     .reset_n(reset_n),
     .power_en(power_en_adder_fast),
-    .A(A),
-    .B(B),
+    .A(A_gated),
+    .B(B_gated),
     .MODE_SEL(adder_mode),
     .C0(C0),
     .Y({CF_adder, adder_out})
@@ -265,11 +298,9 @@ MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
     .power_en(power_en_mult_fast),
-    .start_i(branch == 2'b01),
-    .A(A),
-    .B(B),
-    .P_REG(mult_out),
-    .valid_o()
+    .A(A_gated),
+    .B(B_gated),
+    .P_REG(mult_out)
 );
 
 MULT32_LP mult_lp(
@@ -280,22 +311,22 @@ MULT32_LP mult_lp(
 );
 
 //used for SHL, SHR, SLA, SRA, ROR, ROL, BYT
-//4 PHYSICAL, 7 IMPLEMENTED
+//7 IMPLEMENTED
 SHIFTER shifter(
     .power_en(power_en_shifter),
-    .A(A),
-    .B(B[4:0]),
+    .A(A_gated),
+    .B(B_gated[4:0]),
     .CMD(CMD[2:0]),
     .Y(shifter_out),
     .CF_flag(CF_shifter)
 );
 
-//used for AND, OR, XOR, NOT, NAND, NOR, XNOR, ==
-//4 PHYSICAL, 8 IMPLEMENTED
+//used for AND, OR, XOR, NOT, NAND, NOR, XNOR, EQ
+//8 IMPLEMENTED
 LOGIC_BLOCK logic_block(
     .power_en(power_en_logic),
-    .A(A),
-    .B(B),
+    .A(A_gated),
+    .B(B_gated),
     .CMD(CMD[2:0]), 
     .Y(logic_out)
 );

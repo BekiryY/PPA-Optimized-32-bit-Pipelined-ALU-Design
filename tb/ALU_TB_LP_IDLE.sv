@@ -11,12 +11,14 @@ module ALU_TB;
 
     // Performance control
     logic idle;
+    logic input_valid;
     logic [1:0] branch;
     logic low_power;
     
     // Outputs
     logic [31:0] Y;
     logic [31:0] result_aux;
+    logic output_valid;
     logic [7:0] flag_reg;
 
     // Instantiate the Device Under Test (DUT)
@@ -26,11 +28,13 @@ module ALU_TB;
         .A(A),
         .B(B),
         .CMD(CMD),
+        .input_valid(input_valid),
         .idle(idle),
         .branch(branch),
         .low_power(low_power),
         .Y(Y),
         .result_aux(result_aux),
+        .output_valid(output_valid),
         .flag_reg(flag_reg)
     );
 
@@ -49,6 +53,7 @@ module ALU_TB;
         A = 0;
         B = 0;
         CMD = 0;
+        input_valid = 0;
         idle = 0;
         branch = 0;
         low_power = 0;
@@ -72,6 +77,7 @@ module ALU_TB;
         #1;
 
         CMD = 5'b00000;       // ADD
+        input_valid = 1;
         // branch is already set
         for (i = 0; i < 5; i++) begin
             @(posedge clk);
@@ -89,6 +95,7 @@ module ALU_TB;
         #1;
 
         CMD = 5'b01000;       // MUL (01xxx)
+        input_valid = 1;
         // branch is already set
         for (i = 0; i < 5; i++) begin
             @(posedge clk);
@@ -110,6 +117,7 @@ module ALU_TB;
         // Test SLL
         $display("    -> SLL");
         CMD = 5'b10000;       
+        input_valid = 1;
         for (i = 0; i < 3; i++) begin
             @(posedge clk);
             #1;
@@ -175,6 +183,7 @@ module ALU_TB;
         for (i = 0; i < 10; i++) begin
            @(posedge clk);
            #1;
+           input_valid = $urandom & 1;
            A = $urandom; 
            B = $urandom;
            CMD = $urandom;

@@ -3,13 +3,11 @@ module MULT32 (
     input logic power_en,
     
     //Inputs
-    input logic start_i,
     input logic [31:0] A,
     input logic [31:0] B,
     
     //Outputs
     output logic [63:0] P_REG,
-    output logic valid_o
 );
 
     // --- 1. Signal Decomposition ---
@@ -151,18 +149,6 @@ module MULT32 (
             P_REG <= 0;
         end
     end
-
-    // Valid Signal Pipeline (Depth = 7)
-    // 5 (original) + 1 (MULT16 extra) + 1 (MULT32 extra) = 7 stages
-    logic [6:0] valid_pipe;
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) 
-            valid_pipe <= 7'd0;
-        else 
-            valid_pipe <= {valid_pipe[5:0], start_i & power_en};
-    end
-    assign valid_o = valid_pipe[6] & power_en;
-
 endmodule
 
 module MULT16 (
