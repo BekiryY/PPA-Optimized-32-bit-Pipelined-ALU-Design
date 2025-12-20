@@ -9,8 +9,6 @@ module MULT32_FAST_TB;
     logic [31:0] A;
     logic [31:0] B;
     logic [63:0] P_REG;
-    logic valid_o;
-    logic start_i;
 
     // Instantiate the Unit Under Test (UUT)
     // Note: The module name in MULT32_FAST.sv is MULT32
@@ -20,9 +18,7 @@ module MULT32_FAST_TB;
         .power_en(power_en),
         .A(A),
         .B(B),
-        .P_REG(P_REG),
-        .start_i(start_i),
-        .valid_o(valid_o)
+        .P_REG(P_REG)
     );
 
     // Clock Generation
@@ -96,7 +92,6 @@ module MULT32_FAST_TB;
             // Align with clock to ensure setup times
             @(posedge clk);
             #1.5;
-            start_i <= 1'b1;
             A <= in_a; 
             B <= in_b;
             

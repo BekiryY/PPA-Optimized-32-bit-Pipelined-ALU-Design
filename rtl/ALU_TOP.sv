@@ -227,8 +227,8 @@ always @(posedge clk or negedge reset_n) begin
         v_add_r <= 1'b0;
         v_mul_r <= 7'd0;
     end else begin
-        v_add_r <= input_valid & (CMD[4:3] == 2'b00);
-        v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01)};
+        v_add_r <= input_valid & (CMD[4:3] == 2'b00) & !low_power;
+        v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01) & !low_power};
     end
 end
 
