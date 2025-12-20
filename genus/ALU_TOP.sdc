@@ -18,7 +18,8 @@ create_clock -name clk -period 0.355 [get_ports clk]
 # WARNING: This is highly unrealistic for physical implementation.
 set_clock_uncertainty 0.050 [get_clocks clk]
 
-#lp modules have relaxed clk
+# _lp modules have relaxed clk
+# those modules can have 20x more timing budget
 set_multicycle_path 20 -setup -through [get_cells adder_lp]
 set_multicycle_path 19 -hold -through [get_cells adder_lp]
 set_multicycle_path 20 -setup -through [get_cells mult_lp]

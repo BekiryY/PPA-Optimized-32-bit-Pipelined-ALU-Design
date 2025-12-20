@@ -7,7 +7,7 @@ module MULT32 (
     input logic [31:0] B,
     
     //Outputs
-    output logic [63:0] P_REG,
+    output logic [63:0] P_REG
 );
 
     // --- 1. Signal Decomposition ---
