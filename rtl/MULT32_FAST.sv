@@ -315,7 +315,7 @@ module MULT8 (
             P = 16'h0000;
         end else begin
             P[3:0] = P_LL_REG[3:0];
-            P[15:4] =  {P_HH_REG, 8'h00} + {P_MID_SUM[8:0], 4'h00} + {P_LL_REG[7:4], 4'h00};
+            P[15:4] = {P_HH_REG, 4'h0} + P_MID_SUM + P_LL_REG[7:4];
         end
     end
 

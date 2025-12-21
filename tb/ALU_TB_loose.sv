@@ -56,6 +56,9 @@ module ALU_TB_Loose;
     // Task to drive signals with correct branch prediction timing
     task drive_stimulus(input [4:0] t_cmd, input [31:0] t_a, input [31:0] t_b);
     begin
+        // Random input_valid generation: 20% prob of being 1
+        input_valid = ($urandom_range(0, 99) < 20);
+
         // Branch is determined 2 cycles early (Prediction)
         branch = t_cmd[4:3];
         
@@ -95,7 +98,7 @@ module ALU_TB_Loose;
         reset_n = 1;
         #10;
         
-        input_valid = 1; // Enable input validity for testing
+        // input_valid is now controlled within drive_stimulus
 
         // ---------------------------------------------------------
         // 1. Sequentially do few additions (CMD = 00000)

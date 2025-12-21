@@ -132,6 +132,7 @@ module ALU_TB_FAST;
         for (i = 0; i < 200; i++) begin
             @(posedge clk);
             #1;
+            if (i % 20 == 0) $display("Loop 3 Iteration: %0d / 200 at time %0t", i, $time);
             
             // Handle Opcode Increment every 5 cycles
             // We verify the counter BEFORE incrementing, consistent with previous logic
@@ -157,6 +158,13 @@ module ALU_TB_FAST;
         end
 
         // Finish simulation
+        $finish;
+    end
+
+    // Watchdog to prevent infinite loops
+    initial begin
+        #50000;
+        $display("ERROR: Simulation timed out!");
         $finish;
     end
 
