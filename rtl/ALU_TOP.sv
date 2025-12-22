@@ -127,7 +127,7 @@ assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
 assign Y = (v_add_r) ? final_adder_out : 
            (v_mul_r[6]) ? final_mult_out[31:0] :
            (CMD[4:3] == 2'b10 && output_valid) ? shifter_out :
-           (CMD[4:3] == 2'b11 && output_valid) ? logic_out : 32'bz;
+           (CMD[4:3] == 2'b11 && output_valid) ? logic_out : 32'd0;
 
 assign result_aux = (v_mul_r[6]) ? final_mult_out[63:32] : 32'd0;
 
@@ -221,7 +221,7 @@ always @(posedge clk or negedge reset_n) begin
 end
 
 // Output Valid Handling and Command Pipelining
-logic [1:0] v_add_r;
+logic  v_add_r;
 logic [6:0] v_mul_r;
 logic [1:0] cmd_add_r;      // Delayed CMD for Adder (1 cycle)
 logic [13:0] cmd_mul_r;     // Delayed CMD for Mult (7 cycles of 2 bits)
@@ -234,7 +234,7 @@ always @(posedge clk or negedge reset_n) begin
         cmd_mul_r <= 14'd0;
     end else begin
         // Pipeline valid signals
-        v_add_r <= {v_add_r[1], input_valid & (CMD[4:3] == 2'b00)} & !low_power;
+        v_add_r <=  input_valid & (CMD[4:3] == 2'b00) & !low_power;
         v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01) & !low_power};
         
         // Pipeline command bits (CMD[4:3]) to match latency
@@ -265,10 +265,12 @@ always_comb begin
         output_valid = input_valid; // Combinational in LP
     end else begin
         // Prioritize Multiplier completion if valid, then Adder, etc.
-        // Assuming strict scheduling so no collision, OR simple priority.
         if (v_mul_r[6]) output_valid = 1'b1;
-        else if (v_add_r[1]) output_valid = 1'b1;
-        else output_valid = input_valid; // Pass-through for comb/0-cycle blocks (Shifter/Logic)
+        else if (v_add_r) output_valid = 1'b1;
+        // Only pass input_valid for 0-cycle blocks (Shifter/Logic)
+        // Adder (00) and Mult (01) must NOT assert valid here immediately.
+        else if (CMD[4:3] == 2'b10 || CMD[4:3] == 2'b11) output_valid = input_valid; 
+        else output_valid = 1'b0;
     end
 end
 
