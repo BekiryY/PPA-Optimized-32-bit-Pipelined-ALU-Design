@@ -53,6 +53,8 @@ module ALU_TB_SHOWOFF;
         // Adder (00xxx) -> 1 cycle wait
         // Others -> 1 cycle wait (safe margin)
         if (t_cmd[4:3] == 2'b01) latency = 7;
+        else 
+        if (t_cmd[4:3] == 2'b01) latency = 2;
         else latency = 1;
 
         // Drive inputs
@@ -73,7 +75,7 @@ module ALU_TB_SHOWOFF;
         B = 0;
 
         // Wait for operation to complete
-        repeat(latency) @(posedge clk);
+        repeat(latency - 1) @(posedge clk);
         #1;
     end
     endtask
@@ -119,8 +121,6 @@ module ALU_TB_SHOWOFF;
                 // Op 2: Max Positive / Max Negative (Edge Case)
                 execute_op(op_code, 32'h7FFFFFFF, 32'h80000000);
 
-                // Small gap between opcodes
-                @(posedge clk); 
             end
             
             // Wait a bit before switching power mode

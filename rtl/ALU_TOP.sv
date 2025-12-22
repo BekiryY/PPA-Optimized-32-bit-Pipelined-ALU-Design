@@ -124,10 +124,12 @@ assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
 //01xxx selects mult32
 //10xxx selects shifter
 //11xxx selects logic_block
-assign Y = (CMD[4:3] == 2'b00 && output_valid) ? final_adder_out : 32'bz;   //adder32
-assign Y = (CMD[4:3] == 2'b01 && output_valid) ? final_mult_out[31:0] : 32'bz;   //mult32 (Lower 32 bits)
-assign Y = (CMD[4:3] == 2'b10 && output_valid) ? shifter_out : 32'bz;   //shifter
-assign Y = (CMD[4:3] == 2'b11 && output_valid) ? logic_out : 32'bz;   //logic_block
+assign Y = (v_add_r) ? final_adder_out : 
+           (v_mul_r[6]) ? final_mult_out[31:0] :
+           (CMD[4:3] == 2'b10 && output_valid) ? shifter_out :
+           (CMD[4:3] == 2'b11 && output_valid) ? logic_out : 32'bz;
+
+assign result_aux = (v_mul_r[6]) ? final_mult_out[63:32] : 32'd0;
 
 // Flag Register Update (including CF)
 always @(posedge clk or negedge reset_n) begin
@@ -218,29 +220,55 @@ always @(posedge clk or negedge reset_n) begin
     end
 end
 
-// Output Valid Handling
-logic v_add_r;
+// Output Valid Handling and Command Pipelining
+logic [1:0] v_add_r;
 logic [6:0] v_mul_r;
+logic [1:0] cmd_add_r;      // Delayed CMD for Adder (1 cycle)
+logic [13:0] cmd_mul_r;     // Delayed CMD for Mult (7 cycles of 2 bits)
 
 always @(posedge clk or negedge reset_n) begin
     if(!reset_n) begin
-        v_add_r <= 1'b0;
+        v_add_r <= 2'b0;
         v_mul_r <= 7'd0;
+        cmd_add_r <= 2'b00;
+        cmd_mul_r <= 14'd0;
     end else begin
-        v_add_r <= input_valid & (CMD[4:3] == 2'b00) & !low_power;
+        // Pipeline valid signals
+        v_add_r <= {v_add_r[1], input_valid & (CMD[4:3] == 2'b00)} & !low_power;
         v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01) & !low_power};
+        
+        // Pipeline command bits (CMD[4:3]) to match latency
+        // Adder path: 1 cycle delay
+        if(input_valid && !low_power) cmd_add_r <= CMD[4:3];
+        
+        // Multiplier path: 7 cycle delay (shift register for 2 bits)
+        if(input_valid && !low_power) begin 
+             cmd_mul_r <= {cmd_mul_r[11:0], CMD[4:3]};
+        end else begin
+             // Keep shifting to propagate the pipeline even if new input isn't valid? 
+             // Actually, for a fixed pipeline, we should always shift.
+             cmd_mul_r <= {cmd_mul_r[11:0], (input_valid ? CMD[4:3] : 2'b00)}; 
+             // Note: If input not valid, pushing 00 is risky if 00 is Adder. 
+             // Better to just shift. Realistically, we only care about the value when v_mul_r[6] is 1.
+        end
     end
 end
+
+// Select signals derived from delayed commands
+logic [1:0] cmd_delayed_add;
+logic [1:0] cmd_delayed_mul;
+assign cmd_delayed_add = cmd_add_r;
+assign cmd_delayed_mul = cmd_mul_r[13:12];
 
 always_comb begin
     if (low_power) begin
         output_valid = input_valid; // Combinational in LP
     end else begin
-        case (CMD[4:3])
-            2'b00: output_valid = v_add_r;      // Adder (1 cycle)
-            2'b01: output_valid = v_mul_r[6];   // Mult (7 cycles)
-            default: output_valid = input_valid;// Shifter/Logic (0 cycles)
-        endcase
+        // Prioritize Multiplier completion if valid, then Adder, etc.
+        // Assuming strict scheduling so no collision, OR simple priority.
+        if (v_mul_r[6]) output_valid = 1'b1;
+        else if (v_add_r[1]) output_valid = 1'b1;
+        else output_valid = input_valid; // Pass-through for comb/0-cycle blocks (Shifter/Logic)
     end
 end
 
@@ -250,7 +278,7 @@ end
 logic [63:0] final_mult_out;
 assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
 
-assign result_aux = (output_valid && CMD[4:3] == 2'b01) ? final_mult_out[63:32] : 32'd0;
+assign result_aux = (v_mul_r[6]) ? final_mult_out[63:32] : 32'd0;
 
 assign power_en_adder_lp = power_en_adder && low_power;
 assign power_en_mult_lp = power_en_mult && low_power;
