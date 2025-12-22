@@ -32,7 +32,6 @@ module MULT32_FAST_TB;
         // Initialize Inputs
         reset_n = 0;
         power_en = 0;
-        start_i = 0;
         A = 0;
         B = 0;
 

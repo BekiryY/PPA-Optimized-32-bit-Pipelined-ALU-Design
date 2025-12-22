@@ -1,0 +1,11 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ADDER32_LP.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ADDER32_LP
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU_TOP
+WARNING: [VRFC 10-3380] identifier 'v_add_r' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:127]
+WARNING: [VRFC 10-3380] identifier 'v_mul_r' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:128]
+WARNING: [VRFC 10-3380] identifier 'v_mul_r' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:132]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_LP.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MULT32_LP
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/tb/ALU_TB_loose.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU_TB_Loose

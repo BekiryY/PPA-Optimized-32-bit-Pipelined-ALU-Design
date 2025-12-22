@@ -45,7 +45,7 @@ module ADDER32_TB;
     task drive_inputs(input [31:0] in_a, input [31:0] in_b, input in_c0, input in_mode_sel);
         begin
             @(posedge clk);
-            #2; // Hold time
+            #1; // Hold time
             A = in_a;
             B = in_b;
             C0 = in_c0;
