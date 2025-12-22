@@ -24,10 +24,10 @@ module MULT32 (
     // =========================================================================
     logic [31:0] p_hh_comb, p_hl_comb, p_lh_comb, p_ll_comb;
 
-    MULT16 mult16_hh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_hi), .P(p_hh_comb));
-    MULT16 mult16_hl (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_lo), .P(p_hl_comb));
-    MULT16 mult16_lh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_hi), .P(p_lh_comb));
-    MULT16 mult16_ll (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_lo), .P(p_ll_comb));
+    MULT16 mult16_hh (.clk(clk), .reset_n(reset_n), .A(a_hi), .B(b_hi), .P(p_hh_comb));
+    MULT16 mult16_hl (.clk(clk), .reset_n(reset_n), .A(a_hi), .B(b_lo), .P(p_hl_comb));
+    MULT16 mult16_lh (.clk(clk), .reset_n(reset_n), .A(a_lo), .B(b_hi), .P(p_lh_comb));
+    MULT16 mult16_ll (.clk(clk), .reset_n(reset_n), .A(a_lo), .B(b_lo), .P(p_ll_comb));
 
     // Pipeline Registers (End of Stage 1)
     logic [31:0] p_hh_reg, p_hl_reg, p_lh_reg, p_ll_reg;
@@ -38,16 +38,11 @@ module MULT32 (
             p_hl_reg <= '0; 
             p_lh_reg <= '0; 
             p_hh_reg <= '0;
-        end else if (power_en) begin
+        end else begin
             p_ll_reg <= p_ll_comb; 
             p_hl_reg <= p_hl_comb;
             p_lh_reg <= p_lh_comb; 
             p_hh_reg <= p_hh_comb;
-        end else begin
-            p_ll_reg <= '0; 
-            p_hl_reg <= '0; 
-            p_lh_reg <= '0; 
-            p_hh_reg <= '0;
         end
     end
 
@@ -70,14 +65,10 @@ module MULT32 (
             mid_sum_reg <= '0;
             p_hh_reg_d1 <= '0;
             p_ll_reg_d1 <= '0;
-        end else if (power_en) begin
+        end else begin
             mid_sum_reg <= mid_sum_comb;
             p_hh_reg_d1 <= p_hh_reg;
             p_ll_reg_d1 <= p_ll_reg;
-        end else begin
-            mid_sum_reg <= '0;
-            p_hh_reg_d1 <= '0;
-            p_ll_reg_d1 <= '0;
         end
     end
 
@@ -105,18 +96,12 @@ module MULT32 (
             p_hh_upper_reg    <= '0;
             mid_sum_upper_reg <= '0;
             p_ll_final_reg    <= '0;
-        end else if (power_en) begin
+        end else begin
             p_first_24_reg    <= sum_stage3_comb; 
-            
             // Align signals for the final stage
             p_hh_upper_reg    <= p_hh_reg_d1[31:8];
             mid_sum_upper_reg <= mid_sum_reg[32:24];
             p_ll_final_reg    <= p_ll_reg_d1[15:0]; 
-        end else begin
-            p_first_24_reg    <= '0;
-            p_hh_upper_reg    <= '0;
-            mid_sum_upper_reg <= '0;
-            p_ll_final_reg    <= '0;
         end
     end
 
@@ -146,10 +131,13 @@ module MULT32 (
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             P_REG <= '0;
-        end else if (power_en) begin
-            P_REG <= p_comb;
-        end else begin
-            P_REG <= '0;
+        end else begin 
+            if(power_en) begin
+                P_REG <= p_comb;
+            end
+            else begin
+                P_REG <= '0;
+            end
         end
     end
 
@@ -162,7 +150,6 @@ endmodule
 module MULT16 (
     input  logic        clk,
     input  logic        reset_n,
-    input  logic        power_en,
     input  logic [15:0] A,
     input  logic [15:0] B,
     output logic [31:0] P
@@ -183,10 +170,10 @@ module MULT16 (
     // =========================================================================
     logic [15:0] p_hh_comb, p_hl_comb, p_lh_comb, p_ll_comb;
 
-    MULT8 mult8_hh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_hi), .P(p_hh_comb));
-    MULT8 mult8_hl (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_lo), .P(p_hl_comb));
-    MULT8 mult8_lh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_hi), .P(p_lh_comb));
-    MULT8 mult8_ll (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_lo), .P(p_ll_comb));
+    MULT8 mult8_hh (.clk(clk), .reset_n(reset_n), .A(a_hi), .B(b_hi), .P(p_hh_comb));
+    MULT8 mult8_hl (.clk(clk), .reset_n(reset_n), .A(a_hi), .B(b_lo), .P(p_hl_comb));
+    MULT8 mult8_lh (.clk(clk), .reset_n(reset_n), .A(a_lo), .B(b_hi), .P(p_lh_comb));
+    MULT8 mult8_ll (.clk(clk), .reset_n(reset_n), .A(a_lo), .B(b_lo), .P(p_ll_comb));
 
     // Pipeline Registers
     logic [15:0] p_hh_reg, p_hl_reg, p_lh_reg, p_ll_reg;
@@ -197,17 +184,12 @@ module MULT16 (
             p_hl_reg <= '0;
             p_lh_reg <= '0;
             p_hh_reg <= '0;
-        end else if (power_en) begin
+        end else begin
             p_ll_reg <= p_ll_comb;
             p_hl_reg <= p_hl_comb;
             p_lh_reg <= p_lh_comb;
             p_hh_reg <= p_hh_comb;
-        end else begin
-            p_ll_reg <= '0;
-            p_hl_reg <= '0;
-            p_lh_reg <= '0;
-            p_hh_reg <= '0;
-        end
+        end 
     end
 
     // =========================================================================
@@ -229,29 +211,18 @@ module MULT16 (
             mid_sum_reg <= '0;
             p_hh_reg_d1 <= '0;
             p_ll_reg_d1 <= '0;
-        end else if (power_en) begin
+        end else begin
             mid_sum_reg <= mid_sum_comb;
             p_hh_reg_d1 <= p_hh_reg;
             p_ll_reg_d1 <= p_ll_reg;
-        end else begin
-            mid_sum_reg <= '0;
-            p_hh_reg_d1 <= '0;
-            p_ll_reg_d1 <= '0;
         end
     end
 
     // =========================================================================
     // STAGE 3: Final Addition
     // =========================================================================
-
-    always_comb begin
-        if (!power_en) begin
-            P = 32'h0;
-        end else begin
-            P[7:0]  = p_ll_reg_d1[7:0];
-            P[31:8] = {p_hh_reg_d1, 8'b0} + mid_sum_reg + {16'b0, p_ll_reg_d1[15:8]};
-        end
-    end
+    assign P[7:0]  = p_ll_reg_d1[7:0];
+    assign P[31:8] = {p_hh_reg_d1, 8'b0} + mid_sum_reg + {16'b0, p_ll_reg_d1[15:8]};
 
 endmodule
 
@@ -262,7 +233,6 @@ endmodule
 module MULT8 (
     input  logic       clk,
     input  logic       reset_n,
-    input  logic       power_en,
     input  logic [7:0] A,
     input  logic [7:0] B,
     output logic [15:0] P
@@ -283,10 +253,10 @@ module MULT8 (
     logic [7:0] p_hh, p_hl, p_lh, p_ll;
     
     // Instantiations
-    MULT4 mult4_hh (.power_en(power_en), .A(a_hi), .B(b_hi), .P(p_hh));
-    MULT4 mult4_hl (.power_en(power_en), .A(a_hi), .B(b_lo), .P(p_hl));
-    MULT4 mult4_lh (.power_en(power_en), .A(a_lo), .B(b_hi), .P(p_lh));
-    MULT4 mult4_ll (.power_en(power_en), .A(a_lo), .B(b_lo), .P(p_ll));
+    MULT4 mult4_hh (.A(a_hi), .B(b_hi), .P(p_hh));
+    MULT4 mult4_hl (.A(a_hi), .B(b_lo), .P(p_hl));
+    MULT4 mult4_lh (.A(a_lo), .B(b_hi), .P(p_lh));
+    MULT4 mult4_ll (.A(a_lo), .B(b_lo), .P(p_ll));
 
     // Pipeline Registers
     logic [7:0] p_hh_reg, p_hl_reg, p_lh_reg, p_ll_reg;
@@ -297,16 +267,11 @@ module MULT8 (
             p_hl_reg <= '0;
             p_lh_reg <= '0;
             p_hh_reg <= '0;
-        end else if (power_en) begin
+        end else begin
             p_ll_reg <= p_ll;
             p_hl_reg <= p_hl;
             p_lh_reg <= p_lh;
             p_hh_reg <= p_hh;
-        end else begin
-            p_ll_reg <= '0;
-            p_hl_reg <= '0;
-            p_lh_reg <= '0;
-            p_hh_reg <= '0;
         end
     end
 
@@ -317,14 +282,8 @@ module MULT8 (
     logic [8:0] mid_sum_comb;
     assign mid_sum_comb = p_hl_reg + p_lh_reg; 
     
-    always_comb begin
-        if (!power_en) begin
-            P = 16'h0;
-        end else begin
-            P[3:0]  = p_ll_reg[3:0];
-            P[15:4] = {p_hh_reg, 4'h0} + mid_sum_comb + p_ll_reg[7:4];
-        end
-    end
+    assign P[3:0]  = p_ll_reg[3:0];
+    assign P[15:4] = {p_hh_reg, 4'h0} + mid_sum_comb + p_ll_reg[7:4];
 
 endmodule
 
@@ -335,9 +294,7 @@ endmodule
 module MULT4 (
     input  logic [3:0] A, 
     input  logic [3:0] B,
-    input  logic       power_en,
     output logic [7:0] P
 );
-    // Explicit Operand Isolation
-    assign P = power_en ? (A * B) : 8'h00;
+    assign P = (A * B);
 endmodule
