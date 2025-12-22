@@ -124,12 +124,12 @@ assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
 //01xxx selects mult32
 //10xxx selects shifter
 //11xxx selects logic_block
-assign Y = (v_add_r) ? final_adder_out : 
-           (v_mul_r[6]) ? final_mult_out[31:0] :
+assign Y = (v_add_r || (low_power && CMD[4:3] == 2'b00 && output_valid)) ? final_adder_out : 
+           (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) ? final_mult_out[31:0] :
            (CMD[4:3] == 2'b10 && output_valid) ? shifter_out :
            (CMD[4:3] == 2'b11 && output_valid) ? logic_out : 32'd0;
 
-assign result_aux = (v_mul_r[6]) ? final_mult_out[63:32] : 32'd0;
+assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) ? final_mult_out[63:32] : 32'd0;
 
 // Flag Register Update (including CF)
 always @(posedge clk or negedge reset_n) begin
@@ -228,7 +228,7 @@ logic [13:0] cmd_mul_r;     // Delayed CMD for Mult (7 cycles of 2 bits)
 
 always @(posedge clk or negedge reset_n) begin
     if(!reset_n) begin
-        v_add_r <= 2'b0;
+        v_add_r <= 1'b0;
         v_mul_r <= 7'd0;
         cmd_add_r <= 2'b00;
         cmd_mul_r <= 14'd0;
@@ -236,7 +236,6 @@ always @(posedge clk or negedge reset_n) begin
         // Pipeline valid signals
         v_add_r <=  input_valid & (CMD[4:3] == 2'b00) & !low_power;
         v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01) & !low_power};
-        
         // Pipeline command bits (CMD[4:3]) to match latency
         // Adder path: 1 cycle delay
         if(input_valid && !low_power) cmd_add_r <= CMD[4:3];
@@ -280,7 +279,7 @@ end
 logic [63:0] final_mult_out;
 assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
 
-assign result_aux = (v_mul_r[6]) ? final_mult_out[63:32] : 32'd0;
+// result_aux assigned above
 
 assign power_en_adder_lp = power_en_adder && low_power;
 assign power_en_mult_lp = power_en_mult && low_power;
