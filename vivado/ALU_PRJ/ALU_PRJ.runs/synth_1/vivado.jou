@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Mon Dec 22 21:37:18 2025
+# Process ID         : 6900
+# Current directory  : C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1
+# Command line       : vivado.exe -log MULT32.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source MULT32.tcl
+# Log file           : C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1/MULT32.vds
+# Journal file       : C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1\vivado.jou
+# Running On         : BEK-PC
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : AMD Ryzen 5 5600H with Radeon Graphics         
+# CPU Frequency      : 3294 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 14877 MB
+# Swap memory        : 8589 MB
+# Total Virtual      : 23467 MB
+# Available Virtual  : 9775 MB
+#-----------------------------------------------------------
+source MULT32.tcl -notrace

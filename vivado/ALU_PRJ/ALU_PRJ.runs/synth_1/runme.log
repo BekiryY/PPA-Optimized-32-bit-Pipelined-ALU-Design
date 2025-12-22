@@ -1,0 +1,299 @@
+
+*** Running vivado
+    with args -log MULT32.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source MULT32.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Mon Dec 22 21:37:18 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source MULT32.tcl -notrace
+create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 528.289 ; gain = 220.715
+Command: synth_design -top MULT32 -part xc7k70tfbv676-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 14924
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1067.168 ; gain = 533.922
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'MULT32' [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'MULT16' [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:162]
+INFO: [Synth 8-6157] synthesizing module 'MULT8' [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:262]
+INFO: [Synth 8-6157] synthesizing module 'MULT4' [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:335]
+INFO: [Synth 8-6155] done synthesizing module 'MULT4' (0#1) [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:335]
+INFO: [Synth 8-6155] done synthesizing module 'MULT8' (0#1) [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:262]
+INFO: [Synth 8-6155] done synthesizing module 'MULT16' (0#1) [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:162]
+INFO: [Synth 8-6155] done synthesizing module 'MULT32' (0#1) [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv:1]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1186.809 ; gain = 653.562
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1186.809 ; gain = 653.562
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7k70tfbv676-1
+INFO: [Device 21-403] Loading part xc7k70tfbv676-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1186.809 ; gain = 653.562
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1186.809 ; gain = 653.562
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   25 Bit       Adders := 1     
+	   3 Input   24 Bit       Adders := 5     
+	   4 Input   12 Bit       Adders := 16    
++---Registers : 
+	               64 Bit    Registers := 1     
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 6     
+	               25 Bit    Registers := 1     
+	               24 Bit    Registers := 1     
+	               17 Bit    Registers := 4     
+	               16 Bit    Registers := 25    
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 64    
++---Muxes : 
+	   2 Input   64 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 10    
+	   2 Input   25 Bit        Muxes := 1     
+	   2 Input   24 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 41    
+	   2 Input    9 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 128   
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:32 . Memory (MB): peak = 1428.137 ; gain = 894.891
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:33 . Memory (MB): peak = 1428.137 ; gain = 894.891
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:34 . Memory (MB): peak = 1442.547 ; gain = 909.301
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:27 ; elapsed = 00:00:38 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:27 ; elapsed = 00:00:38 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:27 ; elapsed = 00:00:38 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:27 ; elapsed = 00:00:38 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:27 ; elapsed = 00:00:38 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:27 ; elapsed = 00:00:38 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |   242|
+|3     |LUT1   |     1|
+|4     |LUT2   |  1631|
+|5     |LUT3   |   232|
+|6     |LUT4   |   144|
+|7     |LUT6   |   816|
+|8     |FDCE   |  1327|
+|9     |IBUF   |    67|
+|10    |OBUF   |    64|
++------+-------+------+
+
+Report Instance Areas: 
++------+---------------+---------+------+
+|      |Instance       |Module   |Cells |
++------+---------------+---------+------+
+|1     |top            |         |  4525|
+|2     |  mult16_hh    |MULT16   |   921|
+|3     |    mult8_hh   |MULT8_61 |   171|
+|4     |      mult4_hh |MULT4_77 |    17|
+|5     |      mult4_hl |MULT4_78 |    17|
+|6     |      mult4_lh |MULT4_79 |    17|
+|7     |      mult4_ll |MULT4_80 |    17|
+|8     |    mult8_hl   |MULT8_62 |   171|
+|9     |      mult4_hh |MULT4_73 |    17|
+|10    |      mult4_hl |MULT4_74 |    17|
+|11    |      mult4_lh |MULT4_75 |    17|
+|12    |      mult4_ll |MULT4_76 |    17|
+|13    |    mult8_lh   |MULT8_63 |   171|
+|14    |      mult4_hh |MULT4_69 |    17|
+|15    |      mult4_hl |MULT4_70 |    17|
+|16    |      mult4_lh |MULT4_71 |    17|
+|17    |      mult4_ll |MULT4_72 |    17|
+|18    |    mult8_ll   |MULT8_64 |   171|
+|19    |      mult4_hh |MULT4_65 |    17|
+|20    |      mult4_hl |MULT4_66 |    17|
+|21    |      mult4_lh |MULT4_67 |    17|
+|22    |      mult4_ll |MULT4_68 |    17|
+|23    |  mult16_hl    |MULT16_0 |   925|
+|24    |    mult8_hh   |MULT8_41 |   173|
+|25    |      mult4_hh |MULT4_57 |    17|
+|26    |      mult4_hl |MULT4_58 |    17|
+|27    |      mult4_lh |MULT4_59 |    17|
+|28    |      mult4_ll |MULT4_60 |    17|
+|29    |    mult8_hl   |MULT8_42 |   171|
+|30    |      mult4_hh |MULT4_53 |    17|
+|31    |      mult4_hl |MULT4_54 |    17|
+|32    |      mult4_lh |MULT4_55 |    17|
+|33    |      mult4_ll |MULT4_56 |    17|
+|34    |    mult8_lh   |MULT8_43 |   171|
+|35    |      mult4_hh |MULT4_49 |    17|
+|36    |      mult4_hl |MULT4_50 |    17|
+|37    |      mult4_lh |MULT4_51 |    17|
+|38    |      mult4_ll |MULT4_52 |    17|
+|39    |    mult8_ll   |MULT8_44 |   173|
+|40    |      mult4_hh |MULT4_45 |    17|
+|41    |      mult4_hl |MULT4_46 |    17|
+|42    |      mult4_lh |MULT4_47 |    17|
+|43    |      mult4_ll |MULT4_48 |    17|
+|44    |  mult16_lh    |MULT16_1 |   929|
+|45    |    mult8_hh   |MULT8_21 |   175|
+|46    |      mult4_hh |MULT4_37 |    18|
+|47    |      mult4_hl |MULT4_38 |    18|
+|48    |      mult4_lh |MULT4_39 |    17|
+|49    |      mult4_ll |MULT4_40 |    17|
+|50    |    mult8_hl   |MULT8_22 |   171|
+|51    |      mult4_hh |MULT4_33 |    17|
+|52    |      mult4_hl |MULT4_34 |    17|
+|53    |      mult4_lh |MULT4_35 |    17|
+|54    |      mult4_ll |MULT4_36 |    17|
+|55    |    mult8_lh   |MULT8_23 |   171|
+|56    |      mult4_hh |MULT4_29 |    17|
+|57    |      mult4_hl |MULT4_30 |    17|
+|58    |      mult4_lh |MULT4_31 |    17|
+|59    |      mult4_ll |MULT4_32 |    17|
+|60    |    mult8_ll   |MULT8_24 |   175|
+|61    |      mult4_hh |MULT4_25 |    18|
+|62    |      mult4_hl |MULT4_26 |    18|
+|63    |      mult4_lh |MULT4_27 |    17|
+|64    |      mult4_ll |MULT4_28 |    17|
+|65    |  mult16_ll    |MULT16_2 |   934|
+|66    |    mult8_hh   |MULT8    |   178|
+|67    |      mult4_hh |MULT4_17 |    18|
+|68    |      mult4_hl |MULT4_18 |    18|
+|69    |      mult4_lh |MULT4_19 |    17|
+|70    |      mult4_ll |MULT4_20 |    17|
+|71    |    mult8_hl   |MULT8_3  |   171|
+|72    |      mult4_hh |MULT4_13 |    17|
+|73    |      mult4_hl |MULT4_14 |    17|
+|74    |      mult4_lh |MULT4_15 |    17|
+|75    |      mult4_ll |MULT4_16 |    17|
+|76    |    mult8_lh   |MULT8_4  |   171|
+|77    |      mult4_hh |MULT4_9  |    17|
+|78    |      mult4_hl |MULT4_10 |    17|
+|79    |      mult4_lh |MULT4_11 |    17|
+|80    |      mult4_ll |MULT4_12 |    17|
+|81    |    mult8_ll   |MULT8_5  |   177|
+|82    |      mult4_hh |MULT4    |    18|
+|83    |      mult4_hl |MULT4_6  |    18|
+|84    |      mult4_lh |MULT4_7  |    17|
+|85    |      mult4_ll |MULT4_8  |    17|
++------+---------------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:27 ; elapsed = 00:00:38 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:27 ; elapsed = 00:00:39 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+Synthesis Optimization Complete : Time (s): cpu = 00:00:27 ; elapsed = 00:00:39 . Memory (MB): peak = 1629.715 ; gain = 1096.469
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.068 . Memory (MB): peak = 1644.750 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 242 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1759.617 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 196b3deb
+INFO: [Common 17-83] Releasing license: Synthesis
+20 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:43 . Memory (MB): peak = 1759.617 ; gain = 1231.328
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1759.617 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1/MULT32.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file MULT32_utilization_synth.rpt -pb MULT32_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Dec 22 21:38:11 2025...
