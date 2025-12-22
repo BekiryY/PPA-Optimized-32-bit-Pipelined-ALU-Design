@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ADDER32_TB;
+module ADDER32_FAST_TB;
 
     // Inputs
     logic clk;

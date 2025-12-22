@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ALU_TB_SHOWOFF;
+module ALU_SHOWOFF_TB;
 
     // Signals
     logic clk;

@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ALU_TB_LP_IDLE;
+module ALU_LPnIDLE_TB;
 
     // Signals
     logic clk;

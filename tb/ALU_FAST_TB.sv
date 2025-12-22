@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ALU_TB_FAST;
+module ALU_FAST_TB;
 
     // Signals
     logic clk;

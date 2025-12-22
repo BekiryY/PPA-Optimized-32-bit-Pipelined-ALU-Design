@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ALU_TB_Loose;
+module ALU_Loose_TB;
     // Signals
     logic clk;
     logic reset_n;
