@@ -1,334 +1,343 @@
 module MULT32 (
-    input logic clk, reset_n,
-    input logic power_en,
-    
-    //Inputs
-    input logic [31:0] A,
-    input logic [31:0] B,
-    
-    //Outputs
+    input  logic        clk,
+    input  logic        reset_n,
+    input  logic        power_en,
+    input  logic [31:0] A,
+    input  logic [31:0] B,
     output logic [63:0] P_REG
 );
 
-    // --- 1. Signal Decomposition ---
-    logic [15:0] A_H, A_L, B_H, B_L;
-    assign A_H = A[31:16]; assign A_L = A[15:0];
-    assign B_H = B[31:16]; assign B_L = B[15:0];
+    // =========================================================================
+    // Signal Decomposition
+    // =========================================================================
+    logic [15:0] a_hi, a_lo;
+    logic [15:0] b_hi, b_lo;
 
-    //--------------------STAGE 1--------------------
-    // Instantiating 16x16 Multipliers
-    // These modules takes 4 clock cycles to complete
-    logic [31:0] P_HH_raw, P_HL_raw, P_LH_raw, P_LL_raw;
+    assign a_hi = A[31:16]; 
+    assign a_lo = A[15:0];
+    assign b_hi = B[31:16]; 
+    assign b_lo = B[15:0];
 
-    MULT16 MULT16_HH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_H), .P(P_HH_raw));
-    MULT16 MULT16_HL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_L), .P(P_HL_raw));
-    MULT16 MULT16_LH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_H), .P(P_LH_raw));
-    MULT16 MULT16_LL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_L), .P(P_LL_raw));
+    // =========================================================================
+    // STAGE 1: 16x16 Multipliers description
+    // Latency: 4 clock cycles (internal to MULT16)
+    // =========================================================================
+    logic [31:0] p_hh_comb, p_hl_comb, p_lh_comb, p_ll_comb;
+
+    MULT16 mult16_hh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_hi), .P(p_hh_comb));
+    MULT16 mult16_hl (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_lo), .P(p_hl_comb));
+    MULT16 mult16_lh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_hi), .P(p_lh_comb));
+    MULT16 mult16_ll (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_lo), .P(p_ll_comb));
 
     // Pipeline Registers (End of Stage 1)
-    logic [31:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG;
+    logic [31:0] p_hh_reg, p_hl_reg, p_lh_reg, p_ll_reg;
 
-    always @(posedge clk or negedge reset_n) begin
+    always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_LL_REG <= 0; 
-            P_HL_REG <= 0; 
-            P_LH_REG <= 0; 
-            P_HH_REG <= 0;
+            p_ll_reg <= '0; 
+            p_hl_reg <= '0; 
+            p_lh_reg <= '0; 
+            p_hh_reg <= '0;
         end else if (power_en) begin
-            P_LL_REG <= P_LL_raw; 
-            P_HL_REG <= P_HL_raw;
-            P_LH_REG <= P_LH_raw; 
-            P_HH_REG <= P_HH_raw;
+            p_ll_reg <= p_ll_comb; 
+            p_hl_reg <= p_hl_comb;
+            p_lh_reg <= p_lh_comb; 
+            p_hh_reg <= p_hh_comb;
         end else begin
-            P_LL_REG <= 0; 
-            P_HL_REG <= 0; 
-            P_LH_REG <= 0; 
-            P_HH_REG <= 0;
+            p_ll_reg <= '0; 
+            p_hl_reg <= '0; 
+            p_lh_reg <= '0; 
+            p_hh_reg <= '0;
         end
     end
 
-    //---------------------STAGE 2----------------------------
-    // 32bit intermediate addition Calculate Middle Sum and Lower-Middle Addition
-    // this will take 1 clock cycles to complete
+    // =========================================================================
+    // STAGE 2: Intermediate Addition
+    // Latency: 1 clock cycle (Register at end)
+    // =========================================================================
     
-    // 1. Middle Sum (33 bits)
-    logic [32:0] P_MID_SUM;
-    assign P_MID_SUM = P_HL_REG + P_LH_REG;
+    // 1. Middle Sum (33 bits): P_HL + P_LH
+    logic [32:0] mid_sum_comb;
+    assign mid_sum_comb = p_hl_reg + p_lh_reg;
 
-    // 2. The "First 24" Adder (Bits 16 to 39)
-    // FIX 1: Alignment Correction
-    // We are summing terms valid for bits [39:16].
-    // - P_LL[31:16]:  Aligned to LSB of this adder (Bit 16)
-    // - P_MID[23:0]:  Aligned to LSB of this adder (Bit 16)
-    // - P_HH[7:0]:    Starts at Bit 32. Relative to Bit 16, this is +16.
-    // Pipeline Registers for Alignment (Stage 2 Split)
-    logic [32:0] P_MID_SUM_REG;
-    logic [31:0] P_HH_REG_d1;
-    logic [31:0] P_LL_REG_d1;
+    // Pipeline Registers for Alignment
+    logic [32:0] mid_sum_reg;
+    logic [31:0] p_hh_reg_d1;
+    logic [31:0] p_ll_reg_d1;
 
-    always @(posedge clk or negedge reset_n) begin
+    always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_MID_SUM_REG <= 0;
-            P_HH_REG_d1 <= 0;
-            P_LL_REG_d1 <= 0;
+            mid_sum_reg <= '0;
+            p_hh_reg_d1 <= '0;
+            p_ll_reg_d1 <= '0;
         end else if (power_en) begin
-            P_MID_SUM_REG <= P_MID_SUM;
-            P_HH_REG_d1 <= P_HH_REG;
-            P_LL_REG_d1 <= P_LL_REG;
+            mid_sum_reg <= mid_sum_comb;
+            p_hh_reg_d1 <= p_hh_reg;
+            p_ll_reg_d1 <= p_ll_reg;
         end else begin
-            P_MID_SUM_REG <= 0;
-            P_HH_REG_d1 <= 0;
-            P_LL_REG_d1 <= 0;
+            mid_sum_reg <= '0;
+            p_hh_reg_d1 <= '0;
+            p_ll_reg_d1 <= '0;
         end
     end
 
-    //---------------------STAGE 3----------------------------
-    // 24bit final addition P[40:17]
-    // this will take 1 clock cycles to complete
+    // =========================================================================
+    // STAGE 3: Lower-Middle Addition (First 24 bits)
+    // Latency: 1 clock cycle
+    // =========================================================================
 
-    logic [24:0] P_first_24_comb; // 25 bits to capture carry out
+    // Logic: P_HH[7:0] << 16 + P_MID[23:0] + P_LL[31:16]
+    logic [24:0] sum_stage3_comb; // 25 bits to capture carry out
     
-    assign P_first_24_comb = {P_HH_REG_d1[7:0], 16'b0}  // Shifted high!
-                           + P_MID_SUM_REG[23:0] 
-                           + {8'b0, P_LL_REG_d1[31:16]};
+    assign sum_stage3_comb = {p_hh_reg_d1[7:0], 16'b0} 
+                           + mid_sum_reg[23:0] 
+                           + {8'b0, p_ll_reg_d1[31:16]};
 
-    // Pipeline Registers (End of Stage 2)
-    // We must pass EVERYTHING needed for the final stage through registers.
-    logic [24:0] P_first_24_REG;   // Result of the stage 2 adder
-    logic [23:0] P_HH_UPPER_REG;   // Pass P_HH[31:8] to next stage
-    logic [8:0]  P_MID_UPPER_REG;  // Pass P_MID[32:24] to next stage
-    logic [15:0] P_LL_FINAL_REG;   // FIX 2: Delay LSBs to match timing!
+    // Pipeline Registers (End of Stage 3)
+    logic [24:0] p_first_24_reg;   // Result of the stage 2/3 adder
+    logic [23:0] p_hh_upper_reg;   // Pass P_HH[31:8] to next stage
+    logic [8:0]  mid_sum_upper_reg;  // Pass P_MID[32:24] to next stage
+    logic [15:0] p_ll_final_reg;   // Delayed LSBs
 
-    always @(posedge clk or negedge reset_n) begin
+    always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_first_24_REG  <= 0;
-            P_HH_UPPER_REG  <= 0;
-            P_MID_UPPER_REG <= 0;
-            P_LL_FINAL_REG  <= 0;
+            p_first_24_reg    <= '0;
+            p_hh_upper_reg    <= '0;
+            mid_sum_upper_reg <= '0;
+            p_ll_final_reg    <= '0;
         end else if (power_en) begin
-            P_first_24_REG  <= P_first_24_comb; 
-            // Use delayed versions to align with P_first_24_REG (which is now T+2 aligned)
-            P_HH_UPPER_REG  <= P_HH_REG_d1[31:8];
-            P_MID_UPPER_REG <= P_MID_SUM_REG[32:24];
-            P_LL_FINAL_REG  <= P_LL_REG_d1[15:0]; 
+            p_first_24_reg    <= sum_stage3_comb; 
+            
+            // Align signals for the final stage
+            p_hh_upper_reg    <= p_hh_reg_d1[31:8];
+            mid_sum_upper_reg <= mid_sum_reg[32:24];
+            p_ll_final_reg    <= p_ll_reg_d1[15:0]; 
         end else begin
-            P_first_24_REG  <= 0;
-            P_HH_UPPER_REG  <= 0;
-            P_MID_UPPER_REG <= 0;
-            P_LL_FINAL_REG  <= 0;
+            p_first_24_reg    <= '0;
+            p_hh_upper_reg    <= '0;
+            mid_sum_upper_reg <= '0;
+            p_ll_final_reg    <= '0;
         end
     end
 
-    //---------------------STAGE 4----------------------------
-    // Final 24bit Addition and Output Assembly
-    // this will take 1 clock cycle to complete
+    // =========================================================================
+    // STAGE 4: Final Addition and Assembly
+    // Combinational logic feeding into Stage 5 Register
+    // =========================================================================
 
-    // 1. Final Upper Addition (Bits 40 to 63)
-    // Inputs: P_HH upper part, P_MID upper part, and Carry from Stage 2.
-    logic [23:0] P_upper_sum;
+    logic [63:0] p_comb; 
+
+    // P[15:0] comes directly from the delayed LSBs
+    assign p_comb[15:0]  = p_ll_final_reg;         
     
-    // 2. Assemble Final Output
-    // All parts are now aligned to the same clock cycle (Stage 3).
+    // P[39:16] comes from the intermediate adder result
+    assign p_comb[39:16] = p_first_24_reg[23:0];   
     
-    logic [63:0] P; // combinational result
-    assign P[15:0]  = P_LL_FINAL_REG;         // Delayed LSBs
-    assign P[39:16] = P_first_24_REG[23:0];   // Middle result
-    assign P[63:40] = P_HH_UPPER_REG 
-                       + {15'b0, P_MID_UPPER_REG} 
-                       + {23'b0, P_first_24_REG[24]}; // Add Carry
+    // P[63:40] Summing:
+    // P_HH[31:8] + P_MID[32:24] + Carry from previous stage
+    assign p_comb[63:40] = p_hh_upper_reg 
+                         + {15'b0, mid_sum_upper_reg} 
+                         + {23'b0, p_first_24_reg[24]};
 
-    //---------------------STAGE 5----------------------------
-    //registerin the output (wasting a cycle for accounting for non optimal output delay)
+    // =========================================================================
+    // STAGE 5: Output Registration
+    // =========================================================================
 
-    always @(posedge clk or negedge reset_n) begin
+    always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_REG <= 0;
+            P_REG <= '0;
         end else if (power_en) begin
-            P_REG <= P;
+            P_REG <= p_comb;
         end else begin
-            P_REG <= 0;
+            P_REG <= '0;
         end
     end
+
 endmodule
 
+// =============================================================================
+// SUBMODULE: MULT16
+// =============================================================================
+
 module MULT16 (
-    input logic clk, reset_n,
-    input logic power_en,
-    input logic [15:0] A,
-    input logic [15:0] B,
+    input  logic        clk,
+    input  logic        reset_n,
+    input  logic        power_en,
+    input  logic [15:0] A,
+    input  logic [15:0] B,
     output logic [31:0] P
 );
 
-    // --- 1. Signal Decomposition ---
-    logic [7:0] A_H, A_L, B_H, B_L;
+    // Signal Decomposition
+    logic [7:0] a_hi, a_lo;
+    logic [7:0] b_hi, b_lo;
 
-    assign A_H = A[15:8];
-    assign A_L = A[7:0];
-    assign B_H = B[15:8];
-    assign B_L = B[7:0];
+    assign a_hi = A[15:8];
+    assign a_lo = A[7:0];
+    assign b_hi = B[15:8];
+    assign b_lo = B[7:0];
 
-    //-------------------STAGE 1--------------------
-    // --- 2. Instantiate 8x8 Multipliers (Parallel) ---
-    // These modules take 2 clock cycles to produce a valid result.
-    logic [15:0] P_HH_raw, P_HL_raw, P_LH_raw, P_LL_raw;
+    // =========================================================================
+    // STAGE 1: 8x8 Multipliers (Parallel)
+    // Latency: 2 clock cycles (internal to MULT8)
+    // =========================================================================
+    logic [15:0] p_hh_comb, p_hl_comb, p_lh_comb, p_ll_comb;
 
-    MULT8 MULT8_HH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_H), .P(P_HH_raw));
-    MULT8 MULT8_HL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_H), .B(B_L), .P(P_HL_raw));
-    MULT8 MULT8_LH (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_H), .P(P_LH_raw));
-    MULT8 MULT8_LL (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(A_L), .B(B_L), .P(P_LL_raw));
+    MULT8 mult8_hh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_hi), .P(p_hh_comb));
+    MULT8 mult8_hl (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_hi), .B(b_lo), .P(p_hl_comb));
+    MULT8 mult8_lh (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_hi), .P(p_lh_comb));
+    MULT8 mult8_ll (.clk(clk), .reset_n(reset_n), .power_en(power_en), .A(a_lo), .B(b_lo), .P(p_ll_comb));
 
-    // We register the outputs of the 8x8 mults to prevent the 
-    // summation logic of 8x8 chaining directly into the summation of 16x16.
-    logic [15:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG;
+    // Pipeline Registers
+    logic [15:0] p_hh_reg, p_hl_reg, p_lh_reg, p_ll_reg;
 
-    always @(posedge clk or negedge reset_n) begin
+    always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
-        end
-        else if (power_en) begin
-            P_LL_REG <= P_LL_raw;
-            P_HL_REG <= P_HL_raw;
-            P_LH_REG <= P_LH_raw;
-            P_HH_REG <= P_HH_raw;
-        end else begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
-        end
-    end
-
-    //--------------------------STAGE 2--------------------------
-    // --- 2.    Term Alignment and Summation ---
-    // here will take 1 clock cycle to complete
-
-    // --- Final Alignment ---
-    // P_LL contributes to bits [15:0]
-    // P_MID_SUM contributes to bits [24:8] (Shifted left by 8)
-    // P_HH contributes to bits [31:16] (Shifted left by 16)
-
-    // Optimization: LSB Bypass
-
-    // We need to sum three terms in the overlap region.
-    
-    // Middle Sum: P_HL + P_LH
-    // 16-bit + 16-bit = 17-bit result
-    logic [16:0] P_MID_SUM;
-    assign P_MID_SUM = P_HL_REG + P_LH_REG;
-
-    // Calculation:
-    // The addition width is 24 bits (from bit 8 to bit 31).
-    // Registers for Pipelining Middle Sum
-    logic [16:0] P_MID_SUM_REG;
-    logic [15:0] P_HH_REG_d1;
-    logic [15:0] P_LL_REG_d1;
-
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            P_MID_SUM_REG <= 0;
-            P_HH_REG_d1 <= 0;
-            P_LL_REG_d1 <= 0;
+            p_ll_reg <= '0;
+            p_hl_reg <= '0;
+            p_lh_reg <= '0;
+            p_hh_reg <= '0;
         end else if (power_en) begin
-            P_MID_SUM_REG <= P_MID_SUM;
-            P_HH_REG_d1 <= P_HH_REG;
-            P_LL_REG_d1 <= P_LL_REG;
+            p_ll_reg <= p_ll_comb;
+            p_hl_reg <= p_hl_comb;
+            p_lh_reg <= p_lh_comb;
+            p_hh_reg <= p_hh_comb;
         end else begin
-            P_MID_SUM_REG <= 0;
-            P_HH_REG_d1 <= 0;
-            P_LL_REG_d1 <= 0;
+            p_ll_reg <= '0;
+            p_hl_reg <= '0;
+            p_lh_reg <= '0;
+            p_hh_reg <= '0;
         end
     end
-    //--------------------------STAGE 3--------------------------
-    // final 24bit addition
-    // here will take 1 clock cycle to complete
+
+    // =========================================================================
+    // STAGE 2: Term Alignment and Summation
+    // Latency: 1 clock cycle
+    // =========================================================================
+
+    // Middle Sum: P_HL + P_LH
+    logic [16:0] mid_sum_comb;
+    assign mid_sum_comb = p_hl_reg + p_lh_reg;
+
+    // Registers for Pipelining
+    logic [16:0] mid_sum_reg;
+    logic [15:0] p_hh_reg_d1;
+    logic [15:0] p_ll_reg_d1;
+
+    always_ff @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            mid_sum_reg <= '0;
+            p_hh_reg_d1 <= '0;
+            p_ll_reg_d1 <= '0;
+        end else if (power_en) begin
+            mid_sum_reg <= mid_sum_comb;
+            p_hh_reg_d1 <= p_hh_reg;
+            p_ll_reg_d1 <= p_ll_reg;
+        end else begin
+            mid_sum_reg <= '0;
+            p_hh_reg_d1 <= '0;
+            p_ll_reg_d1 <= '0;
+        end
+    end
+
+    // =========================================================================
+    // STAGE 3: Final Addition
+    // =========================================================================
 
     always_comb begin
         if (!power_en) begin
-            P = 32'h00000000;
+            P = 32'h0;
         end else begin
-            P[7:0] = P_LL_REG_d1[7:0];
-            P[31:8] = {P_HH_REG_d1, 8'b0} + P_MID_SUM_REG + {16'b0, P_LL_REG_d1[15:8]};
+            P[7:0]  = p_ll_reg_d1[7:0];
+            P[31:8] = {p_hh_reg_d1, 8'b0} + mid_sum_reg + {16'b0, p_ll_reg_d1[15:8]};
         end
     end
 
 endmodule
+
+// =============================================================================
+// SUBMODULE: MULT8
+// =============================================================================
 
 module MULT8 (
-    input logic clk, reset_n,
-    input logic power_en,
-    input logic [7:0] A,
-    input logic [7:0] B,
+    input  logic       clk,
+    input  logic       reset_n,
+    input  logic       power_en,
+    input  logic [7:0] A,
+    input  logic [7:0] B,
     output logic [15:0] P
 );
-    // --- Signal Decomposition ---
-    logic [3:0] A_H, A_L, B_H, B_L;
+    // Signal Decomposition
+    logic [3:0] a_hi, a_lo;
+    logic [3:0] b_hi, b_lo;
 
-    assign A_H = A[7:4];
-    assign A_L = A[3:0];
-    assign B_H = B[7:4];
-    assign B_L = B[3:0];
+    assign a_hi = A[7:4];
+    assign a_lo = A[3:0];
+    assign b_hi = B[7:4];
+    assign b_lo = B[3:0];
 
-    //--------------------------STAGE 1--------------------------
-    // --- 1. Partial Product (PP) Generation (Parallel 4x4) ---
-    // These modules take 1 clock cycle to produce a valid result.
-    // All four 4x4 multiplications run in parallel.
-    logic [7:0] P_HH, P_HL, P_LH, P_LL; // All are 8-bit products
-    logic [7:0] P_HH_REG, P_HL_REG, P_LH_REG, P_LL_REG; // Pipeline registers
-    MULT4 MULT4_HH (.power_en(power_en), .A(A_H), .B(B_H), .P(P_HH)); // P_HH: (A_H * B_H)
-    MULT4 MULT4_HL (.power_en(power_en), .A(A_H), .B(B_L), .P(P_HL)); // P_HL: (A_H * B_L)
-    MULT4 MULT4_LH (.power_en(power_en), .A(A_L), .B(B_H), .P(P_LH)); // P_LH: (A_L * B_H)
-    MULT4 MULT4_LL (.power_en(power_en), .A(A_L), .B(B_L), .P(P_LL)); // P_LL: (A_L * B_L)
+    // =========================================================================
+    // STAGE 1: Partial Product Generation (Parallel 4x4)
+    // Latency: 1 clock cycle (internal)
+    // =========================================================================
+    logic [7:0] p_hh, p_hl, p_lh, p_ll;
+    
+    // Instantiations
+    MULT4 mult4_hh (.power_en(power_en), .A(a_hi), .B(b_hi), .P(p_hh));
+    MULT4 mult4_hl (.power_en(power_en), .A(a_hi), .B(b_lo), .P(p_hl));
+    MULT4 mult4_lh (.power_en(power_en), .A(a_lo), .B(b_hi), .P(p_lh));
+    MULT4 mult4_ll (.power_en(power_en), .A(a_lo), .B(b_lo), .P(p_ll));
 
-    always @(posedge clk or negedge reset_n) begin
+    // Pipeline Registers
+    logic [7:0] p_hh_reg, p_hl_reg, p_lh_reg, p_ll_reg;
+
+    always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
-        end
-        else if (power_en) begin
-            P_LL_REG <= P_LL;
-            P_HL_REG <= P_HL;
-            P_LH_REG <= P_LH;
-            P_HH_REG <= P_HH;
+            p_ll_reg <= '0;
+            p_hl_reg <= '0;
+            p_lh_reg <= '0;
+            p_hh_reg <= '0;
+        end else if (power_en) begin
+            p_ll_reg <= p_ll;
+            p_hl_reg <= p_hl;
+            p_lh_reg <= p_lh;
+            p_hh_reg <= p_hh;
         end else begin
-            P_LL_REG <= 0;
-            P_HL_REG <= 0;
-            P_LH_REG <= 0;
-            P_HH_REG <= 0;
+            p_ll_reg <= '0;
+            p_hl_reg <= '0;
+            p_lh_reg <= '0;
+            p_hh_reg <= '0;
         end
     end
 
-    //--------------------------STAGE 2--------------------------
-    // --- 2. Term Alignment and Summation Reduction ---
-    // The critical path is the final 12-bit addition.
+    // =========================================================================
+    // STAGE 2: Term Alignment and Summation
+    // =========================================================================
 
-    // We must first compute P_HL + P_LH. This requires a fast 9-bit adder.
-    logic [8:0] P_MID_SUM;
-    assign P_MID_SUM = P_HL_REG + P_LH_REG; 
+    logic [8:0] mid_sum_comb;
+    assign mid_sum_comb = p_hl_reg + p_lh_reg; 
     
     always_comb begin
         if (!power_en) begin
-            P = 16'h0000;
+            P = 16'h0;
         end else begin
-            P[3:0] = P_LL_REG[3:0];
-            P[15:4] = {P_HH_REG, 4'h0} + P_MID_SUM + P_LL_REG[7:4];
+            P[3:0]  = p_ll_reg[3:0];
+            P[15:4] = {p_hh_reg, 4'h0} + mid_sum_comb + p_ll_reg[7:4];
         end
     end
 
 endmodule
 
+// =============================================================================
+// SUBMODULE: MULT4
+// =============================================================================
+
 module MULT4 (
-    input [3:0] A, [3:0] B,
-    input logic power_en,
+    input  logic [3:0] A, 
+    input  logic [3:0] B,
+    input  logic       power_en,
     output logic [7:0] P
 );
     // Explicit Operand Isolation
-    // When power_en is 0, inputs to the multiplier logic are forced to 0.
-    // This prevents dynamic switching power in the multiplier logic.
-    assign P = power_en ? A * B: 8'h00;
-
+    assign P = power_en ? (A * B) : 8'h00;
 endmodule

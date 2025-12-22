@@ -17,7 +17,7 @@ module ALU_TOP(
     //1 - low power (upto 120MHZ)
 
     //outputs
-    output wire [31:0] Y,
+    output logic [31:0] Y,
     output logic [31:0] result_aux,
     output logic output_valid,
     output logic [7:0] flag_reg
@@ -91,15 +91,15 @@ assign adder_mode = CMD[0] | CMD[1];
 // C0 Control Logic
 always_comb begin
     case (CMD[2:0])
-        3'b000: C0 = 1'b0;          // ADD
-        3'b001: C0 = 1'b1;          // SUB
-        3'b010: C0 = 1'b1;          // GT (assuming subtraction)
-        3'b011: C0 = 1'b1;          // LT (assuming subtraction)
-        3'b100: C0 = CF_reg;        // ADDC
-        3'b101: C0 = CF_reg;        // SUBC
-        3'b011: C0 = 1'b1;          // SUB
-        3'b101: C0 = 1'b1;          // SUB
-        default:  C0 = 1'b0;
+        3'b000:  C0 = 1'b0;          // ADD
+        3'b001:  C0 = 1'b1;          // SUB
+        3'b010:  C0 = 1'b1;          // GT (assuming subtraction)
+        3'b011:  C0 = 1'b1;          // LT (assuming subtraction)
+        3'b100:  C0 = CF_reg;        // ADDC
+        3'b101:  C0 = CF_reg;        // SUBC
+        3'b011:  C0 = 1'b1;          // SUB
+        3'b101:  C0 = 1'b1;          // SUB
+        default: C0 = 1'b0;
     endcase
 end
 
@@ -116,20 +116,24 @@ logic [31:0] A_gated, B_gated;
 assign A_gated = input_valid ? A : 32'd0;
 assign B_gated = input_valid ? B : 32'd0;
 
-// Tristate buffers for output selection
-assign final_adder_out = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
-assign final_adder_carry = (low_power) ? adder_lp_out[32] : CF_adder;
+//-------------------------------OUTPUT SELECTION-------------------------------
+// tristates for output selection
+assign final_adder_out   = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
+assign final_adder_carry = (low_power) ? adder_lp_out[32]   : CF_adder;
 
 //00xxx selects adder32
 //01xxx selects mult32
 //10xxx selects shifter
 //11xxx selects logic_block
-assign Y = (v_add_r || (low_power && CMD[4:3] == 2'b00 && output_valid)) ? final_adder_out : 
+assign Y = (v_add_r || (low_power && CMD[4:3] == 2'b00 && output_valid))    ? final_adder_out : 
            (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) ? final_mult_out[31:0] :
-           (CMD[4:3] == 2'b10 && output_valid) ? shifter_out :
-           (CMD[4:3] == 2'b11 && output_valid) ? logic_out : 32'd0;
+           (CMD[4:3] == 2'b10 && output_valid)                              ? shifter_out :
+           (CMD[4:3] == 2'b11 && output_valid)                              ? logic_out : 32'dz;
 
-assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) ? final_mult_out[63:32] : 32'd0;
+assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) 
+        ? final_mult_out[63:32] 
+        : 32'dz;
+// Even tough these look like spagetthi, tristates are faster than muxes in order of 1-2 logic levels
 
 // Flag Register Update (including CF)
 always @(posedge clk or negedge reset_n) begin
@@ -154,7 +158,7 @@ always @(posedge clk or negedge reset_n) begin
     end
 end
 
-//-------------------------------POWER GATING---------------------------------
+//---------------------------------POWER GATING---------------------------------
 //handling of idling and power gating dynamically depending on the stage counts
 
 logic power_en_adder, power_en_mult, power_en_shifter, power_en_logic;
@@ -200,24 +204,11 @@ always @(posedge clk or negedge reset_n) begin
 end
 
 //disabling the particular block if staged out or idle
-
 always_comb begin
     power_en_adder = sreg_adder[0]   | ((branch == 2'b00) && !idle && input_valid);
     power_en_mult = (sreg_mult[0]   | ((branch == 2'b01) && !idle && input_valid));
     power_en_shifter = sreg_shifter[0] | ((branch == 2'b10) && !idle && input_valid);
     power_en_logic = sreg_logic[0]   | ((branch == 2'b11) && !idle && input_valid);
-end
-
-
-//counter
-logic [31:0] count;
-always @(posedge clk or negedge reset_n) begin
-    if(!reset_n) begin
-        count <= 0;
-    end
-    else begin
-        count <= count + 1;
-    end
 end
 
 // Output Valid Handling and Command Pipelining
@@ -270,6 +261,17 @@ always_comb begin
         // Adder (00) and Mult (01) must NOT assert valid here immediately.
         else if (CMD[4:3] == 2'b10 || CMD[4:3] == 2'b11) output_valid = input_valid; 
         else output_valid = 1'b0;
+    end
+end
+
+//counter (NOT used currently but can be used in future)
+logic [15:0] count;
+always @(posedge clk or negedge reset_n) begin
+    if(!reset_n) begin
+        count <= 0;
+    end
+    else begin
+        count <= count + 1;
     end
 end
 
