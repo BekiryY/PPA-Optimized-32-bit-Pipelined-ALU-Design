@@ -16,7 +16,7 @@ module ADDER32 (
     logic [31:0] C;
     logic [31:0] P;
     logic [31:0] G;
-    logic [32:0] Y_intermediate; // Intermediate output for power gating logic
+
 
     // Pipeline Registers
     logic [15:0] P_REG;
@@ -65,21 +65,12 @@ module ADDER32 (
             C_REG       <= '0;
             C15_REG     <= '0;
         end else begin
-            if (!power_en) begin
-                P_REG       <= '0;
-                G_REG       <= '0;
-                P_lower_REG <= '0;
-                C0_REG      <= '0;
-                C_REG       <= '0;
-                C15_REG     <= '0;
-            end else begin
-                P_REG       <= P[31:16];
-                G_REG       <= G[31:16];
-                P_lower_REG <= P[15:0]; // Capture P[15:0] for next stage
-                C0_REG      <= C0;
-                C_REG       <= C[14:0];
-                C15_REG     <= C[15];
-            end
+            P_REG       <= P[31:16];
+            G_REG       <= G[31:16];
+            P_lower_REG <= P[15:0]; // Capture P[15:0] for next stage
+            C0_REG      <= C0;
+            C_REG       <= C[14:0];
+            C15_REG     <= C[15];
         end
     end
 
@@ -89,7 +80,7 @@ module ADDER32 (
     
     // CLA16 Instance for Lower 16 bits
     CLA16 CLA16_0 (
-        .power_en (power_en),
+
         .P        (P[15:0]),
         .G        (G[15:0]),
         .C0       (C0),
@@ -100,7 +91,7 @@ module ADDER32 (
 
     // CLA16 Instance for Upper 16 bits
     CLA16 CLA16_1 (
-        .power_en (power_en),
+
         .P        (P_REG[15:0]),
         .G        (G_REG[15:0]),
         .C0       (C15_REG),
@@ -117,27 +108,20 @@ module ADDER32 (
         .power_en (power_en),
         .P        (P_lower_REG),            // Use registered P to match C_REG timing
         .C        ({C_REG[14:0], C0_REG}),
-        .S        (Y_intermediate[15:0])
+        .S        (Y[15:0])
     );
 
     SUM16 SUM16_1 (
         .power_en (power_en),
         .P        (P_REG[15:0]),
         .C        ({C[30:16], C15_REG}),
-        .S        (Y_intermediate[31:16])
+        .S        (Y[31:16])
     );
 
     // -------------------------------------------------------------------------
     // Output Logic
     // -------------------------------------------------------------------------
-    always_comb begin
-        if (!power_en) begin
-            Y = 33'h0; // Clamp output to 0 when sleeping (Isolation Cell)
-        end else begin
-            Y[31:0] = Y_intermediate[31:0];
-            Y[32]   = C[31]; // Carry out of the ADDER
-        end
-    end
+    assign Y[32] = power_en ? C[31] : 1'b0; // Carry out of the ADDER
 
 endmodule
 
@@ -146,7 +130,6 @@ endmodule
 // =============================================================================
 
 module PG16 (
-    input  logic        power_en, // Note: Unused in logic but kept for interface
     input  logic [15:0] A,
     input  logic [15:0] B,
     output logic [15:0] P,
@@ -157,19 +140,18 @@ module PG16 (
 endmodule
 
 module carry_calculator (
-    input  logic       power_en,
     input  logic [3:0] P,     // Group Propagate
     input  logic [3:0] G,     // Group Generate
     input  logic       C0,
     output logic [2:0] C_int  // Looks ahead for C1, C2, C3
 );
-    assign C_int[0] = power_en ? (G[0] | (P[0] & C0)) : 1'b0;
-    assign C_int[1] = power_en ? (G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0)) : 1'b0;
-    assign C_int[2] = power_en ? (G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0)) : 1'b0;
+    assign C_int[0] = (G[0] | (P[0] & C0));
+    assign C_int[1] = (G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0));
+    assign C_int[2] = (G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0));
 endmodule
 
 module CLA16 (
-    input  logic        power_en,
+
     input  logic [15:0] P,
     input  logic [15:0] G,
     input  logic        C0,
@@ -199,7 +181,7 @@ module CLA16 (
 
     // Use carry_calculator for C_int
     carry_calculator cc_inst (
-        .power_en (power_en),
+
         .P        (Pg_int),
         .G        (Gg_int),
         .C0       (C0),
@@ -211,7 +193,7 @@ module CLA16 (
     assign Gg = Gg_int[3] | (Pg_int[3] & Gg_int[2]) | (Pg_int[3] & Pg_int[2] & Gg_int[1]) | (Pg_int[3] & Pg_int[2] & Pg_int[1] & Gg_int[0]);
 
     CLA4 CLA4_0 (
-        .power_en (power_en),
+
         .P        (P[3:0]), 
         .G        (G[3:0]), 
         .C0       (C0),
@@ -219,7 +201,7 @@ module CLA16 (
     );
 
     CLA4 CLA4_1 (
-        .power_en (power_en),
+
         .P        (P[7:4]), 
         .G        (G[7:4]), 
         .C0       (C_int[0]),
@@ -227,7 +209,7 @@ module CLA16 (
     );
 
     CLA4 CLA4_2 (
-        .power_en (power_en),
+
         .P        (P[11:8]), 
         .G        (G[11:8]), 
         .C0       (C_int[1]),
@@ -235,7 +217,7 @@ module CLA16 (
     );
 
     CLA4 CLA4_3 (
-        .power_en (power_en),
+
         .P        (P[15:12]), 
         .G        (G[15:12]), 
         .C0       (C_int[2]),
@@ -244,23 +226,22 @@ module CLA16 (
 endmodule
 
 module CLA4 (
-    input  logic       power_en,
     input  logic [3:0] P,
     input  logic [3:0] G,
     input  logic       C0,
     output logic [3:0] C
 );
     // C[0] (Carry-out of stage 0, or C1)
-    assign C[0] = power_en ? (G[0] | (P[0] & C0)) : 1'b0;
+    assign C[0] = (G[0] | (P[0] & C0));
 
     // C[1] (Carry-out of stage 1, or C2)
-    assign C[1] = power_en ? (G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0)) : 1'b0;
+    assign C[1] = (G[1] | (P[1] & G[0]) | (P[1] & P[0] & C0));
 
     // C[2] (Carry-out of stage 2, or C3)
-    assign C[2] = power_en ? (G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0)) : 1'b0;
+    assign C[2] = (G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C0));
 
     // C[3] (Carry-out of stage 3, or C4)
-    assign C[3] = power_en ? (G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]) | (P[3] & P[2] & P[1] & P[0] & C0)) : 1'b0;
+    assign C[3] = (G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]) | (P[3] & P[2] & P[1] & P[0] & C0));
 endmodule
 
 module SUM16 (
