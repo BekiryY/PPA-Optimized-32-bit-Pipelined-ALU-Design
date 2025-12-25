@@ -252,15 +252,23 @@ assign cmd_delayed_mul = cmd_mul_r[13:12];
 
 always_comb begin
     if (low_power) begin
-        output_valid = input_valid; // Combinational in LP
+        if(!idle) begin
+            output_valid = input_valid; // Combinational in LP
+        end else begin 
+            output_valid = 1'b0;
+        end 
     end else begin
-        // Prioritize Multiplier completion if valid, then Adder, etc.
-        if (v_mul_r[6]) output_valid = 1'b1;
-        else if (v_add_r) output_valid = 1'b1;
-        // Only pass input_valid for 0-cycle blocks (Shifter/Logic)
-        // Adder (00) and Mult (01) must NOT assert valid here immediately.
-        else if (CMD[4:3] == 2'b10 || CMD[4:3] == 2'b11) output_valid = input_valid; 
-        else output_valid = 1'b0;
+        if(!idle) begin
+            // Prioritize Multiplier completion if valid, then Adder, etc.
+            if (v_mul_r[6]) output_valid = 1'b1;
+            else if (v_add_r) output_valid = 1'b1;
+            // Only pass input_valid for 0-cycle blocks (Shifter/Logic)
+            // Adder (00) and Mult (01) must NOT assert valid here immediately.
+            else if (CMD[4:3] == 2'b10 || CMD[4:3] == 2'b11) output_valid = input_valid; 
+            else output_valid = 1'b0;
+        end else begin 
+            output_valid = 1'b0;
+        end
     end
 end
 

@@ -1,0 +1,7 @@
+Running: xsim.dir/ALU_LPnIDLE_TB_behav/xsimk.exe -simmode gui -wdb ALU_LPnIDLE_TB_behav.wdb -simrunnum 0 -socket 49930
+Design successfully loaded
+Design Loading Memory Usage: 8668 KB (Peak: 8668 KB)
+Design Loading CPU Usage: 62 ms
+Simulation completed
+Simulation Memory Usage: 9528 KB (Peak: 9528 KB)
+Simulation CPU Usage: 124 ms

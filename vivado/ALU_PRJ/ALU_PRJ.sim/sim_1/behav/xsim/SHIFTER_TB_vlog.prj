@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "B:/VIVADO/2025.2/Vivado/data/rsb/busdef" \
+"../../../../../../rtl/SHIFTER.sv" \
+"../../../../../../tb/SHIFTER_TB.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

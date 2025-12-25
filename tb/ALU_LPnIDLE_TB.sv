@@ -180,7 +180,7 @@ module ALU_LPnIDLE_TB;
         
         // Randomly toggle inputs during idle to ensure it doesn't break anything
         // and to check if output remains stable or desired behavior occurs
-        for (i = 0; i < 10; i++) begin
+        for (i = 0; i < 20; i++) begin
            @(posedge clk);
            #1;
            input_valid = $urandom & 1;

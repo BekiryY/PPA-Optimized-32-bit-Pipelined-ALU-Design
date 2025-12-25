@@ -1,0 +1,12 @@
+
+{ 
+    crc :  4621922750657621414  , 
+    ccp_crc :  0  , 
+    cmdline : " --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot ALU_LPnIDLE_TB_behav xil_defaultlib.ALU_LPnIDLE_TB xil_defaultlib.glbl" , 
+    buildDate : "Nov 14 2025" , 
+    buildTime : "19:37:27" , 
+    linkCmd : "B:\\VIVADO\\2025.2\\Vivado\\data\\..\\tps\\mingw\\6.2.0\\win64.o\\nt\\bin\\gcc.exe -Wa,-W  -O -Wl,--stack,104857600 -o \"xsim.dir/ALU_LPnIDLE_TB_behav/xsimk.exe\"   \"xsim.dir/ALU_LPnIDLE_TB_behav/obj/xsim_0.win64.obj\" \"xsim.dir/ALU_LPnIDLE_TB_behav/obj/xsim_1.win64.obj\" -L\"B:\\VIVADO\\2025.2\\Vivado\\lib\\win64.o\" -lxv_simulator_kernel   -lxv_simbridge_kernel" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 

@@ -152,7 +152,7 @@ module ADDER32_FAST_TB;
 
     initial begin
         $dumpfile("adder32_tb.vcd");
-        $dumpvars(0, ADDER32_TB);
+        $dumpvars(0, ADDER32_FAST_TB);
     end
 
 endmodule

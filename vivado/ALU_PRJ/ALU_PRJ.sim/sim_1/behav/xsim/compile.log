@@ -1,10 +1,2 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ADDER32_LP.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module ADDER32_LP
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module ALU_TOP
-ERROR: [VRFC 10-1280] procedural assignment to a non-register Y is not permitted, left-hand side should be reg/integer/time/genvar [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:130]
-ERROR: [VRFC 10-1280] procedural assignment to a non-register Y is not permitted, left-hand side should be reg/integer/time/genvar [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:131]
-ERROR: [VRFC 10-1280] procedural assignment to a non-register Y is not permitted, left-hand side should be reg/integer/time/genvar [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:132]
-ERROR: [VRFC 10-1280] procedural assignment to a non-register Y is not permitted, left-hand side should be reg/integer/time/genvar [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:133]
-ERROR: [VRFC 10-1280] procedural assignment to a non-register Y is not permitted, left-hand side should be reg/integer/time/genvar [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:134]
-ERROR: [VRFC 10-8530] module 'ALU_TOP' is ignored due to previous errors [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:1]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/tb/SHIFTER_TB.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SHIFTER_TB
