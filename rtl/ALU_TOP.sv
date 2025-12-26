@@ -126,58 +126,26 @@ assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_val
     );
 
 
-//---------------------------------POWER GATING---------------------------------
-//handling of idling and power gating dynamically depending on the stage counts
+    // Power gating signals
+    logic power_en_adder, power_en_mult, power_en_shifter, power_en_logic;
+    logic power_en_adder_lp, power_en_mult_lp;
 
-logic power_en_adder, power_en_mult, power_en_shifter, power_en_logic;
-//brach prediction comes 2 cycles earlier so 
-//the amount of on-cycle is (pipeline stage count + 2)
-logic [3:0] sreg_adder;   // 4 cycles
-logic [8:0] sreg_mult;    // 9 cycles
-logic [2:0] sreg_shifter; // 3 cycles
-logic [2:0] sreg_logic;   // 3 cycles
+    // Power gating controller
+    power_gate_controller power_ctrl (
+        .clk(clk),
+        .reset_n(reset_n),
+        .idle(idle),
+        .input_valid(input_valid),
+        .low_power(low_power),
+        .branch(branch),
+        .power_en_adder(power_en_adder),
+        .power_en_mult(power_en_mult),
+        .power_en_shifter(power_en_shifter),
+        .power_en_logic(power_en_logic),
+        .power_en_adder_lp(power_en_adder_lp),
+        .power_en_mult_lp(power_en_mult_lp)
+    );
 
-always @(posedge clk or negedge reset_n) begin
-    if (!reset_n) begin
-        sreg_adder <= 0;
-        sreg_mult <= 0;
-        sreg_shifter <= 0;
-        sreg_logic <= 0;
-    end else begin
-        // Default: Shift right
-        sreg_adder <= sreg_adder >> 1;
-        sreg_mult <= sreg_mult >> 1;
-        sreg_shifter <= sreg_shifter >> 1;
-        sreg_logic <= sreg_logic >> 1;
-
-        // Load if active request and not idle and valid
-        if (!idle && input_valid) begin
-            if (low_power) begin
-                case (branch)
-                    2'b00: sreg_adder <= 4'b0111;
-                    2'b01: sreg_mult <= 9'b00000111;
-                    2'b10: sreg_shifter <= 3'b111;
-                    2'b11: sreg_logic <= 3'b111;
-                endcase
-            end else begin
-                case (branch)
-                    2'b00: sreg_adder <= 4'b1111;
-                    2'b01: sreg_mult <= 9'b111111111;
-                    2'b10: sreg_shifter <= 3'b111;
-                    2'b11: sreg_logic <= 3'b111;
-                endcase
-            end
-        end
-    end
-end
-
-//disabling the particular block if staged out or idle
-always_comb begin
-    power_en_adder = sreg_adder[0]   | ((branch == 2'b00) && !idle && input_valid);
-    power_en_mult = (sreg_mult[0]   | ((branch == 2'b01) && !idle && input_valid));
-    power_en_shifter = sreg_shifter[0] | ((branch == 2'b10) && !idle && input_valid);
-    power_en_logic = sreg_logic[0]   | ((branch == 2'b11) && !idle && input_valid);
-end
 
 // Output Valid Handling and Command Pipelining
 logic  v_add_r;
@@ -259,10 +227,11 @@ assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
 
 // result_aux assigned above
 
-assign power_en_adder_lp = power_en_adder && low_power;
-assign power_en_mult_lp = power_en_mult && low_power;
+// LP Enables defined in power_gate_controller
+// Fast Enables derived here
 assign power_en_adder_fast = power_en_adder && !low_power;
 assign power_en_mult_fast = power_en_mult && !low_power;
+
 
 
 // Low Power Combinational Multiplier
