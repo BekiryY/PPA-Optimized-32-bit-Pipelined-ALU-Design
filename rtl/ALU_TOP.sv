@@ -69,13 +69,7 @@ logic CF_adder;
 logic CF_shifter;
 logic final_adder_carry;
 logic [31:0] final_adder_out;
-// Flag Controller instantiated below
-
-
 logic adder_mode;
-
-// CF_flag assignment moved to flag_controller
-
 
 c0_calculator c0_calc (
     .CMD(CMD[2:0]),
