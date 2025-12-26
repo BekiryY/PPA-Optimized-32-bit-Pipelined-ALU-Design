@@ -65,26 +65,17 @@ module ALU_TOP(
 //carry related signals
 logic C0;
 logic CF_reg;
-logic PF_reg;
-logic ZF_reg;
 logic CF_adder;
 logic CF_shifter;
-
 logic final_adder_carry;
 logic [31:0] final_adder_out;
-logic [31:0] Y_reg;
+// Flag Controller instantiated below
 
-//flag register
-// [7]PF, [6]0, [5]0, [4]0, [3]OF, [2]CF, [1]SF, [0]ZF
-logic OF_flag;
-logic CF_flag;
-logic SF_flag;
-//unfortunately pf_reg, zf_reg and cf_reg values are 1 cycle more delayed after Y
-assign flag_reg = {PF_reg, 3'b0, OF_flag, CF_reg, SF_flag, ZF_reg};
 
 logic adder_mode;
 
-assign CF_flag = (CMD[4:2] == 3'b011) ? CF_shifter : final_adder_carry;
+// CF_flag assignment moved to flag_controller
+
 
 c0_calculator c0_calc (
     .CMD(CMD[2:0]),
@@ -126,27 +117,20 @@ assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_val
 // Even tough these look like spagetthi, tristates are faster than muxes in order of 1-2 logic levels
 
 // Flag Register Update (including CF)
-always @(posedge clk or negedge reset_n) begin
-    if(!reset_n) begin
-        PF_reg <= 1'b0;
-        OF_flag <= 1'b0; 
-        CF_reg <= 1'b0;
-        SF_flag <= 1'b0;
-        ZF_reg <= 1'b0;
-        Y_reg <= 32'h0;
-    end
-    else begin
-        Y_reg <= Y;
-        PF_reg <= ^Y_reg;
-        ZF_reg <= (Y_reg == 32'h0);
-        SF_flag <= Y[31];
-        // Standard Overflow: (Operand1_Sign == Operand2_Sign) && (Result_Sign != Operand1_Sign)
-        // Operand2_eff is B inverted if subtracting.
-        //OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)) & (Y[31] != A[31]); 
-        OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)); 
-        CF_reg  <= CF_flag; // Store the carry from Adder
-    end
-end
+    flag_controller flags (
+        .clk(clk),
+        .reset_n(reset_n),
+        .CMD(CMD),
+        .A(A),
+        .B(B),
+        .Y(Y),
+        .adder_mode(adder_mode),
+        .CF_shifter(CF_shifter),
+        .final_adder_carry(final_adder_carry),
+        .flag_reg(flag_reg),
+        .CF_reg(CF_reg)
+    );
+
 
 //---------------------------------POWER GATING---------------------------------
 //handling of idling and power gating dynamically depending on the stage counts
