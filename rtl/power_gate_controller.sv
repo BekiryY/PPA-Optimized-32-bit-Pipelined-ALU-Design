@@ -6,8 +6,8 @@ module power_gate_controller (
     input  logic       low_power,
     input  logic [1:0] branch,
 
-    output logic       power_en_adder,
-    output logic       power_en_mult,
+    output logic       power_en_adder_fast,
+    output logic       power_en_mult_fast,
     output logic       power_en_shifter,
     output logic       power_en_logic,
     output logic       power_en_adder_lp,
@@ -18,6 +18,10 @@ module power_gate_controller (
     logic [8:0] sreg_mult;    // 9 cycles
     logic [2:0] sreg_shifter; // 3 cycles
     logic [2:0] sreg_logic;   // 3 cycles
+
+    logic power_en_adder;
+    logic power_en_mult;
+
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
@@ -62,6 +66,9 @@ module power_gate_controller (
         
         power_en_adder_lp = power_en_adder && low_power;
         power_en_mult_lp  = power_en_mult  && low_power;
+        
+        power_en_adder_fast = power_en_adder && !low_power;
+        power_en_mult_fast = power_en_mult && !low_power;
     end
 
 endmodule

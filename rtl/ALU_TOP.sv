@@ -127,8 +127,9 @@ assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_val
 
 
     // Power gating signals
-    logic power_en_adder, power_en_mult, power_en_shifter, power_en_logic;
+    logic power_en_adder_fast, power_en_mult_fast, power_en_shifter, power_en_logic;
     logic power_en_adder_lp, power_en_mult_lp;
+
 
     // Power gating controller
     power_gate_controller power_ctrl (
@@ -138,8 +139,9 @@ assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_val
         .input_valid(input_valid),
         .low_power(low_power),
         .branch(branch),
-        .power_en_adder(power_en_adder),
-        .power_en_mult(power_en_mult),
+        .power_en_adder_fast(power_en_adder_fast),
+        .power_en_mult_fast(power_en_mult_fast),
+
         .power_en_shifter(power_en_shifter),
         .power_en_logic(power_en_logic),
         .power_en_adder_lp(power_en_adder_lp),
@@ -229,10 +231,6 @@ assign final_mult_out = (low_power) ? mult_lp_out : mult_out;
 
 // LP Enables defined in power_gate_controller
 // Fast Enables derived here
-assign power_en_adder_fast = power_en_adder && !low_power;
-assign power_en_mult_fast = power_en_mult && !low_power;
-
-
 
 // Low Power Combinational Multiplier
 // Gating inputs to save dynamic power when not in use
@@ -259,8 +257,6 @@ ADDER32 adder(
     .C0(C0),
     .Y({CF_adder, adder_out})
 );
-
-
 ADDER32_LP adder_lp(
     .power_en(power_en_adder_lp),
     .MODE_SEL(adder_mode),
@@ -270,6 +266,7 @@ ADDER32_LP adder_lp(
     .Y(adder_lp_out)
 );
 
+
 MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
@@ -278,7 +275,6 @@ MULT32 mult(
     .B(B_gated),
     .P_REG(mult_out)
 );
-
 MULT32_LP mult_lp(
     .power_en(power_en_mult_lp),
     .A(A_comb),
@@ -287,7 +283,7 @@ MULT32_LP mult_lp(
 );
 
 //used for SHL, SHR, SLA, SRA, ROR, ROL, BYT
-//7 IMPLEMENTED
+//7 operations impelemented
 SHIFTER shifter(
     .power_en(power_en_shifter),
     .A(A_gated),
