@@ -86,22 +86,12 @@ logic adder_mode;
 
 assign CF_flag = (CMD[4:2] == 3'b011) ? CF_shifter : final_adder_carry;
 
-assign adder_mode = CMD[0] | CMD[1];
-
-// C0 Control Logic
-always_comb begin
-    case (CMD[2:0])
-        3'b000:  C0 = 1'b0;          // ADD
-        3'b001:  C0 = 1'b1;          // SUB
-        3'b010:  C0 = 1'b1;          // GT (assuming subtraction)
-        3'b011:  C0 = 1'b1;          // LT (assuming subtraction)
-        3'b100:  C0 = CF_reg;        // ADDC
-        3'b101:  C0 = CF_reg;        // SUBC
-        3'b011:  C0 = 1'b1;          // SUB
-        3'b101:  C0 = 1'b1;          // SUB
-        default: C0 = 1'b0;
-    endcase
-end
+c0_calculator c0_calc (
+    .CMD(CMD[2:0]),
+    .CF_reg(CF_reg),
+    .C0(C0),
+    .adder_mode(adder_mode)
+);
 
 // Internal wires for module outputs
 logic [31:0] adder_out;
