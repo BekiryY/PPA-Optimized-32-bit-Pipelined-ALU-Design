@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
   <diagram name="Page-1" id="aOeyKOqMOkMBf1CdZOmT">
-    <mxGraphModel dx="1655" dy="1744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2460" dy="2388" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -64,9 +64,6 @@
             <mxPoint x="345" y="-425" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="95LInXZECHZUxMcHEUlF-29" value="PPA-Optimized&amp;nbsp; 32-Bit Pipelined ALU Design with power gating&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="-262" y="-1100" width="415.27" height="60" as="geometry" />
         </mxCell>
         <mxCell id="YoR-V32eHGVvOTE3V8x2-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.117;entryY=1.019;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" parent="1" source="YoR-V32eHGVvOTE3V8x2-39" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -689,13 +686,16 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="T89DXA8yLcH_9zjJ7A6Q-33" value="" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="-450" y="-706" width="490" height="760" as="geometry" />
+          <mxGeometry x="-450" y="-706" width="790" height="800" as="geometry" />
         </mxCell>
         <mxCell id="T89DXA8yLcH_9zjJ7A6Q-34" value="" style="triangle;whiteSpace=wrap;html=1;" parent="T89DXA8yLcH_9zjJ7A6Q-33" vertex="1">
           <mxGeometry width="40" height="50" as="geometry" />
         </mxCell>
         <mxCell id="T89DXA8yLcH_9zjJ7A6Q-35" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="T89DXA8yLcH_9zjJ7A6Q-33" vertex="1">
           <mxGeometry x="15" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kRMxO2U8x3UvMVpj5aGb-119" value="PPA-Optimized&amp;nbsp; 32-Bit Pipelined ALU Design with power gating&lt;div&gt;&amp;nbsp;(input/outputs)&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" vertex="1" parent="T89DXA8yLcH_9zjJ7A6Q-33">
+          <mxGeometry x="310" y="716" width="480" height="84" as="geometry" />
         </mxCell>
         <mxCell id="T89DXA8yLcH_9zjJ7A6Q-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="T89DXA8yLcH_9zjJ7A6Q-35" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -867,18 +867,18 @@
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-24" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=6;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-280" y="620" as="sourcePoint" />
-            <mxPoint x="-113" y="620" as="targetPoint" />
+            <mxPoint x="-245" y="720" as="sourcePoint" />
+            <mxPoint x="-78" y="720" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-25" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=6;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-300" y="160" as="sourcePoint" />
-            <mxPoint x="-117" y="160" as="targetPoint" />
+            <mxPoint x="-265" y="260" as="sourcePoint" />
+            <mxPoint x="-82" y="260" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-44" value="" style="group;rotation=90;" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="-295" y="210" width="710" height="590" as="geometry" />
+          <mxGeometry x="-260" y="310" width="710" height="590" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-32" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;" edge="1" parent="kRMxO2U8x3UvMVpj5aGb-44">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -1001,46 +1001,49 @@
           <mxGeometry x="405" y="165" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-46" value="&lt;b&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;A[31:0]&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-380" y="140" width="60" height="30" as="geometry" />
+          <mxGeometry x="-345" y="240" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-47" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;B[31:0]&lt;/b&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-425" y="600" width="150" height="41" as="geometry" />
+          <mxGeometry x="-390" y="700" width="150" height="41" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-96.44" y="852" as="sourcePoint" />
-            <mxPoint x="-96.44" y="730" as="targetPoint" />
+            <mxPoint x="-61.44" y="952" as="sourcePoint" />
+            <mxPoint x="-61.44" y="830" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-51" value="&lt;b&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;Input_valid&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-126" y="850" width="60" height="30" as="geometry" />
+          <mxGeometry x="-91" y="950" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-52" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;reset_n&lt;/b&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-340" y="390" width="115" height="40" as="geometry" />
+          <mxGeometry x="-305" y="490" width="115" height="40" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-53" value="&lt;b&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;clk&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-295" y="340" width="60" height="30" as="geometry" />
+          <mxGeometry x="-260" y="440" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-71" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-16.980000000000018" y="812" as="sourcePoint" />
-            <mxPoint x="-16.980000000000018" y="690" as="targetPoint" />
+            <mxPoint x="18.019999999999982" y="912" as="sourcePoint" />
+            <mxPoint x="18.019999999999982" y="790" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-49" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;low_power&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-45" y="810" width="60" height="30" as="geometry" />
+          <mxGeometry x="-10" y="910" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-108" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Y[31:0]&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="415" y="410" width="60" height="30" as="geometry" />
+          <mxGeometry x="450" y="510" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-109" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;result_aux[31:0]&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="460" y="320" width="60" height="30" as="geometry" />
+          <mxGeometry x="495" y="420" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-110" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;output_valid&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="450" y="490" width="60" height="30" as="geometry" />
+          <mxGeometry x="485" y="590" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kRMxO2U8x3UvMVpj5aGb-111" value="&lt;b&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;flag_reg[7:0]&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="440" y="240" width="60" height="30" as="geometry" />
+          <mxGeometry x="475" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="95LInXZECHZUxMcHEUlF-29" value="PPA-Optimized&amp;nbsp; 32-Bit Pipelined ALU Design with power gating&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="-90" y="-1090" width="415.27" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
