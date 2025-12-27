@@ -1,9 +1,12 @@
 Time resolution is 1 ps
-Starting SHIFTER Testbench...
-Test 1: Power Gating functionality
-PASS: Power Gating
-Test 2: Shift Left Logical (SLL)
-Test 3: Shift Left Arithmetic (SLA)
-Test 4: Shift Right Logical (SRL)
-Test 5: Shift Right Arithmetic (SRA)
-Test 6: Rotate Left (ROL)
+Testing Low Power Mode...
+  -> Adder (LP)
+  -> Multiplier (LP)
+  -> Shifter (LP)
+    -> SLL
+    -> SRL
+  -> Logic Block (LP)
+    -> AND
+    -> OR
+Testing Idle Mode...
+$finish called at time : 557 ns : File "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/tb/ALU_LPnIDLE_TB.sv" Line 197

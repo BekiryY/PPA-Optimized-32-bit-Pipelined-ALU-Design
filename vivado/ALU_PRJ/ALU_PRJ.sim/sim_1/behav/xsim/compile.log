@@ -1,2 +1,36 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/tb/SHIFTER_TB.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module SHIFTER_TB
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ADDER32_FAST.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ADDER32
+INFO: [VRFC 10-311] analyzing module PG16
+INFO: [VRFC 10-311] analyzing module carry_calculator
+INFO: [VRFC 10-311] analyzing module CLA16
+INFO: [VRFC 10-311] analyzing module CLA4
+INFO: [VRFC 10-311] analyzing module SUM16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ADDER32_LP.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ADDER32_LP
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU_TOP
+WARNING: [VRFC 10-3380] identifier 'v_add_r' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:103]
+WARNING: [VRFC 10-3380] identifier 'v_mul_r' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:104]
+WARNING: [VRFC 10-3380] identifier 'v_mul_r' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:108]
+WARNING: [VRFC 10-3380] identifier 'final_mult_out' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:109]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/LOGIC_BLOCK.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module LOGIC_BLOCK
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MULT32
+INFO: [VRFC 10-311] analyzing module MULT16
+INFO: [VRFC 10-311] analyzing module MULT8
+INFO: [VRFC 10-311] analyzing module MULT4
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_LP.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MULT32_LP
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/SHIFTER.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SHIFTER
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/c0_calculator.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module c0_calculator
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/flag_controller.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flag_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/pipe_counter.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipe_counter
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/power_gate_controller.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module power_gate_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/tb/ALU_LPnIDLE_TB.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU_LPnIDLE_TB
