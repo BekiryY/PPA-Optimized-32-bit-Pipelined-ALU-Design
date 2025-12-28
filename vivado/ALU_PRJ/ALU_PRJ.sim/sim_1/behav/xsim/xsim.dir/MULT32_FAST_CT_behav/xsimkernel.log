@@ -2,3 +2,6 @@ Running: xsim.dir/MULT32_FAST_CT_behav/xsimk.exe -simmode gui -wdb MULT32_FAST_C
 Design successfully loaded
 Design Loading Memory Usage: 9228 KB (Peak: 9228 KB)
 Design Loading CPU Usage: 62 ms
+Simulation completed
+Simulation Memory Usage: 11716 KB (Peak: 11716 KB)
+Simulation CPU Usage: 93 ms

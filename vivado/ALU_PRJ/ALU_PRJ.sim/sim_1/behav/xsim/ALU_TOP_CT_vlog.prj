@@ -1,0 +1,19 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "B:/VIVADO/2025.2/Vivado/data/rsb/busdef" \
+"../../../../../../rtl/ADDER32_FAST.sv" \
+"../../../../../../rtl/ADDER32_LP.sv" \
+"../../../../../../rtl/ALU_TOP.sv" \
+"../../../../../../rtl/LOGIC_BLOCK.sv" \
+"../../../../../../rtl/MULT32_FAST.sv" \
+"../../../../../../rtl/MULT32_LP.sv" \
+"../../../../../../rtl/SHIFTER.sv" \
+"../../../../../../rtl/c0_calculator.sv" \
+"../../../../../../rtl/flag_controller.sv" \
+"../../../../../../rtl/pipe_counter.sv" \
+"../../../../../../verification/coverage_tests/ALU_TOP_CT.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
