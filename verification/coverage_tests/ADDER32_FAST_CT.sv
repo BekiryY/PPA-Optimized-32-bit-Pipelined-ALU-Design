@@ -128,10 +128,26 @@ module ADDER32_FAST_CT;
             end
 
             // 3. Drive New Inputs
-            A        <= $urandom();
-            B        <= $urandom();
-            MODE_SEL <= $urandom_range(0, 1);
-            C0       <= $urandom_range(0, 1);
+            // 3. Drive New Inputs
+            // Use std::randomize with 'dist' to ensure we hit the specific coverage bins
+            void'(std::randomize(A, B, MODE_SEL, C0) with {
+                MODE_SEL inside {[0:1]};
+                C0       inside {[0:1]};
+                
+                // Targets for A: Small, Mid, Large
+                A dist {
+                    [0:255]                       :/ 5,  // val_small
+                    [256:32'hFFFF_FEFF]           :/ 5,  // val_mid
+                    [32'hFFFF_FF00:32'hFFFF_FFFF] :/ 5   // val_large
+                };
+
+                // Targets for B: Small, Large (and fill the rest randomly)
+                B dist {
+                    [0:255]                       :/ 5,  // val_small
+                    [32'hFFFF_FF00:32'hFFFF_FFFF] :/ 5,  // val_large
+                    [256:32'hFFFF_FEFF]           :/ 5   // Random others
+                };
+            });
         end
 
         // Final Report

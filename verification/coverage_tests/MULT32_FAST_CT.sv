@@ -108,8 +108,24 @@ module MULT32_FAST_CT;
             end
             
             // Drive Inputs
-            A <= $urandom();
-            B <= $urandom();
+            // Drive Inputs
+            // Use std::randomize with 'dist' to ensure we hit the specific coverage bins
+            void'(std::randomize(A, B) with {
+                A dist {
+                    0                             := 1,  // val_zeros
+                    [1:255]                       :/ 5,  // val_small
+                    [256:32'h0000_FFFF]           :/ 5,  // val_mid
+                    [32'hFFFF_0000:32'hFFFF_FFFF] :/ 5,  // val_large
+                    [32'h0001_0000:32'hFEFF_FFFF] :/ 5   // Random others (gap)
+                };
+
+                B dist {
+                    0                             := 1,  // val_zeros
+                    [1:255]                       :/ 5,  // val_small
+                    [32'hFFFF_0000:32'hFFFF_FFFF] :/ 5,  // val_large
+                    [256:32'hFEFF_FFFF]           :/ 5   // Random others
+                };
+            });
         end
         
         // Wait for pipeline flush and check validity
