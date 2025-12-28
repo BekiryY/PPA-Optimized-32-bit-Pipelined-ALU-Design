@@ -1,0 +1,4 @@
+Running: xsim.dir/MULT32_FAST_CT_behav/xsimk.exe -simmode gui -wdb MULT32_FAST_CT_behav.wdb -simrunnum 0 -socket 61708
+Design successfully loaded
+Design Loading Memory Usage: 9228 KB (Peak: 9228 KB)
+Design Loading CPU Usage: 62 ms

@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "uvm" -L "unisims_ver" -L "unimacro_ver" -L "secureip" --snapshot "LOGIC_BLOCK_CT_behav" "xil_defaultlib.LOGIC_BLOCK_CT" "xil_defaultlib.glbl" -log "elaborate.log" 

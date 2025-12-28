@@ -2,3 +2,6 @@ Running: xsim.dir/ALU_Loose_TB_behav/xsimk.exe -simmode gui -wdb ALU_Loose_TB_be
 Design successfully loaded
 Design Loading Memory Usage: 9256 KB (Peak: 9256 KB)
 Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11316 KB (Peak: 11316 KB)
+Simulation CPU Usage: 108 ms

@@ -1,0 +1,7 @@
+Running: xsim.dir/LOGIC_BLOCK_CT_behav/xsimk.exe -simmode gui -wdb LOGIC_BLOCK_CT_behav.wdb -simrunnum 0 -socket 61657
+Design successfully loaded
+Design Loading Memory Usage: 8992 KB (Peak: 8992 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11572 KB (Peak: 11572 KB)
+Simulation CPU Usage: 46 ms
