@@ -3,7 +3,6 @@
 module SHIFTER_TB;
 
     // Inputs
-    logic power_en;
     logic [31:0] A;
     logic [4:0]  B;
     logic [2:0]  CMD;
@@ -14,7 +13,6 @@ module SHIFTER_TB;
 
     // Instantiate the Unit Under Test (UUT)
     SHIFTER uut (
-        .power_en(power_en),
         .A(A),
         .B(B),
         .CMD(CMD),
@@ -39,7 +37,6 @@ module SHIFTER_TB;
 
     initial begin
         // Initialize Inputs
-        power_en = 0;
         A = 0;
         B = 0;
         CMD = 0;
@@ -49,21 +46,6 @@ module SHIFTER_TB;
 
         $display("Starting SHIFTER Testbench...");
 
-        // ---------------------------------------------
-        // Test 1: Power Gating
-        // ---------------------------------------------
-        $display("Test 1: Power Gating functionality");
-        power_en = 0;
-        A = 32'hFFFF_FFFF;
-        B = 5'd1;
-        CMD = CMD_SLL;
-        #10;
-        if (Y !== 32'd0 || CF_flag !== 1'b0) begin
-            $error("FAILURE: Power Gating Failed. Y=%h (exp 0), CF=%b (exp 0)", Y, CF_flag);
-        end else begin
-            $display("PASS: Power Gating");
-        end
-        power_en = 1;
 
         // ---------------------------------------------
         // Test 2: Shift Left Logical (SLL)

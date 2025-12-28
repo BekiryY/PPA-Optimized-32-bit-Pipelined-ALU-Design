@@ -3,7 +3,6 @@ module ADDER32_FAST_TB ;
     // Inputs
     logic clk;
     logic reset_n;
-    logic power_en; // Added power_en to control power gating
     logic MODE_SEL; // Added MODE_SEL
     logic C0;
     logic [31:0] A;
@@ -17,7 +16,6 @@ module ADDER32_FAST_TB ;
     ADDER32 uut (
         .clk(clk), 
         .reset_n(reset_n), 
-        .power_en(power_en), // Connected power_en
         .MODE_SEL(MODE_SEL), // Connected MODE_SEL
         .C0(C0), 
         .A(A), 
@@ -39,7 +37,7 @@ end
 
 
 // 1. Calculate the result immediately (Combinational)
-assign expected_comb = power_en ? (A + (B ^ {32{MODE_SEL}}) + C0) : 33'h0;
+assign expected_comb = (A + (B ^ {32{MODE_SEL}}) + C0);
 
 // 2. Delay the result by 1 clock cycle to match the pipeline stage
 always @(posedge clk) begin
@@ -63,7 +61,6 @@ initial begin
         A        <= $urandom();
         B        <= $urandom();
         MODE_SEL <= $urandom_range(0, 1);
-        power_en <= ($urandom_range(0, 9) > 0); // 90% chance power is ON
         C0       <= $urandom_range(0, 1);
     end
     
@@ -77,9 +74,6 @@ covergroup adder_cg @(posedge clk);
     // Check if we tested both Add and Subtract
     MODE: coverpoint MODE_SEL;
     
-    // Check if we tested Power On and Power Off
-    PWR:  coverpoint power_en;
-    
     // Check specific ranges for A and B (Small, Mid, Large)
     A_VAL: coverpoint A {
         bins smalls = {[0:255]};
@@ -87,8 +81,6 @@ covergroup adder_cg @(posedge clk);
         bins others = default;
     }
     
-    // Cross coverage: Did we test Subtraction while Power was On?
-    MODE_x_PWR: cross MODE, PWR;
 endgroup
 
 adder_cg cg_inst = new();

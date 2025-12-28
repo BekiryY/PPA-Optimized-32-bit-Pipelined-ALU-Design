@@ -1,14 +1,12 @@
 `timescale 1ns / 1ps
 
 module LOGIC_BLOCK_TB;
-    logic power_en;
     logic [31:0] A;
     logic [31:0] B;
     logic [3:0] CMD;
     logic [31:0] Y;
 
     LOGIC_BLOCK uut (
-        .power_en(power_en),
         .A(A),
         .B(B),
         .CMD(CMD),
@@ -19,9 +17,6 @@ module LOGIC_BLOCK_TB;
         A = 0;
         B = 0;
         CMD = 0;
-        power_en = 0;
-        #20;
-        power_en = 1;
 
         // Test Case 1: AND (via NAND + NOT)
         // CMD = 0011 (Upper=00 -> Y=~Y1, Lower=11 -> Y1=NAND)

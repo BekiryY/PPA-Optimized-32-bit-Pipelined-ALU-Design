@@ -5,7 +5,6 @@ module ADDER32_FAST_TB;
     // Inputs
     logic clk;
     logic reset_n;
-    logic power_en; // Added power_en to control power gating
     logic MODE_SEL; // Added MODE_SEL
     logic C0;
     logic [31:0] A;
@@ -24,7 +23,6 @@ module ADDER32_FAST_TB;
     ADDER32 uut (
         .clk(clk), 
         .reset_n(reset_n), 
-        .power_en(power_en), // Connected power_en
         .MODE_SEL(MODE_SEL), // Connected MODE_SEL
         .C0(C0), 
         .A(A), 
@@ -85,7 +83,6 @@ module ADDER32_FAST_TB;
     initial begin
         // Initialize Inputs
         reset_n = 0;
-        power_en = 1; // Enable power by default
         MODE_SEL = 0; // Set to ADD
         C0 = 0;
         A = 0;
