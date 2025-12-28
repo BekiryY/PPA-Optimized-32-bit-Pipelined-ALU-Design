@@ -1,7 +1,6 @@
 module ADDER32 (
     input  logic        clk,
     input  logic        reset_n,
-    input  logic        reset_n,
     input  logic        MODE_SEL,
     input  logic        C0,
     input  logic [31:0] A,
@@ -105,13 +104,11 @@ module ADDER32 (
     // -------------------------------------------------------------------------
     
     SUM16 SUM16_0 (
-    SUM16 SUM16_0 (
         .P        (P_lower_REG),            // Use registered P to match C_REG timing
         .C        ({C_REG[14:0], C0_REG}),
         .S        (Y[15:0])
     );
 
-    SUM16 SUM16_1 (
     SUM16 SUM16_1 (
         .P        (P_REG[15:0]),
         .C        ({C[30:16], C15_REG}),

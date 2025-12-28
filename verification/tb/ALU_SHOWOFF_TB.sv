@@ -12,7 +12,6 @@ module ALU_SHOWOFF_TB;
 
     // Performance control
     logic idle;
-    logic [1:0] branch;
     logic low_power;
     
     // Outputs
@@ -30,7 +29,6 @@ module ALU_SHOWOFF_TB;
         .CMD(CMD),
         .input_valid(input_valid),
         .idle(idle),
-        .branch(branch),
         .low_power(low_power),
         .Y(Y),
         .result_aux(result_aux),
