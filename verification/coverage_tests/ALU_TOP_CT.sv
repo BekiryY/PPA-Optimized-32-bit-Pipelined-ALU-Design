@@ -136,8 +136,8 @@ module ALU_TOP_CT;
         CMD_CP: coverpoint CMD;
         
         LP_CP: coverpoint low_power {
-            bins low = {1};
-            bins high = {0};
+            bins val_low = {1};
+            bins val_high = {0};
         }
         
         VALID_CP: coverpoint input_valid {

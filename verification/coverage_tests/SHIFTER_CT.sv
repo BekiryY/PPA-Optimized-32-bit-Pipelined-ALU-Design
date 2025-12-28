@@ -96,11 +96,11 @@ module SHIFTER_CT;
         }
 
         A_CP: coverpoint A {
-            bins zeros = {0};
-            bins ones  = {32'hFFFFFFFF};
-            bins small = {[1:255]};
-            bins large = {[32'hFFFF_FF00:32'hFFFF_FFFF]};
-            bins misc  = {[256:32'hFFFF_FEFF]};
+            bins val_zeros = {0};
+            bins val_ones  = {32'hFFFFFFFF};
+            bins val_small = {[1:255]};
+            bins val_large = {[32'hFFFF_FF00:32'hFFFF_FFFF]};
+            bins val_misc  = {[256:32'hFFFF_FEFF]};
         }
 
         B_CP: coverpoint B {
