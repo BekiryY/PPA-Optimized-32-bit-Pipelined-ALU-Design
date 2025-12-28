@@ -102,9 +102,27 @@ module LOGIC_BLOCK_CT;
             @(posedge clk);
             
             // Drive Inputs
-            A = $urandom();
-            B = $urandom();
-            CMD = $urandom_range(0, 7);
+            // Use std::randomize with 'dist' to ensure we hit the specific coverage bins
+            // defined in the covergroup (Zeros, Ones, Small, Large)
+            void'(std::randomize(A, B, CMD) with {
+                CMD inside {[0:7]};
+                
+                A dist {
+                    0                             := 1,  // Hit Zero bin
+                    32'hFFFFFFFF                  := 1,  // Hit All-Ones bin
+                    [1:255]                       :/ 5,  // Hit Small bin
+                    [32'hFFFF_FF00:32'hFFFF_FFFF] :/ 5,  // Hit Large bin
+                    [256:32'hFFFF_FEFF]           :/ 5   // Random others
+                };
+
+                B dist {
+                    0                             := 1,
+                    32'hFFFFFFFF                  := 1,
+                    [1:255]                       :/ 5,
+                    [32'hFFFF_FF00:32'hFFFF_FFFF] :/ 5,
+                    [256:32'hFFFF_FEFF]           :/ 5
+                };
+            });
             
             // Allow for combinational propagation (this is a combinational block)
             #1; 
