@@ -6,7 +6,7 @@ module c0_calculator (
 );
 
     assign adder_mode = CMD[0] | CMD[1];
-
+    
     always_comb begin
         case (CMD)
             3'b000:  C0 = 1'b0;      // ADD

@@ -1,5 +1,4 @@
 module ADDER32_LP (
-    input power_en,
     input MODE_SEL,
     input C0,
     input [31:0] A,
@@ -13,5 +12,5 @@ module ADDER32_LP (
     assign B_mux = B ^ {32{MODE_SEL}};
 
     // Simple behavioral addition - synthesis will optimize for low power/area at low freq
-    assign Y = power_en ? {1'b0, A} + {1'b0, B_mux} + {32'b0, C0} : 33'b0;
+    assign Y = {1'b0, A} + {1'b0, B_mux} + {32'b0, C0};
 endmodule

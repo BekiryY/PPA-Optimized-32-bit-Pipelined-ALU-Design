@@ -10,7 +10,6 @@ module ALU_TOP(
 
     //performance control
     input idle,
-    input [1:0] branch,
     input low_power,
     //low power table
     //0 - normal (upto 1.66GHZ)
@@ -126,29 +125,6 @@ assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_val
     );
 
 
-    // Power gating signals
-    logic power_en_adder_fast, power_en_mult_fast, power_en_shifter, power_en_logic;
-    logic power_en_adder_lp, power_en_mult_lp;
-
-
-    // Power gating controller
-    power_gate_controller power_ctrl (
-        .clk(clk),
-        .reset_n(reset_n),
-        .idle(idle),
-        .input_valid(input_valid),
-        .low_power(low_power),
-        .branch(branch),
-        .power_en_adder_fast(power_en_adder_fast),
-        .power_en_mult_fast(power_en_mult_fast),
-
-        .power_en_shifter(power_en_shifter),
-        .power_en_logic(power_en_logic),
-        .power_en_adder_lp(power_en_adder_lp),
-        .power_en_mult_lp(power_en_mult_lp)
-    );
-
-
     // Output Valid Handling and Command Pipelining
     logic  v_add_r;
     logic [6:0] v_mul_r;
@@ -206,7 +182,6 @@ end
 ADDER32 adder(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en_adder_fast),
     .A(A_gated),
     .B(B_gated),
     .MODE_SEL(adder_mode),
@@ -214,7 +189,7 @@ ADDER32 adder(
     .Y({CF_adder, adder_out})
 );
 ADDER32_LP adder_lp(
-    .power_en(power_en_adder_lp),
+
     .MODE_SEL(adder_mode),
     .C0(C0), // Note: C0 logic might need review if it depends on piped signals, but looks combinatorial in ALU_TOP
     .A(A_comb),
@@ -226,13 +201,11 @@ ADDER32_LP adder_lp(
 MULT32 mult(
     .clk(clk),
     .reset_n(reset_n),
-    .power_en(power_en_mult_fast),
     .A(A_gated),
     .B(B_gated),
     .P_REG(mult_out)
 );
 MULT32_LP mult_lp(
-    .power_en(power_en_mult_lp),
     .A(A_comb),
     .B(B_comb),
     .Y(mult_lp_out)
@@ -241,7 +214,6 @@ MULT32_LP mult_lp(
 //used for SHL, SHR, SLA, SRA, ROR, ROL, BYT
 //7 operations impelemented
 SHIFTER shifter(
-    .power_en(power_en_shifter),
     .A(A_gated),
     .B(B_gated[4:0]),
     .CMD(CMD[2:0]),
@@ -252,7 +224,6 @@ SHIFTER shifter(
 //used for AND, OR, XOR, NOT, NAND, NOR, XNOR, EQ
 //8 IMPLEMENTED
 LOGIC_BLOCK logic_block(
-    .power_en(power_en_logic),
     .A(A_gated),
     .B(B_gated),
     .CMD(CMD[2:0]), 

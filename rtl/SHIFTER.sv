@@ -1,7 +1,6 @@
 `timescale 1ns / 1ps
 
 module SHIFTER (
-    input logic power_en,
     input  logic [31:0] A,          // Operand
     input  logic [4:0]  B,          // Shift Amount
     input  logic [2:0]  CMD,        // Command: 00=SLL, 01=SLA, 10=SRL, 11=SRA
@@ -22,11 +21,7 @@ logic [32:0] temp_res;
 
 
 always_comb begin
-    if (!power_en) begin
-        Y = 32'b0;
-        CF_flag = 1'b0;
-    end
-    else begin
+    begin
         case (CMD)
             CMD_SLL: begin
                 temp_res = {1'b0, A} << B;
