@@ -90,6 +90,9 @@ logic [31:0] A_gated, B_gated;
 assign A_gated = input_valid ? A : 32'd0;
 assign B_gated = input_valid ? B : 32'd0;
 
+logic  v_add_r;
+logic [6:0] v_mul_r;
+
 //-------------------------------OUTPUT SELECTION-------------------------------
 // tristates for output selection
 assign final_adder_out   = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
@@ -126,8 +129,7 @@ assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_val
 
 
     // Output Valid Handling and Command Pipelining
-    logic  v_add_r;
-    logic [6:0] v_mul_r;
+
     
     pipe_counter pipe_cnt (
         .clk(clk),
