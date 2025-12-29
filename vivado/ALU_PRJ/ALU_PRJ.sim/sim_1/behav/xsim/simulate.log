@@ -1,46 +1,28 @@
 Time resolution is 1 ps
 Starting ALU_TOP Coverage Test...
 Error: Data Mismatch at 117000! Exp=00000000 Got=83ed02df (CMD=03)
-Time: 117 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 177000! Exp=935a1e85 Got=1e85935a (CMD=14)
-Time: 177 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 207000! Exp=ffffff5b Got=ffffff5a (CMD=07)
-Time: 207 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 117 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 267000! Exp=00000001 Got=dcda0fc5 (CMD=03)
-Time: 267 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 267 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 277000! Exp=00000000 Got=1dfcb66b (CMD=03)
-Time: 277 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 297000! Exp=036b34a8 Got=036b34a9 (CMD=04)
-Time: 297 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 277 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 327000! Exp=000001bc Got=10afa5cf (CMD=13)
-Time: 327 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 327 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 337000! Exp=ebf44d9d Got=d350b09e (CMD=18)
-Time: 337 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 347000! Exp=09134c7f Got=4d31fc24 (CMD=14)
-Time: 347 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 407000! Exp=89675614 Got=9d585225 (CMD=14)
-Time: 407 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 427000! Exp=70335d58 Got=70335d57 (CMD=13)
-Time: 427 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 447000! Exp=0684e520 Got=200684e5 (CMD=15)
-Time: 447 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 527000! Exp=0c0408e3 Got=0c0408e2 (CMD=05)
-Time: 527 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 337 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
+Error: Data Mismatch at 377000! Exp=c057c02e Got=c057c02d (CMD=05)
+Time: 377 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
+Error: Data Mismatch at 537000! Exp=6aae2c39 Got=6aae2c38 (CMD=00)
+Time: 537 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 547000! Exp=fff0ab40 Got=1ed1fe87 (CMD=11)
-Time: 547 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 567000! Exp=519cf5f4 Got=519cf5f3 (CMD=07)
-Time: 567 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 547 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 617000! Exp=00000000 Got=fcaab2a1 (CMD=02)
-Time: 617 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 657000! Exp=28000000 Got=00000280 (CMD=15)
-Time: 657 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 617 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
+Error: Data Mismatch at 707000! Exp=03576812 Got=03576811 (CMD=05)
+Time: 707 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 817000! Exp=00000000 Got=5e58fb2e (CMD=1f)
-Time: 817 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 837000! Exp=fd96d9b1 Got=fd96d9b0 (CMD=07)
-Time: 837 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
-Error: Data Mismatch at 847000! Exp=a66e1c7d Got=1c7da66e (CMD=15)
-Time: 847 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 817 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 897000! Exp=bc9957df Got=bc9957de (CMD=05)
-Time: 897 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 897 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336
 Error: Data Mismatch at 917000! Exp=947c79f9 Got=d38c2240 (CMD=1c)
-Time: 917 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Time: 917 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial272_52  Scope: ALU_TOP_CT.Block285_53.Block285_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 336

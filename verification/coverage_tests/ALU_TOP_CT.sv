@@ -19,6 +19,8 @@ module ALU_TOP_CT;
     logic [31:0] result_aux;
     logic        output_valid;
     logic [7:0]  flag_reg;
+    logic [31:0] Y_conflict;
+    logic        conflict_valid;
 
     // -------------------------------------------------------------------------
     // DUT
@@ -35,7 +37,9 @@ module ALU_TOP_CT;
         .Y(Y),
         .result_aux(result_aux),
         .output_valid(output_valid),
-        .flag_reg(flag_reg)
+        .flag_reg(flag_reg),
+        .Y_conflict(Y_conflict),
+        .conflict_valid(conflict_valid)
     );
 
     // -------------------------------------------------------------------------
@@ -71,6 +75,7 @@ module ALU_TOP_CT;
     function automatic logic [63:0] calc_op(logic [31:0] a, logic [31:0] b, logic [4:0] cmd);
         logic [63:0] res;
         logic [32:0] add_res;
+        logic [32:0] shift_res;
         
         case(cmd[4:3])
             2'b00: begin // Adder
@@ -90,13 +95,34 @@ module ALU_TOP_CT;
             2'b01: res = 64'(a) * 64'(b); // Mult
             2'b10: begin // Shifter
                 case(cmd[2:0])
-                    3'b000: res = {32'b0, a << b[4:0]}; // SLL
-                    3'b001: res = {32'b0, $signed(a) <<< b[4:0]}; // SLA
-                    3'b010: res = {32'b0, a >> b[4:0]}; // SRL
-                    3'b011: res = {32'b0, $signed(a) >>> b[4:0]}; // SRA
-                    3'b100: res = {32'b0, (a >> b[4:0]) | (a << (32 - b[4:0]))}; // ROR
-                    3'b101: res = {32'b0, (a << b[4:0]) | (a >> (32 - b[4:0]))}; // ROL
-                    3'b110: res = {32'b0, {a[7:0], a[15:8], a[23:16], a[31:24]}}; // BYT
+                    3'b000: begin // SLL
+                        shift_res = {1'b0, a} << b[4:0];
+                        res = {32'b0, shift_res[31:0]};
+                    end
+                    3'b001: begin // SLA
+                        shift_res = {1'b0, a} <<< b[4:0];
+                        res = {32'b0, shift_res[31:0]};
+                    end
+                    3'b010: begin // SRL
+                        shift_res = {a, 1'b0} >> b[4:0];
+                        res = {32'b0, shift_res[32:1]};
+                    end
+                    3'b011: begin // SRA
+                        shift_res = $signed({a, 1'b0}) >>> b[4:0];
+                        res = {32'b0, shift_res[32:1]};
+                    end
+                    3'b100: begin // ROL
+                        shift_res = (a << b[4:0]) | (a >> (32 - b[4:0]));
+                        res = {32'b0, shift_res[31:0]};
+                    end
+                    3'b101: begin // ROR
+                        shift_res = (a >> b[4:0]) | (a << (32 - b[4:0]));
+                        res = {32'b0, shift_res[31:0]};
+                    end
+                    3'b110: begin // BYT
+                        shift_res = {a[7:0], a[15:8], a[23:16], a[31:24]};
+                        res = {32'b0, shift_res[31:0]};
+                    end
                     default: res = 0;
                 endcase
             end
@@ -232,12 +258,12 @@ module ALU_TOP_CT;
                 // assign Y = (v_add_r ...) ? adder : (v_mul_r ...) ? mult : ...
                 // So Adder has HIGHER priority than Mult in DUT assign statement.
                 
-                if (pipe_add.valid) begin
-                    exp_output_valid = 1;
-                    exp_Y = pipe_add.data;
-                end else if (pipe_mul[7].valid) begin
+                if (pipe_mul[7].valid) begin
                     exp_output_valid = 1;
                     exp_Y = pipe_mul[7].data;
+                end else if (pipe_add.valid) begin
+                    exp_output_valid = 1;
+                    exp_Y = pipe_add.data;
                 end else if (input_valid && (CMD[4:3] == 2'b10 || CMD[4:3] == 2'b11)) begin
                     // Logic / Shift (Passthrough)
                     exp_output_valid = 1;

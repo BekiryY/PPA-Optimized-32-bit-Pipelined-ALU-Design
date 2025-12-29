@@ -19,6 +19,8 @@ module ALU_TOP(
     output logic [31:0] Y,
     output logic [31:0] result_aux,
     output logic output_valid,
+    output logic [31:0] Y_conflict,
+    output logic conflict_valid,
     output logic [7:0] flag_reg
 );
 //SHIFTER + LOGIC BLOCK + MULT32 + ADDER32
@@ -98,18 +100,48 @@ logic [6:0] v_mul_r;
 assign final_adder_out   = (low_power) ? adder_lp_out[31:0] : adder_out[31:0];
 assign final_adder_carry = (low_power) ? adder_lp_out[32]   : CF_adder;
 
-//00xxx selects adder32
-//01xxx selects mult32
-//10xxx selects shifter
-//11xxx selects logic_block
-assign Y = (v_add_r || (low_power && CMD[4:3] == 2'b00 && output_valid))    ? final_adder_out : 
-           (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) ? final_mult_out[31:0] :
-           (CMD[4:3] == 2'b10 && output_valid)                              ? shifter_out :
-           (CMD[4:3] == 2'b11 && output_valid)                              ? logic_out : 32'dz;
+// Internal Valid Signal Construction
+logic valid_mult, valid_adder, valid_comb;
+logic [31:0] comb_out;
 
-assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) 
-        ? final_mult_out[63:32] 
-        : 32'dz;
+assign valid_mult = v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid);
+assign valid_adder = v_add_r || (low_power && CMD[4:3] == 2'b00 && output_valid);
+assign valid_comb = ((CMD[4:3] == 2'b10) || (CMD[4:3] == 2'b11)) && output_valid;
+
+assign comb_out = (CMD[4:3] == 2'b10) ? shifter_out : logic_out;
+
+// Priority: MULT32 > ADDER32 > SHIFTER = LOGIC_BLOCK
+
+assign Y = (valid_mult)  ? final_mult_out[31:0] :
+           (valid_adder) ? final_adder_out :
+           (valid_comb)  ? comb_out : 32'dz;
+
+assign result_aux = (valid_mult) ? final_mult_out[63:32] : 32'dz;
+
+// Conflict Logic
+always_comb begin
+    Y_conflict = 32'd0;
+    conflict_valid = 1'b0;
+
+    if (valid_mult) begin
+        if (valid_comb) begin
+            // Conflict Mult vs Comb. Comb is least important.
+            Y_conflict = comb_out;
+            conflict_valid = 1'b1;
+        end else if (valid_adder) begin
+            // Conflict Mult vs Adder. Adder is least important.
+            Y_conflict = final_adder_out;
+            conflict_valid = 1'b1;
+        end
+    end else if (valid_adder) begin
+        if (valid_comb) begin
+            // Conflict Adder vs Comb. Comb is least important.
+            Y_conflict = comb_out;
+            conflict_valid = 1'b1;
+        end
+    end
+end
+
 // Even tough these look like spagetthi, tristates are faster than muxes in order of 1-2 logic levels
 
 // Flag Register Update (including CF)

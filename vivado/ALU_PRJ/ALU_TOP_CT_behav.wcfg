@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="ALU_TOP_CT_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="ALU_TOP_CT" />
+            <top_module name="glbl" />
+            <top_module name="std" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="689.850 ns"></ZoomStartTime>
+      <ZoomEndTime time="766.551 ns"></ZoomEndTime>
+      <Cursor1Time time="707.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="190"></NameColumnWidth>
+      <ValueColumnWidth column_width="152"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="25" />
+   <wvobject fp_name="/ALU_TOP_CT/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/reset_n" type="logic">
+      <obj_property name="ElementShortName">reset_n</obj_property>
+      <obj_property name="ObjectShortName">reset_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/A" type="array">
+      <obj_property name="ElementShortName">A[31:0]</obj_property>
+      <obj_property name="ObjectShortName">A[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/B" type="array">
+      <obj_property name="ElementShortName">B[31:0]</obj_property>
+      <obj_property name="ObjectShortName">B[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/CMD" type="array">
+      <obj_property name="ElementShortName">CMD[4:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD[4:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/input_valid" type="logic">
+      <obj_property name="ElementShortName">input_valid</obj_property>
+      <obj_property name="ObjectShortName">input_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/idle" type="logic">
+      <obj_property name="ElementShortName">idle</obj_property>
+      <obj_property name="ObjectShortName">idle</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/low_power" type="logic">
+      <obj_property name="ElementShortName">low_power</obj_property>
+      <obj_property name="ObjectShortName">low_power</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/Y" type="array">
+      <obj_property name="ElementShortName">Y[31:0]</obj_property>
+      <obj_property name="ObjectShortName">Y[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/result_aux" type="array">
+      <obj_property name="ElementShortName">result_aux[31:0]</obj_property>
+      <obj_property name="ObjectShortName">result_aux[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/output_valid" type="logic">
+      <obj_property name="ElementShortName">output_valid</obj_property>
+      <obj_property name="ObjectShortName">output_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/flag_reg" type="array">
+      <obj_property name="ElementShortName">flag_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">flag_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/tb_A" type="array">
+      <obj_property name="ElementShortName">tb_A[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_A[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/tb_B" type="array">
+      <obj_property name="ElementShortName">tb_B[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_B[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/tb_CMD" type="array">
+      <obj_property name="ElementShortName">tb_CMD[4:0]</obj_property>
+      <obj_property name="ObjectShortName">tb_CMD[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/tb_input_valid" type="logic">
+      <obj_property name="ElementShortName">tb_input_valid</obj_property>
+      <obj_property name="ObjectShortName">tb_input_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/tb_idle" type="logic">
+      <obj_property name="ElementShortName">tb_idle</obj_property>
+      <obj_property name="ObjectShortName">tb_idle</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/tb_low_power" type="logic">
+      <obj_property name="ElementShortName">tb_low_power</obj_property>
+      <obj_property name="ObjectShortName">tb_low_power</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/exp_Y" type="array">
+      <obj_property name="ElementShortName">exp_Y[31:0]</obj_property>
+      <obj_property name="ObjectShortName">exp_Y[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/exp_result_aux" type="array">
+      <obj_property name="ElementShortName">exp_result_aux[31:0]</obj_property>
+      <obj_property name="ObjectShortName">exp_result_aux[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/exp_output_valid" type="logic">
+      <obj_property name="ElementShortName">exp_output_valid</obj_property>
+      <obj_property name="ObjectShortName">exp_output_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/error_count" type="array">
+      <obj_property name="ElementShortName">error_count[31:0]</obj_property>
+      <obj_property name="ObjectShortName">error_count[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/test_cycles" type="array">
+      <obj_property name="ElementShortName">test_cycles[31:0]</obj_property>
+      <obj_property name="ObjectShortName">test_cycles[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/pipe_add" type="array">
+      <obj_property name="ElementShortName">pipe_add</obj_property>
+      <obj_property name="ObjectShortName">pipe_add</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/pipe_mul" type="array">
+      <obj_property name="ElementShortName">pipe_mul[0:7]</obj_property>
+      <obj_property name="ObjectShortName">pipe_mul[0:7]</obj_property>
+   </wvobject>
+</wave_config>

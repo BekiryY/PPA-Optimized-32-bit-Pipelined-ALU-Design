@@ -256,7 +256,7 @@ void wrapper_func_0(char *dp)
 
 void simulate(char *dp)
 {
-iki_register_root_pointers(5, 52376, 12,0,0,47960, 1,2, 0, 32,47768, 1,2, 0, 32,48152, 2,0,0,123224, 16,0,0) ; 
+iki_register_root_pointers(5, 123224, 16,0,0,52376, 12,0,0,47768, 1,2, 0, 32,47960, 1,2, 0, 32,48152, 2,0,0) ; 
 		iki_schedule_processes_at_time_zero(dp, "xsim.dir/ALU_TOP_CT_behav/xsim.reloc");
 	wrapper_func_0(dp);
 
@@ -267,15 +267,15 @@ iki_register_root_pointers(5, 52376, 12,0,0,47960, 1,2, 0, 32,47768, 1,2, 0, 32,
 
 }
 #include "iki_bridge.h"
-void subprog_m_925d325_c0a402c5_32() ;
-void subprog_m_925d325_c0a402c5_31() ;
-void subprog_m_925d325_c0a402c5_30() ;
-void subprog_m_925d325_c0a402c5_29() ;
-void subprog_m_925d325_c0a402c5_28() ;
-void subprog_m_925d325_c0a402c5_27() ;
-void subprog_m_925d325_c0a402c5_26() ;
-void subprog_m_925d325_c0a402c5_25() ;
-static char* ng160[] = {(void *)subprog_m_925d325_c0a402c5_32, (void *)subprog_m_925d325_c0a402c5_31, (void *)subprog_m_925d325_c0a402c5_30, (void *)subprog_m_925d325_c0a402c5_29, (void *)subprog_m_925d325_c0a402c5_28, (void *)subprog_m_925d325_c0a402c5_27, (void *)subprog_m_925d325_c0a402c5_26, (void *)subprog_m_925d325_c0a402c5_25};
+void subprog_m_516f6a28_c0a402c5_32() ;
+void subprog_m_516f6a28_c0a402c5_31() ;
+void subprog_m_516f6a28_c0a402c5_30() ;
+void subprog_m_516f6a28_c0a402c5_29() ;
+void subprog_m_516f6a28_c0a402c5_28() ;
+void subprog_m_516f6a28_c0a402c5_27() ;
+void subprog_m_516f6a28_c0a402c5_26() ;
+void subprog_m_516f6a28_c0a402c5_25() ;
+static char* ng160[] = {(void *)subprog_m_516f6a28_c0a402c5_32, (void *)subprog_m_516f6a28_c0a402c5_31, (void *)subprog_m_516f6a28_c0a402c5_30, (void *)subprog_m_516f6a28_c0a402c5_29, (void *)subprog_m_516f6a28_c0a402c5_28, (void *)subprog_m_516f6a28_c0a402c5_27, (void *)subprog_m_516f6a28_c0a402c5_26, (void *)subprog_m_516f6a28_c0a402c5_25};
 void relocate(char *);
 
 void sensitize(char *);

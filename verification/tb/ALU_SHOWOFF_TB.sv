@@ -62,7 +62,6 @@ module ALU_SHOWOFF_TB;
         A = t_a;
         B = t_b;
         input_valid = 1;
-        branch = t_cmd[4:3]; // Predict same cycle (Bypass supported in RTL)
 
         // Pulse valid for 1 cycle
         @(posedge clk);
@@ -89,7 +88,6 @@ module ALU_SHOWOFF_TB;
         CMD = 0;
         input_valid = 0;
         idle = 0;
-        branch = 0;
         low_power = 0;
 
         // Reset Pulse
