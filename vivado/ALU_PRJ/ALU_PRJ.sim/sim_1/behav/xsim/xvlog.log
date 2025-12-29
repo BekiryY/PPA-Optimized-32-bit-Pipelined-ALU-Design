@@ -9,8 +9,8 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimi
 INFO: [VRFC 10-311] analyzing module ADDER32_LP
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ALU_TOP
-WARNING: [VRFC 10-3380] identifier 'final_mult_out' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:106]
-WARNING: [VRFC 10-3380] identifier 'final_mult_out' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:111]
+WARNING: [VRFC 10-3380] identifier 'final_mult_out' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:115]
+WARNING: [VRFC 10-3380] identifier 'final_mult_out' is used before its declaration [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv:119]
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/LOGIC_BLOCK.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module LOGIC_BLOCK
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" into library xil_defaultlib

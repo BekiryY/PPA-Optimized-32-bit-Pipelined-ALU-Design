@@ -59,6 +59,7 @@ module ALU_TOP_CT;
     logic [4:0]  tb_CMD;
     logic        tb_input_valid;
     logic        tb_idle, tb_low_power;
+    logic        flag_c_delayed;
 
     // Pipeline Registers (Duplicate of DUT pipe_counter)
     // model_* signals removed as they were unused and causing confusion.
@@ -79,17 +80,31 @@ module ALU_TOP_CT;
         
         case(cmd[4:3])
             2'b00: begin // Adder
-                case(cmd[2:0])
-                     3'b000: add_res = {1'b0, a} + {1'b0, b}; // ADD
-                     3'b001: add_res = {1'b0, a} - {1'b0, b}; // SUB
-                     3'b010: add_res = (a > b) ? 33'd1 : 33'd0; // GT
-                     3'b011: add_res = (a < b) ? 33'd1 : 33'd 0; // LT
-                     3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_reg[2]; // ADDC (C assumed 0)
-                     3'b101: add_res = {1'b0, a} - {1'b0, b} + flag_reg[2]; // SUBC (C assumed 0)
-                     3'b110: add_res = {1'b0, a} - {1'b0, b}; // SUB
-                     3'b111: add_res = {1'b0, a} - {1'b0, b}; // SUB
-                     default: add_res = 0; 
-                endcase
+                if(!low_power) begin
+                    case(cmd[2:0])
+                        3'b000: add_res = {1'b0, a} + {1'b0, b}; // ADD
+                        3'b001: add_res = {1'b0, a} - {1'b0, b}; // SUB
+                        3'b010: add_res = {1'b0, a} - {1'b0, b}; // GT
+                        3'b011: add_res = {1'b0, a} - {1'b0, b}; // LT
+                        3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_c_delayed; // ADDC
+                        3'b101: add_res = {1'b0, a} - {1'b0, b} + flag_c_delayed - 1; // SUBC (A - B + C - 1)
+                        3'b110: add_res = {1'b0, a} - {1'b0, b}; // SUB
+                        3'b111: add_res = {1'b0, a} - {1'b0, b}; // SUB
+                        default: add_res = 0; 
+                    endcase
+                end else begin
+                    case(cmd[2:0])
+                        3'b000: add_res = {1'b0, a} + {1'b0, b}; // ADD
+                        3'b001: add_res = {1'b0, a} - {1'b0, b}; // SUB
+                        3'b010: add_res = {1'b0, a} - {1'b0, b}; // GT
+                        3'b011: add_res = {1'b0, a} - {1'b0, b}; // LT
+                        3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_reg[2]; // ADDC
+                        3'b101: add_res = {1'b0, a} - {1'b0, b} + flag_reg[2] - 1; // SUBC (A - B + C - 1)
+                        3'b110: add_res = {1'b0, a} - {1'b0, b}; // SUB
+                        3'b111: add_res = {1'b0, a} - {1'b0, b}; // SUB
+                        default: add_res = 0; 
+                    endcase
+                end 
                 res = {31'b0, add_res[31:0]};
             end
             2'b01: res = 64'(a) * 64'(b); // Mult
@@ -128,14 +143,14 @@ module ALU_TOP_CT;
             end
             2'b11: begin // Logic
                  case(cmd[2:0])
-                    3'b000: res = {32'b0, ~a}; // NOT A
+                    3'b000: res = {32'b0, ~b}; // NOT B
                     3'b001: res = {32'b0, a ^ b};
                     3'b010: res = {32'b0, a | b};
                     3'b011: res = {32'b0, a & b};
                     3'b100: res = {32'b0, ~(a ^ b)}; // XNOR
                     3'b101: res = {32'b0, ~(a | b)}; // NOR
                     3'b110: res = {32'b0, ~(a & b)}; // NAND
-                    3'b111: res = {32'b0, (a == b) ? 32'd1 : 32'd0}; // EQ
+                    3'b111: res = {32'b0, a ^ b}; // EQ
                     default: res = 0;
                  endcase
             end
@@ -180,6 +195,7 @@ module ALU_TOP_CT;
     // -------------------------------------------------------------------------
     int error_count = 0;
     int test_cycles = 5000;
+    int lp_counter = 0;
     
     // Reference Pipeline state
     // We need to match the DUT's exact pipeline behavior
@@ -197,9 +213,11 @@ module ALU_TOP_CT;
          if (!reset_n) begin
             pipe_add <= '{32'b0, 1'b0};
             for(int k=0; k<=7; k++) pipe_mul[k] <= '{32'b0, 1'b0};
+            flag_c_delayed <= 1'b0;
          end else begin
-            // --- Update Pipeline Stage 0 (Inputs) ---
             logic input_is_valid_op;
+            flag_c_delayed <= flag_reg[2];
+            // --- Update Pipeline Stage 0 (Inputs) ---
             input_is_valid_op = tb_input_valid && !tb_idle && !tb_low_power;
 
             // Adder Feed (1 cycle)
@@ -272,6 +290,10 @@ module ALU_TOP_CT;
              end
         end
     end
+            
+    logic prev_idle;
+    logic prev_lp; 
+    logic transitioning;
 
     initial begin
         $display("Starting ALU_TOP Coverage Test...");
@@ -282,6 +304,8 @@ module ALU_TOP_CT;
         // Initialize behavioral signals
         tb_A=0; tb_B=0; tb_CMD=0; tb_input_valid=0; tb_idle=0; tb_low_power=0;
         
+
+
         repeat(5) @(posedge clk);
         reset_n = 1;
         repeat(5) @(posedge clk);
@@ -296,16 +320,33 @@ module ALU_TOP_CT;
             // We'll update them with the randomization below.
             
             // 2. Randomize Next Inputs
-            void'(std::randomize(A, B, CMD, input_valid, idle, low_power) with {
+            // 2. Randomize Next Inputs
+
+            prev_idle = idle;
+            prev_lp = low_power;
+
+            if (lp_counter <= 0) begin
+                lp_counter = $urandom_range(20, 100); // Hold state for 20-100 cycles
+                void'(std::randomize(idle, low_power) with {
+                    idle        dist { 0 := 90, 1 := 10 };
+                    low_power   dist { 0 := 70, 1 := 30 };
+                });
+            end else begin
+                lp_counter--;
+            end
+            
+            transitioning = (idle != prev_idle) || (low_power != prev_lp);
+
+            void'(std::randomize(A, B, CMD, input_valid) with {
                 // Constraints
                 CMD inside {[0:7], [16:31]}; // Disable CMD[4:3] == 2'b01 (Mult 8-15)
                 
                 // Weighting
-                input_valid dist { 1 := 80, 0 := 20 }; // Mostly valid
-                idle        dist { 0 := 95, 1 := 5 };  // Mostly active
-                
-                // Low power toggle frequency
-                low_power   dist { 0 := 50, 1 := 50 };
+                if (transitioning) {
+                    input_valid == 0;
+                } else {
+                    input_valid dist { 1 := 80, 0 := 20 }; // Mostly valid
+                }
                 
                 A dist { 0:=1, 32'hFFFFFFFF:=1, [1:255]:/5, [256:32'hFFFF_FEFF]:/50 };
                 B dist { 0:=1, 32'hFFFFFFFF:=1, [1:255]:/5, [256:32'hFFFF_FEFF]:/50 };

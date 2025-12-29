@@ -52,7 +52,7 @@ module ALU_TOP(
 // 10110    A  B	        BYT         Byte swap
 //
 //logic unit (11xxx)
-// 11000	~A	            NOT         Bitwise NOT
+// 11000	~B	            NOT         Bitwise NOT
 // 11001	A ^ B	        XOR         Bitwise XOR
 // 11010	A | B	        OR          Bitwise OR
 // 11011	A & B	        AND         Bitwise AND
