@@ -1,370 +1,46 @@
 Time resolution is 1 ps
 Starting ALU_TOP Coverage Test...
-Error: Output Valid Mismatch at 126000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 126 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 136000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0b Valid=1)
-Time: 136 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 196000! Exp=0 Got=1 (LP=0 Idle=0 CMD=0f Valid=0)
-Time: 196 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 316000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 316 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 336000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 336 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 366000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 366 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 516000! Exp=4cfc3708 Got=f3fbf71d
-Time: 516 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 526000! Exp=00000000 Got=80814881
-Time: 526 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 686000! Exp=00000000 Got=8554d320
-Time: 686 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 726000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 726 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 736000! Exp=955535e1 Got=3b3aa8dc
-Time: 736 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 876000! Exp=1 Got=0 (LP=0 Idle=0 CMD=08 Valid=1)
-Time: 876 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 916000! Exp=00000000 Got=947c79f9
-Time: 916 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 1046000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 1046 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 1156000! Exp=00000000 Got=dafcdd70
-Time: 1156 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 1376000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0a Valid=1)
-Time: 1376 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 1386000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 1386 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 1396000! Exp=1 Got=0 (LP=0 Idle=0 CMD=08 Valid=0)
-Time: 1396 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 1476000! Exp=1 Got=0 (LP=0 Idle=0 CMD=1c Valid=0)
-Time: 1476 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 1606000! Exp=00000000 Got=ffffffdf
-Time: 1606 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 1636000! Exp=1 Got=0 (LP=0 Idle=0 CMD=1b Valid=0)
-Time: 1636 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 1746000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 1746 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 1766000! Exp=00000000 Got=6c212d9a
-Time: 1766 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 1796000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 1796 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 1946000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 1946 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 2156000! Exp=00000000 Got=ebaff9af
-Time: 2156 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 2196000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 2196 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 2236000! Exp=00000000 Got=def7ab9b
-Time: 2236 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 2256000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 2256 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 2416000! Exp=00000000 Got=56b2da6b
-Time: 2416 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 2436000! Exp=1 Got=0 (LP=0 Idle=0 CMD=11 Valid=0)
-Time: 2436 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2526000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 2526 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 2556000! Exp=ee26257b Got=00000000
-Time: 2556 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 2606000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 2606 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2616000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0f Valid=1)
-Time: 2616 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 2676000! Exp=00000000 Got=876265ec
-Time: 2676 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 2716000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 2716 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2726000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0c Valid=1)
-Time: 2726 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2776000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 2776 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2836000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 2836 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2856000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 2856 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2916000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 2916 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2936000! Exp=1 Got=0 (LP=0 Idle=0 CMD=16 Valid=0)
-Time: 2936 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 2956000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=0)
-Time: 2956 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3006000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 3006 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 3016000! Exp=38ba8f26 Got=6d229707
-Time: 3016 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 3046000! Exp=1ce0cee4 Got=284ba2b7
-Time: 3046 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 3066000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 3066 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3096000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 3096 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3116000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 3116 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3236000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 3236 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3296000! Exp=1 Got=0 (LP=0 Idle=0 CMD=18 Valid=0)
-Time: 3296 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 3326000! Exp=00000000 Got=81c08011
-Time: 3326 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 3346000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 3346 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3366000! Exp=0 Got=1 (LP=0 Idle=0 CMD=0f Valid=1)
-Time: 3366 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3426000! Exp=0 Got=1 (LP=0 Idle=0 CMD=0f Valid=0)
-Time: 3426 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 3436000! Exp=fddcfb9d Got=6ddffbf7
-Time: 3436 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 3576000! Exp=eef4c2f6 Got=307eacc3
-Time: 3576 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 3616000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0d Valid=1)
-Time: 3616 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3676000! Exp=0 Got=1 (LP=0 Idle=0 CMD=09 Valid=0)
-Time: 3676 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3686000! Exp=1 Got=0 (LP=0 Idle=0 CMD=1b Valid=0)
-Time: 3686 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3736000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0c Valid=1)
-Time: 3736 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3776000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 3776 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 3956000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 3956 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 4046000! Exp=00000000 Got=f1d85285
-Time: 4046 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 4106000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 4106 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 4166000! Exp=00000000 Got=81040300
-Time: 4166 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 4196000! Exp=00000000 Got=176ff8a1
-Time: 4196 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 4206000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 4206 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 4286000! Exp=00000000 Got=94c0a398
-Time: 4286 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 4386000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 4386 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 4406000! Exp=00000000 Got=a6dd0d48
-Time: 4406 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 4626000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 4626 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 4756000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0f Valid=1)
-Time: 4756 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 4766000! Exp=0 Got=1 (LP=0 Idle=0 CMD=0d Valid=1)
-Time: 4766 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 4776000! Exp=1 Got=0 (LP=0 Idle=0 CMD=08 Valid=1)
-Time: 4776 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 4856000! Exp=00000000 Got=a8150424
-Time: 4856 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 4886000! Exp=00000000 Got=dae5b9e9
-Time: 4886 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 4946000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 4946 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 5026000! Exp=00000000 Got=e13d3619
-Time: 5026 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 5146000! Exp=00000000 Got=b6e04780
-Time: 5146 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 5176000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 5176 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 5246000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 5246 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 5286000! Exp=00000000 Got=369e961b
-Time: 5286 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 5316000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 5316 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 5566000! Exp=1 Got=0 (LP=0 Idle=0 CMD=08 Valid=1)
-Time: 5566 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 5586000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 5586 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 5596000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0d Valid=1)
-Time: 5596 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 5676000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 5676 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 5706000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 5706 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 5876000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 5876 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 5926000! Exp=00000000 Got=dfdeeb7d
-Time: 5926 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 6046000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 6046 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 6086000! Exp=0 Got=1 (LP=0 Idle=0 CMD=0d Valid=1)
-Time: 6086 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 6166000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 6166 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 6206000! Exp=00000000 Got=7cbdc2b8
-Time: 6206 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 6256000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 6256 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 6356000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 6356 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 6406000! Exp=00000000 Got=e5b655fd
-Time: 6406 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 6496000! Exp=00000000 Got=87d178b0
-Time: 6496 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 6666000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 6666 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 6746000! Exp=2ec4a8d1 Got=6e69c260
-Time: 6746 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 6806000! Exp=00000000 Got=992d2872
-Time: 6806 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 6856000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 6856 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 6876000! Exp=00000000 Got=74a73ccd
-Time: 6876 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 6926000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 6926 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 6946000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 6946 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 7066000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 7066 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 7106000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 7106 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 7226000! Exp=00000000 Got=a5f1751d
-Time: 7226 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 7256000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=0)
-Time: 7256 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 7266000! Exp=1 Got=0 (LP=0 Idle=0 CMD=08 Valid=0)
-Time: 7266 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 7306000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 7306 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 7376000! Exp=00000000 Got=e05d4695
-Time: 7376 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 7406000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 7406 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 7436000! Exp=00000000 Got=ff5fafce
-Time: 7436 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 7476000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 7476 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 7646000! Exp=7afed11e Got=e2874314
-Time: 7646 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 7656000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 7656 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 7686000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 7686 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 7806000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 7806 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 7816000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0c Valid=1)
-Time: 7816 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 7876000! Exp=4cc28140 Got=dae1b53d
-Time: 7876 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 7906000! Exp=1 Got=0 (LP=0 Idle=0 CMD=16 Valid=0)
-Time: 7906 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 7966000! Exp=00000000 Got=ecf7fb7b
-Time: 7966 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 8096000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 8096 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 8126000! Exp=00000000 Got=9c010103
-Time: 8126 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 8176000! Exp=00000000 Got=84922242
-Time: 8176 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 8206000! Exp=00000000 Got=83400200
-Time: 8206 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 8266000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 8266 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 8296000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 8296 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 8456000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 8456 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 8476000! Exp=00000000 Got=b2eac772
-Time: 8476 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 8536000! Exp=00000000 Got=8b027c00
-Time: 8536 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 8546000! Exp=00000000 Got=fe7edcad
-Time: 8546 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 8646000! Exp=3896eeda Got=c61b4618
-Time: 8646 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 8706000! Exp=00000000 Got=893f9435
-Time: 8706 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 8736000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 8736 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 8836000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 8836 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 8896000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 8896 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 8906000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0f Valid=0)
-Time: 8906 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 8966000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 8966 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 9046000! Exp=00000000 Got=ffffff12
-Time: 9046 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 9056000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 9056 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 9076000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 9076 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 9086000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0f Valid=1)
-Time: 9086 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 9106000! Exp=00000000 Got=ffffff08
-Time: 9106 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 9126000! Exp=00000000 Got=bd426c81
-Time: 9126 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 9136000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 9136 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 9156000! Exp=a6efbc58 Got=2cff9fe4
-Time: 9156 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 9176000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 9176 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 9216000! Exp=00000000 Got=b1d66349
-Time: 9216 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 9286000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 9286 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 9336000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 9336 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 9386000! Exp=0 Got=1 (LP=0 Idle=0 CMD=01 Valid=1)
-Time: 9386 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 9396000! Exp=1d257eab Got=27230102
-Time: 9396 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 9476000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 9476 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 9536000! Exp=00000000 Got=9d66c4a2
-Time: 9536 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Logic Mismatch at 9646000! Exp=00000000 Got=379c5644
-Time: 9646 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 9656000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 9656 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 9716000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 9716 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 9806000! Exp=0 Got=1 (LP=0 Idle=0 CMD=07 Valid=1)
-Time: 9806 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 10006000! Exp=54d0ecfc Got=84c91b74
-Time: 10006 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 10076000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 10076 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10186000! Exp=0 Got=1 (LP=0 Idle=0 CMD=0c Valid=0)
-Time: 10186 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10196000! Exp=1 Got=0 (LP=0 Idle=0 CMD=1b Valid=0)
-Time: 10196 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10276000! Exp=0 Got=1 (LP=0 Idle=0 CMD=02 Valid=1)
-Time: 10276 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10286000! Exp=1 Got=0 (LP=0 Idle=0 CMD=1b Valid=0)
-Time: 10286 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 10306000! Exp=00000000 Got=00aec35b
-Time: 10306 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 10316000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 10316 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 10386000! Exp=00000000 Got=3b644d60
-Time: 10386 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 10406000! Exp=1 Got=0 (LP=0 Idle=0 CMD=07 Valid=0)
-Time: 10406 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10466000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 10466 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10476000! Exp=1 Got=0 (LP=0 Idle=0 CMD=0d Valid=1)
-Time: 10476 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 10486000! Exp=00000000 Got=811b0600
-Time: 10486 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 10536000! Exp=0 Got=1 (LP=0 Idle=0 CMD=04 Valid=1)
-Time: 10536 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 10566000! Exp=00000000 Got=b782ed1b
-Time: 10566 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 10606000! Exp=0 Got=1 (LP=0 Idle=0 CMD=03 Valid=1)
-Time: 10606 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10646000! Exp=0 Got=1 (LP=0 Idle=0 CMD=00 Valid=1)
-Time: 10646 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 10676000! Exp=00000000 Got=2be48f72
-Time: 10676 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 10686000! Exp=0 Got=1 (LP=0 Idle=0 CMD=06 Valid=1)
-Time: 10686 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Logic Mismatch at 10756000! Exp=00000000 Got=47002449
-Time: 10756 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 317
-Error: Output Valid Mismatch at 10906000! Exp=0 Got=1 (LP=0 Idle=0 CMD=05 Valid=1)
-Time: 10906 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
-Error: Output Valid Mismatch at 10946000! Exp=1 Got=0 (LP=0 Idle=0 CMD=06 Valid=0)
-Time: 10946 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial252_52  Scope: ALU_TOP_CT.Block265_53.Block265_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 304
+Error: Data Mismatch at 117000! Exp=00000000 Got=83ed02df (CMD=03)
+Time: 117 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 177000! Exp=935a1e85 Got=1e85935a (CMD=14)
+Time: 177 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 207000! Exp=ffffff5b Got=ffffff5a (CMD=07)
+Time: 207 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 267000! Exp=00000001 Got=dcda0fc5 (CMD=03)
+Time: 267 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 277000! Exp=00000000 Got=1dfcb66b (CMD=03)
+Time: 277 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 297000! Exp=036b34a8 Got=036b34a9 (CMD=04)
+Time: 297 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 327000! Exp=000001bc Got=10afa5cf (CMD=13)
+Time: 327 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 337000! Exp=ebf44d9d Got=d350b09e (CMD=18)
+Time: 337 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 347000! Exp=09134c7f Got=4d31fc24 (CMD=14)
+Time: 347 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 407000! Exp=89675614 Got=9d585225 (CMD=14)
+Time: 407 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 427000! Exp=70335d58 Got=70335d57 (CMD=13)
+Time: 427 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 447000! Exp=0684e520 Got=200684e5 (CMD=15)
+Time: 447 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 527000! Exp=0c0408e3 Got=0c0408e2 (CMD=05)
+Time: 527 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 547000! Exp=fff0ab40 Got=1ed1fe87 (CMD=11)
+Time: 547 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 567000! Exp=519cf5f4 Got=519cf5f3 (CMD=07)
+Time: 567 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 617000! Exp=00000000 Got=fcaab2a1 (CMD=02)
+Time: 617 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 657000! Exp=28000000 Got=00000280 (CMD=15)
+Time: 657 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 817000! Exp=00000000 Got=5e58fb2e (CMD=1f)
+Time: 817 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 837000! Exp=fd96d9b1 Got=fd96d9b0 (CMD=07)
+Time: 837 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 847000! Exp=a66e1c7d Got=1c7da66e (CMD=15)
+Time: 847 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 897000! Exp=bc9957df Got=bc9957de (CMD=05)
+Time: 897 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314
+Error: Data Mismatch at 917000! Exp=947c79f9 Got=d38c2240 (CMD=1c)
+Time: 917 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial250_52  Scope: ALU_TOP_CT.Block263_53.Block263_54  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 314

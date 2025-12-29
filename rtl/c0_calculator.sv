@@ -15,6 +15,8 @@ module c0_calculator (
             3'b011:  C0 = 1'b1;      // LT
             3'b100:  C0 = CF_reg;    // ADDC
             3'b101:  C0 = CF_reg;    // SUBC
+            3'b110:  C0 = 1'b1;    // SUB
+            3'b111:  C0 = 1'b1;    // SUB
             default: C0 = 1'b0;
         endcase
     end
