@@ -67,3 +67,53 @@ WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-D
 WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 144. Module MULT16 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 144. Module MULT16 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 288. Module MULT4 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv" Line 227. Module MULT8 doesn't have a timescale but at least one module in design has a timescale.
+INFO: [Common 17-14] Message 'XSIM 43-4099' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.std
+Compiling module xil_defaultlib.c0_calculator
+Compiling module xil_defaultlib.flag_controller
+Compiling module xil_defaultlib.pipe_counter
+Compiling module xil_defaultlib.PG16
+Compiling module xil_defaultlib.carry_calculator
+Compiling module xil_defaultlib.CLA4
