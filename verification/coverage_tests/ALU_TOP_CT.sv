@@ -59,7 +59,7 @@ module ALU_TOP_CT;
     logic [4:0]  tb_CMD;
     logic        tb_input_valid;
     logic        tb_idle, tb_low_power;
-    logic        flag_c_delayed;
+    // flag_c_delayed removed
 
     // Pipeline Registers (Duplicate of DUT pipe_counter)
     // model_* signals removed as they were unused and causing confusion.
@@ -86,8 +86,8 @@ module ALU_TOP_CT;
                         3'b001: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         3'b010: add_res = {1'b0, a} - {1'b0, b}; // GT
                         3'b011: add_res = {1'b0, a} - {1'b0, b}; // LT
-                        3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_c_delayed; // ADDC
-                        3'b101: add_res = {1'b0, a} - {1'b0, b} - flag_c_delayed; // SUBC (A - B + C - 1)
+                        3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_reg[2]; // ADDC
+                        3'b101: add_res = {1'b0, a} - {1'b0, b} + flag_reg[2] - 33'd1; // SUBC (A - B + C - 1)
                         3'b110: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         3'b111: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         default: add_res = 0; 
@@ -99,7 +99,7 @@ module ALU_TOP_CT;
                         3'b010: add_res = {1'b0, a} - {1'b0, b}; // GT
                         3'b011: add_res = {1'b0, a} - {1'b0, b}; // LT
                         3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_reg[2]; // ADDC
-                        3'b101: add_res = {1'b0, a} - {1'b0, b} - flag_reg[2]; // SUBC (A - B + C - 1)
+                        3'b101: add_res = {1'b0, a} - {1'b0, b} + flag_reg[2] - 33'd1; // SUBC (A - B + C - 1)
                         3'b110: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         3'b111: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         default: add_res = 0; 
@@ -213,10 +213,10 @@ module ALU_TOP_CT;
          if (!reset_n) begin
             pipe_add <= '{64'b0, 1'b0};
             for(int k=0; k<=6; k++) pipe_mul[k] <= '{64'b0, 1'b0};
-            flag_c_delayed <= 1'b0;
+            // flag_c_delayed removed
          end else begin
             logic input_is_valid_op;
-            flag_c_delayed <= flag_reg[2];
+            // flag_c_delayed removed
             // --- Update Pipeline Stage 0 (Inputs) ---
             input_is_valid_op = tb_input_valid && !tb_idle && !tb_low_power;
 
@@ -359,9 +359,9 @@ module ALU_TOP_CT;
             prev_lp = low_power;
 
             if (lp_counter <= 0) begin
-                lp_counter = $urandom_range(20, 100); // Hold state for 20-100 cycles
+                lp_counter = $urandom_range(10, 100); // Hold state for 10-100 cycles
                 void'(std::randomize(idle, low_power) with {
-                    idle        dist { 0 := 90, 1 := 10 };
+                    idle        dist { 0 := 70, 1 := 30 };
                     low_power   dist { 0 := 70, 1 := 30 };
                 });
             end else begin
@@ -408,7 +408,16 @@ module ALU_TOP_CT;
             // Check Data if output_valid is asserted
             // Only check if we have a robust expectation.
             if (exp_output_valid && output_valid) begin
-                if (exp_Y !== Y) begin 
+                logic data_match;
+                data_match = (exp_Y === Y);
+                
+                // Allow finding expected result on conflict channel if main channel is taken by higher priority op
+                // (User requested relaxation: if(conflict_valid) exp_y = y or y_conflict)
+                if (!data_match && conflict_valid && (exp_Y === Y_conflict)) begin
+                    data_match = 1;
+                end
+                
+                if (!data_match) begin 
                    $error("Data Mismatch at %0t! Exp=%h Got=%h (CMD=%h)", $time, exp_Y, Y, CMD);
                    error_count++;
                 end

@@ -12,15 +12,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="718.800 ns"></ZoomStartTime>
-      <ZoomEndTime time="798.001 ns"></ZoomEndTime>
-      <Cursor1Time time="688.900 ns"></Cursor1Time>
+      <ZoomStartTime time="4,851.875 ns"></ZoomStartTime>
+      <ZoomEndTime time="4,931.826 ns"></ZoomEndTime>
+      <Cursor1Time time="4,876.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="190"></NameColumnWidth>
-      <ValueColumnWidth column_width="102"></ValueColumnWidth>
+      <ValueColumnWidth column_width="87"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="24" />
    <wvobject fp_name="/ALU_TOP_CT/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -53,10 +53,14 @@
    <wvobject fp_name="/ALU_TOP_CT/idle" type="logic">
       <obj_property name="ElementShortName">idle</obj_property>
       <obj_property name="ObjectShortName">idle</obj_property>
+      <obj_property name="CustomSignalColor">#DCDCDC</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/low_power" type="logic">
       <obj_property name="ElementShortName">low_power</obj_property>
       <obj_property name="ObjectShortName">low_power</obj_property>
+      <obj_property name="CustomSignalColor">#A0A0A4</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/Y" type="array">
       <obj_property name="ElementShortName">Y[31:0]</obj_property>
@@ -104,6 +108,8 @@
       <obj_property name="ElementShortName">error_count[31:0]</obj_property>
       <obj_property name="ObjectShortName">error_count[31:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/prev_idle" type="logic">
       <obj_property name="ElementShortName">prev_idle</obj_property>
@@ -112,5 +118,22 @@
    <wvobject fp_name="/ALU_TOP_CT/prev_lp" type="logic">
       <obj_property name="ElementShortName">prev_lp</obj_property>
       <obj_property name="ObjectShortName">prev_lp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/uut/final_adder_out" type="array">
+      <obj_property name="ElementShortName">final_adder_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">final_adder_out[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/uut/valid_mult" type="logic">
+      <obj_property name="ElementShortName">valid_mult</obj_property>
+      <obj_property name="ObjectShortName">valid_mult</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/uut/valid_adder" type="logic">
+      <obj_property name="ElementShortName">valid_adder</obj_property>
+      <obj_property name="ObjectShortName">valid_adder</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/uut/valid_comb" type="logic">
+      <obj_property name="ElementShortName">valid_comb</obj_property>
+      <obj_property name="ObjectShortName">valid_comb</obj_property>
    </wvobject>
 </wave_config>

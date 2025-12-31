@@ -106,7 +106,7 @@ logic [31:0] comb_out;
 
 assign valid_mult = v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid);
 assign valid_adder = v_add_r || (low_power && CMD[4:3] == 2'b00 && output_valid);
-assign valid_comb = ((CMD[4:3] == 2'b10) || (CMD[4:3] == 2'b11)) && output_valid;
+assign valid_comb = input_valid && ((CMD[4:3] == 2'b10) || (CMD[4:3] == 2'b11)) && output_valid;
 
 assign comb_out = (CMD[4:3] == 2'b10) ? shifter_out : logic_out;
 
