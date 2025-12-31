@@ -1,23 +1,33 @@
 module ADDER32 (
     input  logic        clk,
     input  logic        reset_n,
+
+    //inputs
     input  logic        MODE_SEL,
     input  logic        C0,
     input  logic [31:0] A,
     input  logic [31:0] B,
+
+    //output
     output logic [32:0] Y
 );
 
     // =========================================================================
     // Internal Signals
     // =========================================================================
+    // Internal Signals
     logic [31:0] B_XORED;
     logic [31:0] C;
     logic [31:0] P;
     logic [31:0] G;
 
+    // Stage 1 Registers (Input)
+    logic [31:0] A_reg;
+    logic [31:0] B_reg;
+    logic        C0_reg;
+    logic        MODE_SEL_reg;
 
-    // Pipeline Registers
+    // Stage 2 Registers (Pipeline)
     logic [15:0] P_REG;
     logic [15:0] G_REG;
     logic [15:0] P_lower_REG;    // Register for lower P bits to align with C_REG
@@ -25,35 +35,53 @@ module ADDER32 (
     logic [14:0] C_REG;          // C[14:0] register
     logic        C15_REG;        // C[15] register explicitly defined
 
+    // Output Registers
+    logic [32:0] Y_internal;
+    logic [32:0] Y_reg;
+
     // =========================================================================
     // Logic Implementation
     // =========================================================================
 
-    // MODE_SEL = 0 for addition
-    // MODE_SEL = 1 for subtraction
-    assign B_XORED = B ^ {32{MODE_SEL}};
+    // -------------------------------------------------------------------------
+    // Stage 1: Input Registration
+    // -------------------------------------------------------------------------
+    always_ff @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            A_reg        <= '0;
+            B_reg        <= '0;
+            C0_reg       <= '0;
+            MODE_SEL_reg <= '0;
+        end else begin
+            A_reg        <= A;
+            B_reg        <= B;
+            C0_reg       <= C0;
+            MODE_SEL_reg <= MODE_SEL;
+        end
+    end
+
+    // MODE_SEL = 0 for addition, 1 for subtraction
+    assign B_XORED = B_reg ^ {32{MODE_SEL_reg}};
 
     // -------------------------------------------------------------------------
     // Propagate/Generate Logic
     // -------------------------------------------------------------------------
     PG16 PG16_0 (
-        //.power_en (power_en), // Unused in original
-        .A        (A[15:0]),
+        .A        (A_reg[15:0]),
         .B        (B_XORED[15:0]),
         .P        (P[15:0]),
         .G        (G[15:0])
     );
 
     PG16 PG16_1 (
-        //.power_en (power_en), // Unused in original
-        .A        (A[31:16]),
+        .A        (A_reg[31:16]),
         .B        (B_XORED[31:16]),
         .P        (P[31:16]),
         .G        (G[31:16])
     );
 
     // -------------------------------------------------------------------------
-    // Pipeline Registers
+    // Stage 2: Pipeline Registers
     // -------------------------------------------------------------------------
     always_ff @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
@@ -67,7 +95,7 @@ module ADDER32 (
             P_REG       <= P[31:16];
             G_REG       <= G[31:16];
             P_lower_REG <= P[15:0]; // Capture P[15:0] for next stage
-            C0_REG      <= C0;
+            C0_REG      <= C0_reg;  // Capture from Input Reg
             C_REG       <= C[14:0];
             C15_REG     <= C[15];
         end
@@ -82,7 +110,7 @@ module ADDER32 (
 
         .P        (P[15:0]),
         .G        (G[15:0]),
-        .C0       (C0),
+        .C0       (C0_reg), // Use Stage 1 C0
         .C        (C[15:0]),
         .Pg       (), // Open
         .Gg       ()  // Open
@@ -106,19 +134,32 @@ module ADDER32 (
     SUM16 SUM16_0 (
         .P        (P_lower_REG),            // Use registered P to match C_REG timing
         .C        ({C_REG[14:0], C0_REG}),
-        .S        (Y[15:0])
+        .S        (Y_internal[15:0])
     );
 
     SUM16 SUM16_1 (
         .P        (P_REG[15:0]),
         .C        ({C[30:16], C15_REG}),
-        .S        (Y[31:16])
+        .S        (Y_internal[31:16])
     );
 
     // -------------------------------------------------------------------------
     // Output Logic
     // -------------------------------------------------------------------------
-    assign Y[32] = C[31]; // Carry out of the ADDER
+    assign Y_internal[32] = C[31]; // Carry out of the ADDER
+
+    // -------------------------------------------------------------------------
+    // Stage 3: Output Registration
+    // -------------------------------------------------------------------------
+    always_ff @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            Y_reg <= '0;
+        end else begin
+            Y_reg <= Y_internal;
+        end
+    end
+
+    assign Y = Y_reg;
 
 endmodule
 
