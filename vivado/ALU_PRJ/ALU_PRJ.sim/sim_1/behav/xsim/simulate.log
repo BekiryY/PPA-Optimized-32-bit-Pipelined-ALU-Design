@@ -1,0 +1,6 @@
+Time resolution is 1 ps
+Starting ALU_TOP Coverage Test...
+Error: Result Aux Mismatch at 987000! Exp=zzzzzzzz Got=15474fd5
+Time: 987 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial331_54  Scope: ALU_TOP_CT.Block346_55.Block346_56.Block410_58  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 429
+Error: Conflict Valid Mismatch at 987000! Exp=0 Got=1
+Time: 987 ns  Iteration: 0  Process: /ALU_TOP_CT/Initial331_54  Scope: ALU_TOP_CT.Block346_55.Block346_56  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/coverage_tests/ALU_TOP_CT.sv Line: 436

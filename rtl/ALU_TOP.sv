@@ -118,33 +118,17 @@ assign Y = (valid_mult)  ? final_mult_out[31:0] :
 
 assign result_aux = (valid_mult) ? final_mult_out[63:32] : 32'dz;
 
-// Conflict Logic
-always_comb begin
-    Y_conflict = 32'd0;
-    conflict_valid = 1'b0;
-    if(!idle) begin
-        if (valid_mult) begin
-            if (valid_comb) begin
-                // Conflict Mult vs Comb. Comb is least important.
-                Y_conflict = comb_out;
-                conflict_valid = 1'b1;
-            end else if (valid_adder) begin
-                // Conflict Mult vs Adder. Adder is least important.
-                Y_conflict = final_adder_out;
-                conflict_valid = 1'b1;
-            end
-        end else if (valid_adder) begin
-            if (valid_comb) begin
-                // Conflict Adder vs Comb. Comb is least important.
-                Y_conflict = comb_out;
-                conflict_valid = 1'b1;
-            end
-        end
-    end else begin
-        Y_conflict = 32'd0;
-        conflict_valid = 1'b0;
-    end
-end
+    // Conflict Logic Module
+    conflict_handler conflict_h (
+        .idle(idle),
+        .valid_mult(valid_mult),
+        .valid_adder(valid_adder),
+        .valid_comb(valid_comb),
+        .adder_out(final_adder_out),
+        .comb_out(comb_out),
+        .Y_conflict(Y_conflict),
+        .conflict_valid(conflict_valid)
+    );
 
 // Even tough these look like spagetthi, tristates are faster than muxes in order of 1-2 logic levels
 
