@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="SHIFTER_TB_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="SHIFTER_TB" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="2,536.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,687.201 ns"></ZoomEndTime>
+      <Cursor1Time time="2,521.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="203"></NameColumnWidth>
+      <ValueColumnWidth column_width="161"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/SHIFTER_TB/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/reset_n" type="logic">
+      <obj_property name="ElementShortName">reset_n</obj_property>
+      <obj_property name="ObjectShortName">reset_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/A" type="array">
+      <obj_property name="ElementShortName">A[31:0]</obj_property>
+      <obj_property name="ObjectShortName">A[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/B" type="array">
+      <obj_property name="ElementShortName">B[4:0]</obj_property>
+      <obj_property name="ObjectShortName">B[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/CMD" type="array">
+      <obj_property name="ElementShortName">CMD[2:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD[2:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/Y" type="array">
+      <obj_property name="ElementShortName">Y[31:0]</obj_property>
+      <obj_property name="ObjectShortName">Y[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/CF_flag" type="logic">
+      <obj_property name="ElementShortName">CF_flag</obj_property>
+      <obj_property name="ObjectShortName">CF_flag</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/expected_temp" type="array">
+      <obj_property name="ElementShortName">expected_temp[32:0]</obj_property>
+      <obj_property name="ObjectShortName">expected_temp[32:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/expected_Y" type="array">
+      <obj_property name="ElementShortName">expected_Y[31:0]</obj_property>
+      <obj_property name="ObjectShortName">expected_Y[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/expected_CF" type="logic">
+      <obj_property name="ElementShortName">expected_CF</obj_property>
+      <obj_property name="ObjectShortName">expected_CF</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SHIFTER_TB/i" type="array">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
+   </wvobject>
+</wave_config>

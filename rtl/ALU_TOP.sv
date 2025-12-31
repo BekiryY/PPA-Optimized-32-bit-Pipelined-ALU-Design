@@ -20,6 +20,9 @@ module ALU_TOP(
     output logic [31:0] result_aux,
     output logic output_valid,
     output logic [7:0] flag_reg
+
+    output logic [31:0] Y_conflict,
+    output logic Y_conflict_valid,
 );
 //SHIFTER + LOGIC BLOCK + MULT32 + ADDER32
 //   7    +      8      +   1    +   6    TOTAL OF 22FUNCS
