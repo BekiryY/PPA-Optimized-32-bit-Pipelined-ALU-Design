@@ -103,39 +103,39 @@ module ADDER32_FAST_TB;
         
         // Test Case 1: Simple Addition
         drive_inputs(32'h0000_0001, 32'h0000_0001, 0, 0);
-        @(posedge clk); #5; // Wait one pipe stage
+        repeat(3) @(posedge clk); #5; // Wait pipeline latency (3 stages)
         check_outputs();
 
         // Test Case 2: Carry propagation across 16-bit boundary
         drive_inputs(32'h0000_FFFF, 32'h0000_0001, 0, 0);
-        @(posedge clk); #5;
+        repeat(3) @(posedge clk); #5;
         check_outputs();
         
         // Test Case 3: Max Value
         drive_inputs(32'hFFFF_FFFF, 32'h0000_0001, 0, 0);
-        @(posedge clk); #5;
+        repeat(3) @(posedge clk); #5;
         check_outputs();
 
         // Test Case 4: Simple Subtraction (A - B) -> C0=1
         drive_inputs(32'h0000_0005, 32'h0000_0002, 1, 1);
-        @(posedge clk); #5;
+        repeat(3) @(posedge clk); #5;
         check_outputs();
 
         // Test Case 5: Subtraction with borrow (A - B) -> C0=1
         drive_inputs(32'h0000_0001, 32'h0000_0002, 1, 1);
-        @(posedge clk); #5;
+        repeat(3) @(posedge clk); #5;
         check_outputs();
 
         drive_inputs($urandom, $urandom, 0, 0); // Random addition
-        @(posedge clk); #5;
+        repeat(3) @(posedge clk); #5;
         check_outputs();
 
-        $display("Starting Streaming Random Test...");
+        $display("Starting Streaming Random Test... (Checking latency only)");
         
         repeat(100) begin
             logic rand_mode_sel = $urandom % 2;
             drive_inputs($urandom, $urandom, $urandom % 2, rand_mode_sel);
-            #5;
+            repeat(3) @(posedge clk); #5;
             check_outputs();
         end
 

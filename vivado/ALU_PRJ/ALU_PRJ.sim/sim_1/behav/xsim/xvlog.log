@@ -1,10 +1,3 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ADDER32_FAST.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module ADDER32
-INFO: [VRFC 10-311] analyzing module PG16
-INFO: [VRFC 10-311] analyzing module carry_calculator
-INFO: [VRFC 10-311] analyzing module CLA16
-INFO: [VRFC 10-311] analyzing module CLA4
-INFO: [VRFC 10-311] analyzing module SUM16
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ADDER32_FAST_TB
 WARNING: [VRFC 10-3824] variable 'rand_mode_sel' must explicitly be declared as automatic or static [C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv:136]

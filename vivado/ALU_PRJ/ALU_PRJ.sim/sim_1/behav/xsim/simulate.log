@@ -1,169 +1,21 @@
 Time resolution is 1 ps
 Starting Sanity Check (Stable Inputs)...
-Error: Mismatch at time               121000: A_q=00000001, B_q=00000001, C0_q=0, MODE_SEL_q=0 -> Expected 000000002, Got 000000000
-Time: 121 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               141000: A_q=0000ffff, B_q=00000001, C0_q=0, MODE_SEL_q=0 -> Expected 000010000, Got 000000002
-Time: 141 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               161000: A_q=ffffffff, B_q=00000001, C0_q=0, MODE_SEL_q=0 -> Expected 100000000, Got 000010000
-Time: 161 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               181000: A_q=00000005, B_q=00000002, C0_q=1, MODE_SEL_q=1 -> Expected 000000003, Got 100000000
-Time: 181 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               201000: A_q=00000001, B_q=00000002, C0_q=1, MODE_SEL_q=1 -> Expected 1ffffffff, Got 100000003
-Time: 201 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               221000: A_q=63a1f9e3, B_q=58b8090b, C0_q=0, MODE_SEL_q=0 -> Expected 0bc5a02ee, Got 0ffffffff
-Time: 221 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Starting Streaming Random Test...
-Error: Mismatch at time               232000: A_q=261c2ff6, B_q=89e131c5, C0_q=1, MODE_SEL_q=0 -> Expected 0affd61bc, Got 0ffffffff
-Time: 232 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               242000: A_q=6d832ba8, B_q=7db56bcd, C0_q=1, MODE_SEL_q=1 -> Expected 1efcdbfdb, Got 0bc5a02ee
-Time: 242 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               252000: A_q=87969d92, B_q=51be76d8, C0_q=0, MODE_SEL_q=1 -> Expected 035d826b9, Got 0bc5a02ee
-Time: 252 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               262000: A_q=4f73e2a5, B_q=b5f767f9, C0_q=1, MODE_SEL_q=0 -> Expected 1056b4a9f, Got 0affd61bc
-Time: 262 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               272000: A_q=07b5ded1, B_q=11ef78bb, C0_q=0, MODE_SEL_q=1 -> Expected 1f5c66615, Got 0efcdbfdb
-Time: 272 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               282000: A_q=47e6e0b4, B_q=54dd6e4b, C0_q=0, MODE_SEL_q=1 -> Expected 1f3097268, Got 135d826b9
-Time: 282 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               292000: A_q=66cce707, B_q=7a588b20, C0_q=1, MODE_SEL_q=0 -> Expected 0e1257228, Got 1056b4a9f
-Time: 292 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               302000: A_q=4f35f96c, B_q=54fac2ab, C0_q=1, MODE_SEL_q=1 -> Expected 1fa3b36c1, Got 0f5c66615
-Time: 302 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               312000: A_q=4f534dcc, B_q=2517083e, C0_q=0, MODE_SEL_q=1 -> Expected 02a3c458d, Got 0f3097268
-Time: 312 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               322000: A_q=7a11caea, B_q=63072f70, C0_q=1, MODE_SEL_q=0 -> Expected 0dd18fa5b, Got 0e1257228
-Time: 322 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               332000: A_q=081e37ae, B_q=3942cfd9, C0_q=0, MODE_SEL_q=0 -> Expected 041610787, Got 0fa3b36c1
-Time: 332 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               342000: A_q=1c49ff49, B_q=bc7a8799, C0_q=0, MODE_SEL_q=0 -> Expected 0d8c486e2, Got 12a3c458d
-Time: 342 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               352000: A_q=75bd5772, B_q=33837b3c, C0_q=0, MODE_SEL_q=0 -> Expected 0a940d2ae, Got 0dd18fa5b
-Time: 352 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               362000: A_q=6ffe02d5, B_q=722d54df, C0_q=0, MODE_SEL_q=0 -> Expected 0e22b57b4, Got 041610787
-Time: 362 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               372000: A_q=25b0d01b, B_q=5d07c744, C0_q=0, MODE_SEL_q=0 -> Expected 082b8975f, Got 0d8c486e2
-Time: 372 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               382000: A_q=4f351c23, B_q=ae323eb8, C0_q=1, MODE_SEL_q=1 -> Expected 1a102dd6b, Got 0a940d2ae
-Time: 382 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               392000: A_q=0b3a05fc, B_q=732cde3d, C0_q=0, MODE_SEL_q=1 -> Expected 1980d27be, Got 0e22b57b4
-Time: 392 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               402000: A_q=a15f1cf5, B_q=85feec69, C0_q=1, MODE_SEL_q=0 -> Expected 1275e095f, Got 082b8975f
-Time: 402 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               412000: A_q=792bcaa6, B_q=59e9cd8f, C0_q=1, MODE_SEL_q=1 -> Expected 01f41fd17, Got 0a102dd6b
-Time: 412 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               422000: A_q=5fe8b9f8, B_q=565d5370, C0_q=0, MODE_SEL_q=1 -> Expected 0098b6687, Got 0980d27be
-Time: 422 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               432000: A_q=304720ff, B_q=4e2c4f9e, C0_q=1, MODE_SEL_q=0 -> Expected 07e73709e, Got 1275e095f
-Time: 432 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               442000: A_q=2489a30e, B_q=3ac376c5, C0_q=1, MODE_SEL_q=1 -> Expected 1e9c62c49, Got 11f41fd17
-Time: 442 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               452000: A_q=08efc663, B_q=5ce3cbce, C0_q=1, MODE_SEL_q=0 -> Expected 065d39232, Got 1098b6687
-Time: 452 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               462000: A_q=97a74294, B_q=4e44fe9b, C0_q=0, MODE_SEL_q=0 -> Expected 0e5ec412f, Got 07e73709e
-Time: 462 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               472000: A_q=2b28ca69, B_q=674acc85, C0_q=1, MODE_SEL_q=1 -> Expected 1c3ddfde4, Got 0e9c62c49
-Time: 472 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               482000: A_q=358fcb20, B_q=505a9fe9, C0_q=1, MODE_SEL_q=1 -> Expected 1e5352b37, Got 065d39232
-Time: 482 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               492000: A_q=b7a56c6f, B_q=3177885e, C0_q=1, MODE_SEL_q=0 -> Expected 0e91cf4ce, Got 0e5ec412f
-Time: 492 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               502000: A_q=81d22848, B_q=06efb87c, C0_q=1, MODE_SEL_q=1 -> Expected 07ae26fcc, Got 0c3ddfde4
-Time: 502 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               512000: A_q=b86740db, B_q=71766fa1, C0_q=0, MODE_SEL_q=1 -> Expected 046f0d139, Got 0e5352b37
-Time: 512 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               522000: A_q=7866281d, B_q=749a9960, C0_q=0, MODE_SEL_q=1 -> Expected 003cb8ebc, Got 0e91cf4ce
-Time: 522 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               532000: A_q=66110901, B_q=1a5dca20, C0_q=1, MODE_SEL_q=0 -> Expected 0806ed322, Got 17ae26fcc
-Time: 532 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               542000: A_q=0ef86380, B_q=5eb7cff5, C0_q=1, MODE_SEL_q=0 -> Expected 06db03376, Got 146f0d139
-Time: 542 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               552000: A_q=79159a16, B_q=7a4b6c32, C0_q=0, MODE_SEL_q=1 -> Expected 1feca2de3, Got 103cb8ebc
-Time: 552 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               562000: A_q=59033c28, B_q=62c537b7, C0_q=0, MODE_SEL_q=0 -> Expected 0bbc873df, Got 0806ed322
-Time: 562 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               572000: A_q=5d10a3e9, B_q=509807b8, C0_q=0, MODE_SEL_q=0 -> Expected 0ada8aba1, Got 06db03376
-Time: 572 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               582000: A_q=b35d3f6f, B_q=573e3dec, C0_q=1, MODE_SEL_q=1 -> Expected 05c1f0183, Got 0feca2de3
-Time: 582 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               592000: A_q=27d645a4, B_q=62538a24, C0_q=0, MODE_SEL_q=0 -> Expected 08a29cfc8, Got 0bbc873df
-Time: 592 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               602000: A_q=3991c810, B_q=4eae79b9, C0_q=0, MODE_SEL_q=1 -> Expected 1eae34e56, Got 0ada8aba1
-Time: 602 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               612000: A_q=310203dd, B_q=b2232bd6, C0_q=0, MODE_SEL_q=1 -> Expected 17eded806, Got 15c1f0183
-Time: 612 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               622000: A_q=00d1a58f, B_q=283cfb34, C0_q=1, MODE_SEL_q=0 -> Expected 0290ea0c4, Got 08a29cfc8
-Time: 622 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               632000: A_q=5a60270a, B_q=08976c6b, C0_q=1, MODE_SEL_q=1 -> Expected 051c8ba9f, Got 0eae34e56
-Time: 632 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               642000: A_q=b0d467a0, B_q=68634efe, C0_q=1, MODE_SEL_q=0 -> Expected 11937b69f, Got 07eded806
-Time: 642 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               652000: A_q=70fabb69, B_q=a96ceb62, C0_q=0, MODE_SEL_q=0 -> Expected 11a67a6cb, Got 0290ea0c4
-Time: 652 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               662000: A_q=91d03a60, B_q=736bd14b, C0_q=0, MODE_SEL_q=1 -> Expected 01e646914, Got 151c8ba9f
-Time: 662 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               672000: A_q=1cd8bcad, B_q=136a0cf8, C0_q=1, MODE_SEL_q=1 -> Expected 0096eafb5, Got 11937b69f
-Time: 672 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               682000: A_q=86d5de44, B_q=519dca87, C0_q=1, MODE_SEL_q=1 -> Expected 0353813bd, Got 11a67a6cb
-Time: 682 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               692000: A_q=6507d77f, B_q=560e05aa, C0_q=1, MODE_SEL_q=1 -> Expected 00ef9d1d5, Got 11e646914
-Time: 692 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               702000: A_q=a7abd031, B_q=83cb7ed6, C0_q=1, MODE_SEL_q=1 -> Expected 023e0515b, Got 1096eafb5
-Time: 702 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               712000: A_q=59d98480, B_q=61e3e2b4, C0_q=0, MODE_SEL_q=0 -> Expected 0bbbd6734, Got 1353813bd
-Time: 712 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               722000: A_q=65af618a, B_q=881dae29, C0_q=1, MODE_SEL_q=1 -> Expected 1dd91b361, Got 10ef9d1d5
-Time: 722 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               732000: A_q=6a0190dd, B_q=06ca59d5, C0_q=1, MODE_SEL_q=0 -> Expected 070cbeab3, Got 123e0515b
-Time: 732 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               742000: A_q=0ee807fe, B_q=4f47371c, C0_q=1, MODE_SEL_q=1 -> Expected 1bfa0d0e2, Got 0bbbd6734
-Time: 742 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               752000: A_q=561190f2, B_q=5048132c, C0_q=0, MODE_SEL_q=1 -> Expected 005c97dc5, Got 0dd91b361
-Time: 752 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               762000: A_q=1f8f4a48, B_q=57d463b3, C0_q=0, MODE_SEL_q=0 -> Expected 07763adfb, Got 070cbeab3
-Time: 762 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               772000: A_q=281c76df, B_q=267dbd0e, C0_q=1, MODE_SEL_q=0 -> Expected 04e9a33ee, Got 0bfa0d0e2
-Time: 772 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               782000: A_q=7e5220c2, B_q=b87da5f7, C0_q=0, MODE_SEL_q=0 -> Expected 136cfc6b9, Got 105c97dc5
-Time: 782 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               792000: A_q=5efb6305, B_q=17e7108d, C0_q=1, MODE_SEL_q=1 -> Expected 047145278, Got 07763adfb
-Time: 792 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               802000: A_q=5064b684, B_q=ab66f52c, C0_q=1, MODE_SEL_q=1 -> Expected 1a4fdc158, Got 04e9a33ee
-Time: 802 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               812000: A_q=434e05b9, B_q=71d67432, C0_q=1, MODE_SEL_q=0 -> Expected 0b52479ec, Got 136cfc6b9
-Time: 812 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               822000: A_q=1d3d695e, B_q=1069b8ba, C0_q=0, MODE_SEL_q=0 -> Expected 02da72218, Got 147145278
-Time: 822 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               832000: A_q=82402ced, B_q=4fc07319, C0_q=0, MODE_SEL_q=0 -> Expected 0d200a006, Got 0a4fdc158
-Time: 832 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               842000: A_q=602a2bd4, B_q=b751011e, C0_q=1, MODE_SEL_q=1 -> Expected 1a8d92ab6, Got 0b52479ec
-Time: 842 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               852000: A_q=07117437, B_q=744730b9, C0_q=0, MODE_SEL_q=1 -> Expected 192ca437d, Got 02da72218
-Time: 852 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               862000: A_q=2b9831d7, B_q=81f0f470, C0_q=0, MODE_SEL_q=1 -> Expected 1a9a73d66, Got 0d200a006
-Time: 862 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               872000: A_q=76382529, B_q=4b8de7d9, C0_q=0, MODE_SEL_q=1 -> Expected 02aaa3d4f, Got 0a8d92ab6
-Time: 872 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               882000: A_q=4d7edc49, B_q=638b3ee7, C0_q=0, MODE_SEL_q=1 -> Expected 1e9f39d61, Got 092ca437d
-Time: 882 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               892000: A_q=af1926c0, B_q=6e5f432a, C0_q=1, MODE_SEL_q=0 -> Expected 11d7869eb, Got 0a9a73d66
-Time: 892 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               902000: A_q=51ea8211, B_q=3a015583, C0_q=1, MODE_SEL_q=1 -> Expected 017e92c8e, Got 12aaa3d4f
-Time: 902 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               912000: A_q=a86098ae, B_q=a5d65cef, C0_q=0, MODE_SEL_q=1 -> Expected 0028a3bbe, Got 0e9f39d61
-Time: 912 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               922000: A_q=5fd7b272, B_q=bdeab056, C0_q=1, MODE_SEL_q=1 -> Expected 1a1ed021c, Got 11d7869eb
-Time: 922 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               932000: A_q=63c10d45, B_q=78ea6f6b, C0_q=0, MODE_SEL_q=0 -> Expected 0dcab7cb0, Got 117e92c8e
-Time: 932 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               942000: A_q=36d51fc1, B_q=7dd22971, C0_q=0, MODE_SEL_q=1 -> Expected 1b902f64f, Got 1028a3bbe
-Time: 942 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               952000: A_q=76bc98dc, B_q=4e5470b8, C0_q=0, MODE_SEL_q=0 -> Expected 0c5110994, Got 0a1ed021c
-Time: 952 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               962000: A_q=4c269a29, B_q=a9fff796, C0_q=0, MODE_SEL_q=0 -> Expected 0f62691bf, Got 0dcab7cb0
-Time: 962 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               972000: A_q=7854684e, B_q=2656d262, C0_q=1, MODE_SEL_q=1 -> Expected 051fd95ec, Got 0b902f64f
-Time: 972 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               982000: A_q=5056c9f8, B_q=b89cd148, C0_q=0, MODE_SEL_q=1 -> Expected 197b9f8af, Got 0c5110994
-Time: 982 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
-Error: Mismatch at time               992000: A_q=5ef3a3aa, B_q=77d32120, C0_q=1, MODE_SEL_q=0 -> Expected 0d6c6c4cb, Got 0f62691bf
-Time: 992 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               261000: A_q=00000005, B_q=00000002, C0_q=1, MODE_SEL_q=1 -> Expected 000000003, Got 100000003
+Time: 261 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               301000: A_q=00000001, B_q=00000002, C0_q=1, MODE_SEL_q=1 -> Expected 1ffffffff, Got 0ffffffff
+Time: 301 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Starting Streaming Random Test... (Checking latency only)
+Error: Mismatch at time               421000: A_q=6d832ba8, B_q=7db56bcd, C0_q=1, MODE_SEL_q=1 -> Expected 1efcdbfdb, Got 0efcdbfdb
+Time: 421 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               461000: A_q=87969d92, B_q=51be76d8, C0_q=0, MODE_SEL_q=1 -> Expected 035d826b9, Got 135d826b9
+Time: 461 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               541000: A_q=07b5ded1, B_q=11ef78bb, C0_q=0, MODE_SEL_q=1 -> Expected 1f5c66615, Got 0f5c66615
+Time: 541 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               581000: A_q=47e6e0b4, B_q=54dd6e4b, C0_q=0, MODE_SEL_q=1 -> Expected 1f3097268, Got 0f3097268
+Time: 581 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               661000: A_q=4f35f96c, B_q=54fac2ab, C0_q=1, MODE_SEL_q=1 -> Expected 1fa3b36c1, Got 0fa3b36c1
+Time: 661 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               701000: A_q=4f534dcc, B_q=2517083e, C0_q=0, MODE_SEL_q=1 -> Expected 02a3c458d, Got 12a3c458d
+Time: 701 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
+Error: Mismatch at time               981000: A_q=4f351c23, B_q=ae323eb8, C0_q=1, MODE_SEL_q=1 -> Expected 1a102dd6b, Got 0a102dd6b
+Time: 981 ns  Iteration: 0  Process: /ADDER32_FAST_TB/check_outputs  Scope: ADDER32_FAST_TB.check_outputs  File: C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ADDER32_FAST_TB.sv Line: 77
