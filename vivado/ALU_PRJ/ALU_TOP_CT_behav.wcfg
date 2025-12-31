@@ -12,9 +12,9 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="439.600 ns"></ZoomStartTime>
-      <ZoomEndTime time="598.001 ns"></ZoomEndTime>
-      <Cursor1Time time="457.600 ns"></Cursor1Time>
+      <ZoomStartTime time="718.800 ns"></ZoomStartTime>
+      <ZoomEndTime time="798.001 ns"></ZoomEndTime>
+      <Cursor1Time time="688.900 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="190"></NameColumnWidth>
@@ -61,20 +61,22 @@
    <wvobject fp_name="/ALU_TOP_CT/Y" type="array">
       <obj_property name="ElementShortName">Y[31:0]</obj_property>
       <obj_property name="ObjectShortName">Y[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/result_aux" type="array">
       <obj_property name="ElementShortName">result_aux[31:0]</obj_property>
       <obj_property name="ObjectShortName">result_aux[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/exp_Y" type="array">
       <obj_property name="ElementShortName">exp_Y[31:0]</obj_property>
       <obj_property name="ObjectShortName">exp_Y[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/exp_result_aux" type="array">
       <obj_property name="ElementShortName">exp_result_aux[31:0]</obj_property>
       <obj_property name="ObjectShortName">exp_result_aux[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/output_valid" type="logic">
       <obj_property name="ElementShortName">output_valid</obj_property>
@@ -92,6 +94,7 @@
    <wvobject fp_name="/ALU_TOP_CT/Y_conflict" type="array">
       <obj_property name="ElementShortName">Y_conflict[31:0]</obj_property>
       <obj_property name="ObjectShortName">Y_conflict[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/conflict_valid" type="logic">
       <obj_property name="ElementShortName">conflict_valid</obj_property>
@@ -100,6 +103,7 @@
    <wvobject fp_name="/ALU_TOP_CT/error_count" type="array">
       <obj_property name="ElementShortName">error_count[31:0]</obj_property>
       <obj_property name="ObjectShortName">error_count[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/prev_idle" type="logic">
       <obj_property name="ElementShortName">prev_idle</obj_property>

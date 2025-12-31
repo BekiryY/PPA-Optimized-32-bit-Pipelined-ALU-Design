@@ -205,14 +205,14 @@ module ALU_TOP_CT;
     // All LP: 0 cycle
     
     struct packed {
-        logic [31:0] data;
+        logic [63:0] data;
         logic        valid;
-    } pipe_add, pipe_mul[0:7]; // pipe_add is 1 stage, mul is 7 stages (0..7)
+    } pipe_add, pipe_mul[0:6]; // pipe_add is 1 stage, mul is 7 stages (0..6)
 
     always @(posedge clk) begin
          if (!reset_n) begin
-            pipe_add <= '{32'b0, 1'b0};
-            for(int k=0; k<=7; k++) pipe_mul[k] <= '{32'b0, 1'b0};
+            pipe_add <= '{64'b0, 1'b0};
+            for(int k=0; k<=6; k++) pipe_mul[k] <= '{64'b0, 1'b0};
             flag_c_delayed <= 1'b0;
          end else begin
             logic input_is_valid_op;
@@ -225,67 +225,100 @@ module ALU_TOP_CT;
             if (input_is_valid_op && tb_CMD[4:3] == 2'b00) begin
                 logic [63:0] res;
                 res = calc_op(tb_A, tb_B, tb_CMD); // Calc based on current inputs
-                pipe_add.data  <= res[31:0];
+                pipe_add.data  <= res;
                 pipe_add.valid <= 1'b1;
             end else begin
                 pipe_add.valid <= 1'b0;
-                pipe_add.data  <= 32'b0; // Clean
+                pipe_add.data  <= 64'b0; // Clean
             end
 
             // Mult Feed (7 cycles)
             // Shift the pipeline
-            for(int k=7; k>0; k--) pipe_mul[k] <= pipe_mul[k-1];
+            for(int k=6; k>0; k--) pipe_mul[k] <= pipe_mul[k-1];
             
             // Insert at 0
             if (input_is_valid_op && tb_CMD[4:3] == 2'b01) begin
                  logic [63:0] res;
                  res = calc_op(tb_A, tb_B, tb_CMD);
-                 pipe_mul[0].data  <= res[31:0]; // Just checking lower 32 for now
+                 pipe_mul[0].data  <= res; 
                  pipe_mul[0].valid <= 1'b1;
             end else begin
                  pipe_mul[0].valid <= 1'b0;
-                 pipe_mul[0].data  <= 32'b0;
+                 pipe_mul[0].data  <= 64'b0;
             end
          end
     end
     
+    // Expected Outputs
+    logic [31:0] exp_conflict;
+    logic        exp_conflict_valid;
+
     // Combinational Expected Logic
     always_comb begin
+        logic [63:0] comb_res_full;
+        logic valid_mult, valid_adder, valid_comb;
+
         exp_output_valid = 0;
         exp_Y = 0;
+        exp_result_aux = 32'bz; // Default to High-Z for non-mult ops
+        exp_conflict = 0;
+        exp_conflict_valid = 0;
         
+        // Calculate combinatorial result for current inputs
+        comb_res_full = calc_op(A, B, CMD);
+        
+        valid_mult = pipe_mul[6].valid;
+        valid_adder = pipe_add.valid;
+        valid_comb = input_valid && (CMD[4:3] == 2'b10 || CMD[4:3] == 2'b11);
+
         // Priority Mux Logic matching DUT
         // 1. Low Power (Combinational)
         if (low_power) begin
             if (!idle && input_valid) begin
                  exp_output_valid = 1;
-                 // Calc immediate
-                 {exp_result_aux, exp_Y} = 64'(calc_op(A, B, CMD)); 
+                 exp_Y = comb_res_full[31:0];
+                 
+                 if (CMD[4:3] == 2'b01) begin // Mult
+                    exp_result_aux = comb_res_full[63:32];
+                 end
             end
         end else begin
             // 2. Fast Mode
              if (!idle) begin
-                // Priority: Mult Done > Adder Done > Combinational(Logic/Shift)
-                // Note: DUT logic:
-                // assign Y = (v_add_r ...) ? ... : (v_mul_r[6] ...) ? ... : (logic/shift)
-                // Wait, DUT priority is:
-                // if (v_add_r) -> Adder
-                // else if (v_mul_r[6]) -> Mult
-                // ...
-                // Let's check DUT carefully!
-                assign Y = (v_add_r ...) ? adder : (v_mul_r ...) ? mult : ...
-                // So Adder has HIGHER priority than Mult in DUT assign statement.
+                // Priority: MULT32 > ADDER32 > SHIFTER = LOGIC_BLOCK
                 
-                if (pipe_mul[7].valid) begin
+                // Main Output Selection
+                if (valid_mult) begin
                     exp_output_valid = 1;
-                    exp_Y = pipe_mul[7].data;
-                end else if (pipe_add.valid) begin
+                    exp_Y = pipe_mul[6].data[31:0];
+                    exp_result_aux = pipe_mul[6].data[63:32];
+                end else if (valid_adder) begin
                     exp_output_valid = 1;
-                    exp_Y = pipe_add.data;
-                end else if (input_valid && (CMD[4:3] == 2'b10 || CMD[4:3] == 2'b11)) begin
+                    exp_Y = pipe_add.data[31:0];
+                end else if (valid_comb) begin
                     // Logic / Shift (Passthrough)
                     exp_output_valid = 1;
-                    {exp_result_aux, exp_Y} = 64'(calc_op(A, B, CMD));
+                    exp_Y = comb_res_full[31:0];
+                end
+                
+                // Conflict Logic
+                // Priority: MULT32 > ADDER32 > SHIFTER = LOGIC_BLOCK
+                if (valid_mult) begin
+                    if (valid_comb) begin
+                        // Conflict Mult vs Comb. Comb is least important.
+                        exp_conflict = comb_res_full[31:0];
+                        exp_conflict_valid = 1'b1;
+                    end else if (valid_adder) begin
+                        // Conflict Mult vs Adder. Adder is least important.
+                        exp_conflict = pipe_add.data[31:0];
+                        exp_conflict_valid = 1'b1;
+                    end
+                end else if (valid_adder) begin
+                    if (valid_comb) begin
+                        // Conflict Adder vs Comb. Comb is least important.
+                        exp_conflict = comb_res_full[31:0];
+                        exp_conflict_valid = 1'b1;
+                    end
                 end
              end
         end
@@ -372,14 +405,33 @@ module ALU_TOP_CT;
                  error_count++;
             end
             
-            // Check Data if valid
+            // Check Data if output_valid is asserted
             // Only check if we have a robust expectation.
-            // Our calc_op is simplified (doesn't handle all C0/Mode cases perfectly for Adder).
-            // But for simple cases or Logic/Shift it should work.
             if (exp_output_valid && output_valid) begin
                 if (exp_Y !== Y) begin 
                    $error("Data Mismatch at %0t! Exp=%h Got=%h (CMD=%h)", $time, exp_Y, Y, CMD);
                    error_count++;
+                end
+                
+                // Check Result Aux (Upper 32 bits of Mult)
+                if (exp_result_aux !== result_aux) begin
+                   // Only flag if it's actually a multiplication result we expect, or if we expect 0.
+                   // Since exp_result_aux defaults to 0, this is safe.
+                   $error("Result Aux Mismatch at %0t! Exp=%h Got=%h", $time, exp_result_aux, result_aux);
+                   error_count++;
+                end
+            end
+            
+            // Check Conflict Signals
+            if (conflict_valid !== exp_conflict_valid) begin
+                $error("Conflict Valid Mismatch at %0t! Exp=%b Got=%b", $time, exp_conflict_valid, conflict_valid);
+                error_count++;
+            end
+            
+            if (exp_conflict_valid && conflict_valid) begin
+                if (exp_conflict !== Y_conflict) begin
+                    $error("Conflict Data Mismatch at %0t! Exp=%h Got=%h", $time, exp_conflict, Y_conflict);
+                    error_count++;
                 end
             end
 
