@@ -4,7 +4,8 @@ This repository documents the complete **RTL-to-GDSII** implementation of a high
 
 The design achieves a verified **Turbo Mode frequency of 1.66 GHz** (sub-nanosecond timing) while supporting a dynamic **Low Power Mode** for energy efficiency.
 
----
+![Alt Text](documents/screenshots/ALU_main_gpdk045.png)
+
 
 ## Design Flow & Methodology
 The project follows an industry-standard ASIC pre-sign-off flow, moving from micro-architectural definition to physical layout hardening.
@@ -17,6 +18,7 @@ Before synthesis, the logic was rigorously verified using **Cadence Xcelium & Vi
 * **Constrained-Random Verification:** Developed a testbench to inject random instructions and data to cover corner cases.
 * **Self-Checking Scoreboard:** Implemented a real-time "Golden Model" comparator to validate ALU outputs against a reference C-model.
 * **100% Sign-off Coverage:** Achieved 100% in Toggle, Block, and Functional coverage metrics.
+
 
 ### 3. Synthesis & Physical Implementation
 The design was synthesized using **Cadence Genus** to map RTL to the target technology library, optimizing for a positive slack margin. The netlist was then transferred to **Cadence Innovus** for the physical implementation phase, which included:
