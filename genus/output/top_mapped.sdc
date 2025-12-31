@@ -1,6 +1,6 @@
 # ####################################################################
 
-#  Created by Genus(TM) Synthesis Solution 21.18-s082_1 on Thu Dec 18 23:35:10 +03 2025
+#  Created by Genus(TM) Synthesis Solution 21.18-s082_1 on Sun Dec 28 14:19:24 +03 2025
 
 # ####################################################################
 
@@ -279,8 +279,6 @@ set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports {CMD[3]}
 set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports {CMD[2]}]
 set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports {CMD[1]}]
 set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports {CMD[0]}]
-set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports {branch[1]}]
-set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports {branch[0]}]
 set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports idle]
 set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports low_power]
 set_input_delay -clock [get_clocks clk] -add_delay -max 0.08 [get_ports reset_n]
@@ -353,8 +351,6 @@ set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports {CMD[3]}
 set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports {CMD[2]}]
 set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports {CMD[1]}]
 set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports {CMD[0]}]
-set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports {branch[1]}]
-set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports {branch[0]}]
 set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports idle]
 set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports low_power]
 set_input_delay -clock [get_clocks clk] -add_delay -min 0.04 [get_ports reset_n]
@@ -505,7 +501,5 @@ set_output_delay -clock [get_clocks clk] -add_delay -min -0.05 [get_ports {flag_
 set_max_transition 0.08 [current_design]
 set_max_capacitance 0.3 [current_design]
 set_wire_load_mode "enclosed"
-set_dont_touch [get_nets power_en_adder]
-set_dont_touch [get_nets power_en_mult]
 set_clock_uncertainty -setup 0.05 [get_clocks clk]
 set_clock_uncertainty -hold 0.05 [get_clocks clk]

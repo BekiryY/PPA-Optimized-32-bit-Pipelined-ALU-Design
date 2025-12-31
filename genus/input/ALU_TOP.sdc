@@ -1,8 +1,8 @@
 # SDC File for ALU_TOP
-# Target Frequency HP: 1.66GHz 
-# Period HP = 1/1660MHz = 0.6024 ns
+# Target Frequency HP: 2.80GHz 
+# Period HP = 1/2800MHz = 0.357 ns
 # Target Frequency LP: 0.12GHz 
-# Period LP = 1/120MHz = 8.333 ns
+# Period LP = 1/180MHz = 8.333 ns
 
 # Set the SDC version
 set sdc_version 2.0,
@@ -11,12 +11,12 @@ set sdc_version 2.0,
 set_time_unit -nanoseconds
 set_load_unit -picofarads
 
-#2.816GHz for enabling the TDS and path optimization of Genus
-create_clock -name clk -period 0.355 [get_ports clk]
+#4.0GHz for enabling the TDS and path optimization of Genus
+create_clock -name clk -period 0.250 [get_ports clk]
 
 # NOTE: Clock uncertainty is explicitly set to 0 as requested.
 # WARNING: This is highly unrealistic for physical implementation.
-set_clock_uncertainty 0.050 [get_clocks clk]
+set_clock_uncertainty 0.035 [get_clocks clk]
 
 # _lp modules have relaxed clk
 # those modules can have 20x more timing budget
@@ -46,8 +46,8 @@ set_output_delay -min -0.05 -clock clk [get_ports {Y[*] result_aux flag_reg}]
 
 # --- Design Rule Constraints (DRCs)---------------------------------
 # Transition time should be appropriate for the *period* (0.500 ns), not the I/O delay.
-set_max_transition 0.08 [current_design] 
-set_max_capacitance 0.3 [current_design]
+set_max_transition 0.05 [current_design] 
+set_max_capacitance 0.25 [current_design]
 
 # here is very important by deration we tell genus that real silicon can be %16 slower than rtl
 # hence we encourage Genus to activate TDS and optimize the worst paths
