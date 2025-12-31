@@ -73,8 +73,6 @@ logic [31:0] final_adder_out;
 logic adder_mode;
 
 c0_calculator c0_calc (
-    .clk(clk),
-    .reset_n(reset_n),
     .CMD(CMD[2:0]),
     .CF_reg(CF_reg),
     .C0(C0),

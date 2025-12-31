@@ -87,7 +87,7 @@ module ALU_TOP_CT;
                         3'b010: add_res = {1'b0, a} - {1'b0, b}; // GT
                         3'b011: add_res = {1'b0, a} - {1'b0, b}; // LT
                         3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_c_delayed; // ADDC
-                        3'b101: add_res = {1'b0, a} - {1'b0, b} + flag_c_delayed - 1; // SUBC (A - B + C - 1)
+                        3'b101: add_res = {1'b0, a} - {1'b0, b} - flag_c_delayed; // SUBC (A - B + C - 1)
                         3'b110: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         3'b111: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         default: add_res = 0; 
@@ -99,7 +99,7 @@ module ALU_TOP_CT;
                         3'b010: add_res = {1'b0, a} - {1'b0, b}; // GT
                         3'b011: add_res = {1'b0, a} - {1'b0, b}; // LT
                         3'b100: add_res = {1'b0, a} + {1'b0, b} + flag_reg[2]; // ADDC
-                        3'b101: add_res = {1'b0, a} - {1'b0, b} + flag_reg[2] - 1; // SUBC (A - B + C - 1)
+                        3'b101: add_res = {1'b0, a} - {1'b0, b} - flag_reg[2]; // SUBC (A - B + C - 1)
                         3'b110: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         3'b111: add_res = {1'b0, a} - {1'b0, b}; // SUB
                         default: add_res = 0; 
@@ -273,7 +273,7 @@ module ALU_TOP_CT;
                 // else if (v_mul_r[6]) -> Mult
                 // ...
                 // Let's check DUT carefully!
-                // assign Y = (v_add_r ...) ? adder : (v_mul_r ...) ? mult : ...
+                assign Y = (v_add_r ...) ? adder : (v_mul_r ...) ? mult : ...
                 // So Adder has HIGHER priority than Mult in DUT assign statement.
                 
                 if (pipe_mul[7].valid) begin
@@ -339,7 +339,7 @@ module ALU_TOP_CT;
 
             void'(std::randomize(A, B, CMD, input_valid) with {
                 // Constraints
-                CMD inside {[0:7], [16:31]}; // Disable CMD[4:3] == 2'b01 (Mult 8-15)
+                CMD inside {[0:31]}; // Enable all commands including Mult
                 
                 // Weighting
                 if (transitioning) {

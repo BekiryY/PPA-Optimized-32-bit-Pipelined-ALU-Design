@@ -12,15 +12,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="4,572.250 ns"></ZoomStartTime>
-      <ZoomEndTime time="4,649.951 ns"></ZoomEndTime>
-      <Cursor1Time time="4,637.000 ns"></Cursor1Time>
+      <ZoomStartTime time="439.600 ns"></ZoomStartTime>
+      <ZoomEndTime time="598.001 ns"></ZoomEndTime>
+      <Cursor1Time time="457.600 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="190"></NameColumnWidth>
-      <ValueColumnWidth column_width="127"></ValueColumnWidth>
+      <ValueColumnWidth column_width="102"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="18" />
+   <WVObjectSize size="20" />
    <wvobject fp_name="/ALU_TOP_CT/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -43,6 +43,8 @@
       <obj_property name="ElementShortName">CMD[4:0]</obj_property>
       <obj_property name="ObjectShortName">CMD[4:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/input_valid" type="logic">
       <obj_property name="ElementShortName">input_valid</obj_property>
@@ -65,9 +67,22 @@
       <obj_property name="ElementShortName">result_aux[31:0]</obj_property>
       <obj_property name="ObjectShortName">result_aux[31:0]</obj_property>
    </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/exp_Y" type="array">
+      <obj_property name="ElementShortName">exp_Y[31:0]</obj_property>
+      <obj_property name="ObjectShortName">exp_Y[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/exp_result_aux" type="array">
+      <obj_property name="ElementShortName">exp_result_aux[31:0]</obj_property>
+      <obj_property name="ObjectShortName">exp_result_aux[31:0]</obj_property>
+   </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/output_valid" type="logic">
       <obj_property name="ElementShortName">output_valid</obj_property>
       <obj_property name="ObjectShortName">output_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/exp_output_valid" type="logic">
+      <obj_property name="ElementShortName">exp_output_valid</obj_property>
+      <obj_property name="ObjectShortName">exp_output_valid</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/flag_reg" type="array">
       <obj_property name="ElementShortName">flag_reg[7:0]</obj_property>
@@ -82,21 +97,16 @@
       <obj_property name="ElementShortName">conflict_valid</obj_property>
       <obj_property name="ObjectShortName">conflict_valid</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_TOP_CT/exp_Y" type="array">
-      <obj_property name="ElementShortName">exp_Y[31:0]</obj_property>
-      <obj_property name="ObjectShortName">exp_Y[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ALU_TOP_CT/exp_result_aux" type="array">
-      <obj_property name="ElementShortName">exp_result_aux[31:0]</obj_property>
-      <obj_property name="ObjectShortName">exp_result_aux[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ALU_TOP_CT/exp_output_valid" type="logic">
-      <obj_property name="ElementShortName">exp_output_valid</obj_property>
-      <obj_property name="ObjectShortName">exp_output_valid</obj_property>
-   </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/error_count" type="array">
       <obj_property name="ElementShortName">error_count[31:0]</obj_property>
       <obj_property name="ObjectShortName">error_count[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/prev_idle" type="logic">
+      <obj_property name="ElementShortName">prev_idle</obj_property>
+      <obj_property name="ObjectShortName">prev_idle</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_TOP_CT/prev_lp" type="logic">
+      <obj_property name="ElementShortName">prev_lp</obj_property>
+      <obj_property name="ObjectShortName">prev_lp</obj_property>
    </wvobject>
 </wave_config>
