@@ -19,13 +19,3 @@ A high-performance, **PPA (Performance, Power, Area) optimized** Arithmetic Logi
 | **Final Timing Closure** | Cadence Quantus | Full RC Parasitic Extraction and Sign-off. |
 
 
-
-
-I want you to edit the ALU_FAST_TB.sv
-
-after cmd is 00000 after being 11111 once (after one full loop).
-
-make the test of "pipeline conflicts"
-give 1 cycle operation like SHIFTER & LOGIC BLOCK one cycle after 
-
-prompt later
