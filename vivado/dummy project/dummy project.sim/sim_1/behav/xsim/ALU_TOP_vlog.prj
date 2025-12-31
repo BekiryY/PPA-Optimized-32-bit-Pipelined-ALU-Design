@@ -1,0 +1,23 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "B:/VIVADO/2025.2/Vivado/data/rsb/busdef" \
+"../../../../../../documents/schematics/schematics/rtl/ADDER32_FAST.sv" \
+"../../../../../../documents/schematics/schematics/rtl/ADDER32_LP.sv" \
+"../../../../../../documents/schematics/schematics/rtl/DFFR.sv" \
+"../../../../../../documents/schematics/schematics/rtl/DFFR16_multi.sv" \
+"../../../../../../documents/schematics/schematics/rtl/DFFR32_multi.sv" \
+"../../../../../../documents/schematics/schematics/rtl/DFFR64.sv" \
+"../../../../../../documents/schematics/schematics/rtl/LOGIC_BLOCK.sv" \
+"../../../../../../documents/schematics/schematics/rtl/MULT32_FAST.sv" \
+"../../../../../../documents/schematics/schematics/rtl/MULT32_LP.sv" \
+"../../../../../../documents/schematics/schematics/rtl/SHIFTER.sv" \
+"../../../../../../documents/schematics/schematics/rtl/c0_calculator.sv" \
+"../../../../../../documents/schematics/schematics/rtl/conflict_handler.sv" \
+"../../../../../../documents/schematics/schematics/rtl/flag_controller.sv" \
+"../../../../../../documents/schematics/schematics/rtl/pipe_counter.sv" \
+"../../../../../../documents/schematics/schematics/rtl/ALU_TOP.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
