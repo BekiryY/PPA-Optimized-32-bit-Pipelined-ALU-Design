@@ -10,7 +10,7 @@ The design achieves a verified **Turbo Mode frequency of 1.66 GHz** (sub-nanosec
 The project follows an industry-standard ASIC sign-off flow, moving from micro-architectural definition to physical layout hardening.
 
 ### 1. Architecture & RTL Design
-The architecture was built for speed. A **7-stage pipeline** was implemented to break down critical paths (specifically in the multiplier and adder), allowing for a high clock frequency of 1.66 GHz. The RTL is written in **SystemVerilog**, utilizing parameterized modules for flexibility.
+The architecture was built for speed & throughput while saving power at the same time. A **7-stage pipeline** was implemented to break down critical paths (specifically in the multiplier and adder), allowing for a high clock frequency of 1.66 GHz. The RTL is written in **SystemVerilog**, utilizing parameterized modules for flexibility.
 
 ### 2. Functional Verification & Coverage Tests
 Before synthesis, the logic was rigorously verified using **Cadence Xcelium & Vivado 2025.2**.
@@ -45,5 +45,5 @@ The following metrics were extracted after physical routing (Innovus) and RC ext
 | **Gate Count** | **10,496 Gates** | NAND2 Equivalent Area |
 | **Est. Transistors** | **~84,000** | Estimated count (High flip-flop density) |
 | **Gate Density** | **198.4 kG/mm²** | Physical packing efficiency |
-| **Cell Utilization** | **[Check Innovus]** | *Run `report_density` in Innovus* |
-| **Clock Tree Power** | **[Check Innovus]** | *Run `report_power` and check clock net %* |
+| **Cell Utilization** | **%74.7** | *Run `report_density` in Innovus* |
+| **Clock Tree Power** | **%9.61** | *Run `report_power` and check clock net %* |
