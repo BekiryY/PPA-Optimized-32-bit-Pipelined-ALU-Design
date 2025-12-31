@@ -453,7 +453,10 @@ module ALU_TOP_CT;
             $display("---------------------------------------------------");
         end else begin
             $display("---------------------------------------------------");
+            $display(" Coverage: %0.2f%%", cg_inst.get_coverage());
             $display(" TEST FAILED with %0d errors", error_count);
+            $display(" Note: errors are: due to not finished multiplication and addition before going into low_power mode.");
+            $display(" Note: errors are: triple conflict, adder multiplication and combinational blocks are giving valid input at the same time.");
             $display("---------------------------------------------------");
         end
         $finish;
