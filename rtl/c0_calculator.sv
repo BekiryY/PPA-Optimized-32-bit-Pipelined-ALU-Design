@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module c0_calculator (
     input  logic [2:0] CMD,
     input  logic       CF_reg,

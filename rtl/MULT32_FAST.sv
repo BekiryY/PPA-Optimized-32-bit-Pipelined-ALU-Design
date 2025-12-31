@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module MULT32 (
     input  logic        clk,
     input  logic        reset_n,

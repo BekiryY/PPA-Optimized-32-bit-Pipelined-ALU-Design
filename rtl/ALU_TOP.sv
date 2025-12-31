@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module ALU_TOP(
     input clk,
     input reset_n,

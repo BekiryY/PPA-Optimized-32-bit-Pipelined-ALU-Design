@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module ADDER32_LP (
     input MODE_SEL,
     input C0,

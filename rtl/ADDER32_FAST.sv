@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module ADDER32 (
     input  logic        clk,
     input  logic        reset_n,

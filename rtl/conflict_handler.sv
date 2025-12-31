@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module conflict_handler(
     input logic idle,
     input logic valid_mult,

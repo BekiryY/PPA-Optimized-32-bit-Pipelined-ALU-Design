@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module LOGIC_BLOCK(
     input [31:0] A,
     input [31:0] B,
