@@ -61,8 +61,8 @@ The following metrics were extracted after physical routing (Innovus) and RC ext
 | **Operating Frequency** | **1.66 GHz** | Turbo Mode Target (602.4 ps period) |
 | **Peak Throughput** | **1.66 GOPS** | 1.0 Operation per Cycle | 
 | **Pipeline Latency** | **7-1-0 Cycles** | Variable latency (Mul-Logic-Bypass) |
-| **Worst Negative Slack** | **+27 ps** | Timing margin (Setup) |
-| **Worst Negative Slack** | **+7 ps** | Timing margin (Hold)|
+| **Worst Negative Slack** | **+21 ps** | Timing margin (Setup) |
+| **Worst Negative Slack** | **+5 ps** | Timing margin (Hold)|
 | **Total Power (Turbo)** | **51.94 mW** | @ 1.66 GHz, 1.2V (High Performance) |
 | **Total Power (Low)** | **3.30 mW** | @ 180 MHz, 1.0V (Power Saving) |
 | **Power Density (Turbo)**| **100 W/cm²** | High thermal density due to frequency/voltage |
