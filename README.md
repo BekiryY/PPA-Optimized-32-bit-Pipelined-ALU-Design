@@ -10,7 +10,7 @@ Functional correctness was verified using a constrained-random testbench in **Ca
 ## PPA Metrics (Sign-off Results)
 Final metrics extracted after physical routing in **Innovus** and parasitic extraction in **Quantus**.
 
-## Final PPA & Performance Sign-off
+## Final PPA & Performance PRE-Sign-off
 
 | Metric | Results | Description / Context |
 | :--- | :--- | :--- |
