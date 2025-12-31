@@ -163,7 +163,7 @@ assign result_aux = (valid_mult) ? final_mult_out[63:32] : 32'dz;
         .output_valid(output_valid),
         .v_add_r(v_add_r),
         .v_mul_r(v_mul_r)
-    );
+    );  
 
 
 //counter (NOT used currently but can be used in future)
