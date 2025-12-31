@@ -7,7 +7,7 @@ The design achieves a verified **Turbo Mode frequency of 1.66 GHz** (sub-nanosec
 ---
 
 ## Design Flow & Methodology
-The project follows an industry-standard ASIC sign-off flow, moving from micro-architectural definition to physical layout hardening.
+The project follows an industry-standard ASIC pre-sign-off flow, moving from micro-architectural definition to physical layout hardening.
 
 ### 1. Architecture & RTL Design
 The architecture was built for speed & throughput while saving power at the same time. A **7-stage pipeline** was implemented to break down critical paths (specifically in the multiplier and adder), allowing for a high clock frequency of 1.66 GHz. The RTL is written in **SystemVerilog**, utilizing parameterized modules for flexibility.
