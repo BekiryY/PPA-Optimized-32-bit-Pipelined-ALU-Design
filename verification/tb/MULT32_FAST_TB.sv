@@ -94,11 +94,16 @@ module MULT32_FAST_TB;
             // Expected value
             expected = 64'(in_a) * 64'(in_b);
 
-            // Wait for remaining pipeline stages
-            // We already waited 1 cycle (the start_i pulse cycle).
-            // Total latency is 4, so we need to wait 3 more cycles.
-           
+            // Wait for 8 pipeline stages
+            // We already waited 1 cycle above before driving next? No, wait here.
+            // Latency = 8.
+            repeat(8) @(posedge clk); #2;
 
+            if (P_REG !== expected) begin
+                $error("Mismatch: A=%d, B=%d, Expected=%d, Got=%d", in_a, in_b, expected, P_REG);
+            end else begin
+                //$display("Match: A=%d, B=%d, P=%d", in_a, in_b, P_REG);
+            end
         end
     endtask
 

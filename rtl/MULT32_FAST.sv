@@ -7,15 +7,32 @@ module MULT32 (
 );
 
     // =========================================================================
+    // STAGE 0: Input Registration
+    // Latency: 1 clock cycle
+    // =========================================================================
+    logic [31:0] A_reg;
+    logic [31:0] B_reg;
+
+    always_ff @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            A_reg <= '0;
+            B_reg <= '0;
+        end else begin
+            A_reg <= A;
+            B_reg <= B;
+        end
+    end
+
+    // =========================================================================
     // Signal Decomposition
     // =========================================================================
     logic [15:0] a_hi, a_lo;
     logic [15:0] b_hi, b_lo;
 
-    assign a_hi = A[31:16]; 
-    assign a_lo = A[15:0];
-    assign b_hi = B[31:16]; 
-    assign b_lo = B[15:0];
+    assign a_hi = A_reg[31:16]; 
+    assign a_lo = A_reg[15:0];
+    assign b_hi = B_reg[31:16]; 
+    assign b_lo = B_reg[15:0];
 
     // =========================================================================
     // STAGE 1: 16x16 Multipliers description

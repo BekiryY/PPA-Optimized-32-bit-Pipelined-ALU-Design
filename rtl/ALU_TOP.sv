@@ -100,11 +100,11 @@ assign final_adder_carry = (low_power) ? adder_lp_out[32]   : CF_adder;
 //10xxx selects shifter
 //11xxx selects logic_block
 assign Y = (v_add_r || (low_power && CMD[4:3] == 2'b00 && output_valid))    ? final_adder_out : 
-           (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) ? final_mult_out[31:0] :
+           (v_mul_r || (low_power && CMD[4:3] == 2'b01 && output_valid)) ? final_mult_out[31:0] :
            (v_shift_r || (low_power && CMD[4:3] == 2'b10 && output_valid))  ? shifter_out :
            (CMD[4:3] == 2'b11 && output_valid)                              ? logic_out : 32'dz;
 
-assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_valid)) 
+assign result_aux = (v_mul_r || (low_power && CMD[4:3] == 2'b01 && output_valid)) 
         ? final_mult_out[63:32] 
         : 32'dz;
 // Even tough these look like spagetthi, tristates are faster than muxes in order of 1-2 logic levels
@@ -130,9 +130,9 @@ assign result_aux = (v_mul_r[6] || (low_power && CMD[4:3] == 2'b01 && output_val
 
 
     // Output Valid Handling and Command Pipelining
-    logic [2:0] v_add_r;
-    logic [6:0] v_mul_r;
-    logic [2:0] v_shift_r;
+    logic v_add_r;
+    logic v_mul_r;
+    logic v_shift_r;
     
     pipe_counter pipe_cnt (
         .clk(clk),

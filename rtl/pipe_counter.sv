@@ -7,57 +7,51 @@ module pipe_counter (
     input  logic       idle,
 
     output logic       output_valid,
-    output logic [2:0] v_add_r,
-    output logic [6:0] v_mul_r,
-    output logic [2:0] v_shift_r
+    output logic       v_add_r,
+    output logic       v_mul_r,
+    output logic       v_shift_r
 );
 
-    logic [1:0] cmd_add_r;      // Delayed CMD for Adder (1 cycle)
-    logic [13:0] cmd_mul_r;     // Delayed CMD for Mult (7 cycles of 2 bits)
-    
-    logic [1:0] add_delay_line; // 2 bits for intermediate stages
-    logic       shift_delay_line; // 1 bit for intermediate stage (Latency=2: Del0 -> v_shift_r)
+    // Internal Shift Registers for Valid Signals
+    // Adder: 3 stages (Indices 0, 1, 2. Output is [2])
+    logic [2:0] add_valid_pipe;
+    // Multiplier: 8 stages (Indices 0..7. Output is [7])
+    logic [7:0] mul_valid_pipe;
+    // Shifter: 2 stages (Indices 0, 1. Output is [1])
+    logic [1:0] shift_valid_pipe;
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
-            v_add_r         <= 1'b0;
-            v_mul_r         <= 7'd0;
-            v_shift_r       <= 1'b0;
-            cmd_add_r       <= 2'b00;
-            cmd_mul_r       <= 14'd0;
-            add_delay_line  <= 2'd0;
-            shift_delay_line <= 1'b0;
+            add_valid_pipe   <= '0;
+            mul_valid_pipe   <= '0;
+            shift_valid_pipe <= '0;
         end else begin
-            // Pipeline valid signals
-            // Adder Latency = 3 cycles.
-            add_delay_line[0] <= input_valid & (CMD[4:3] == 2'b00) & !low_power;
-            add_delay_line[1] <= add_delay_line[0];
-            v_add_r           <= add_delay_line[1];
-            
-            // Shifter Latency = 2 cycles.
-            // Cycle 1: shift_delay_line
-            // Cycle 2: v_shift_r
-            shift_delay_line <= input_valid & (CMD[4:3] == 2'b10) & !low_power;
-            v_shift_r        <= shift_delay_line;
-
-            v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01) & !low_power};
-            
-            // Pipeline command bits (CMD[4:3]) to match latency
-            // Adder path: 1 cycle delay
-            if(input_valid && !low_power) cmd_add_r <= CMD[4:3];
-            
-            // Multiplier path: 7 cycle delay (shift register for 2 bits)
-            if(input_valid && !low_power) begin 
-                 cmd_mul_r <= {cmd_mul_r[11:0], CMD[4:3]};
+            // Shift in new valid flags (LSB in, MSB out)
+            // LSB is T=1 (next cycle after input_valid)
+            // MSB is Output Valid
+            if (!idle && !low_power) begin
+                // Adder (Opcode 00)
+                add_valid_pipe <= {add_valid_pipe[1:0], (input_valid && CMD[4:3] == 2'b00)};
+                
+                // Multiplier (Opcode 01)
+                // 8 Stages total pipeline delay
+                mul_valid_pipe <= {mul_valid_pipe[6:0], (input_valid && CMD[4:3] == 2'b01)};
+                
+                // Shifter (Opcode 10)
+                shift_valid_pipe <= {shift_valid_pipe[0], (input_valid && CMD[4:3] == 2'b10)};
             end else begin
-                 // Keep shifting to propagate the pipeline even if new input isn't valid? 
-                 // Actually, for a fixed pipeline, we should always shift.
-                 cmd_mul_r <= {cmd_mul_r[11:0], (input_valid ? CMD[4:3] : 2'b00)}; 
-                 // Note: If input not valid, pushing 00 is risky if 00 is Adder. 
-                 // Better to just shift. Realistically, we only care about the value when v_mul_r[6] is 1.
+                // If idle or low power, flush the pipeline
+                add_valid_pipe   <= {add_valid_pipe[1:0], 1'b0};
+                mul_valid_pipe   <= {mul_valid_pipe[6:0], 1'b0};
+                shift_valid_pipe <= {shift_valid_pipe[0], 1'b0};
             end
         end
     end
+
+    // Assign Outputs (MSB is the result of the full latency)
+    assign v_add_r   = add_valid_pipe[2];
+    assign v_mul_r   = mul_valid_pipe[7];
+    assign v_shift_r = shift_valid_pipe[1];
 
     // Output Valid Handling
     always_comb begin
@@ -69,12 +63,12 @@ module pipe_counter (
             end 
         end else begin
             if(!idle) begin
-                // Prioritize Multiplier completion if valid, then Adder, etc.
-                if (v_mul_r[6]) output_valid = 1'b1;
+                // Check valid flags from end of pipeline
+                if (v_mul_r)      output_valid = 1'b1;
                 else if (v_add_r) output_valid = 1'b1;
-                else if (v_shift_r) output_valid = 1'b1; // Shifter Logic (Latency 2)
+                else if (v_shift_r) output_valid = 1'b1;
                 
-                // Only pass input_valid for 0-cycle blocks (Logic Only: 11)
+                // Logic Block (Opcode 11) is 0 cycle latency (Combinational)
                 else if (CMD[4:3] == 2'b11) output_valid = input_valid; 
                 else output_valid = 1'b0;
             end else begin 
