@@ -14,7 +14,18 @@ The design achieves a verified **Turbo Mode frequency of 1.66 GHz** (sub-nanosec
 The project follows an industry-standard ASIC pre-sign-off flow, moving from micro-architectural definition to physical layout hardening.
 
 ### 1. Architecture & RTL Design
+
+![ALU Top Level](documents/schematics/alu_simple.drawio.png)
+<p align="center">
+  <b>Figure 2:</b> <i>Simplified I/O block diagram</i>
+</p>
+
 The architecture was built for speed & throughput while saving power at the same time. A **7-stage pipeline** was implemented to break down critical paths (specifically in the multiplier and adder), allowing for a high clock frequency of 1.66 GHz. The RTL is written in **SystemVerilog**, utilizing parameterized modules for flexibility.
+
+![ALU Top Level](documents/schematics/alu.drawio.png)
+<p align="center">
+  <b>Figure 3:</b> <i>full RTL architecture</i>
+</p>
 
 ### 2. Functional Verification & Coverage Tests
 Before synthesis, the logic was rigorously verified using **Cadence Xcelium & Vivado 2025.2**.
@@ -36,6 +47,8 @@ The following metrics were extracted after physical routing (Innovus) and RC ext
 
 | Metric | Results | Description / Context |
 | :--- | :--- | :--- |
+| **Architecture** | **32bit pipeline** | Architecture |
+| **opcodes** | **22 OPCODES** | unique opcode number |
 | **Operating Frequency** | **1.66 GHz** | Turbo Mode Target (602.4 ps period) |
 | **Peak Throughput** | **1.66 GOPS** | 1.0 Operation per Cycle | 
 | **Pipeline Latency** | **7-1-0 Cycles** | Variable latency (Mul-Logic-Bypass) |
