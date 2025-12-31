@@ -1,31 +1,69 @@
 # PPA-Optimized 32-bit Pipelined ALU Design
 
-A high-performance, **PPA (Performance, Power, Area) optimized** Arithmetic Logic Unit (ALU) designed for a 32-bit processor core. This project demonstrates the complete **RTL-to-GDS sign-off flow** on a complex, pipelined unit, achieving a verified operating frequency of **2.0 GHz** (500 ps period).
+This repository documents the complete **RTL-to-GDSII** implementation of a high-frequency, 32-bit Arithmetic Logic Unit (ALU). Designed to simulate a high-performance processor core execution unit, this project targets aggressive PPA (Performance, Power, Area) metrics using a 45nm technology node.
 
-## Key Features & Achievements
+The design achieves a verified **Turbo Mode frequency of 1.66 GHz** (sub-nanosecond timing) while supporting a dynamic **Low Power Mode** for energy efficiency.
 
-* **Ultra-High Frequency:** Achieved timing closure with a positive slack of 45 ps, demonstrating a critical path delay of $\approx 455\,\text{ps}$ (sub-nanosecond performance).
-* **Advanced Pipelining:** Features a multi-stage **pipelined multiplier** for high throughput (1 GMACS) and a separate **pipelined adder** unit. 
-* **Power Optimization:** RTL structured to implement **power gating** for unused blocks to minimize static/leakage power, and incorporates design hooks for **low-power operational modes**.
-* **Area Efficiency:** Implements flag-based comparison logic ($A == B$, $A > B$, etc.) by efficiently reusing the main adder/subtractor hardware, saving silicon area.
+![ALU Top Level](documents/screenshots/ALU_main_gpdk045.png)
+<p align="center">
+  <b>Figure 1:</b> <i>Layout view of the final physical implementation flow in Innovus.</i>
+</p>
 
-## Tool Flow (RTL-to-GDS)
 
-| Stage | Tool | Purpose |
+## Design Flow & Methodology
+The project follows an industry-standard ASIC pre-sign-off flow, moving from micro-architectural definition to physical layout hardening.
+
+### 1. Architecture & RTL Design
+
+![ALU Top Level](documents/schematics/alu_simple.drawio.png)
+<p align="center">
+  <b>Figure 2:</b> <i>Simplified I/O block diagram</i>
+</p>
+
+The architecture was built for speed & throughput while saving power at the same time. A **7-stage pipeline** was implemented to break down critical paths (specifically in the multiplier and adder), allowing for a high clock frequency of 1.66 GHz. The RTL is written in **SystemVerilog**, utilizing parameterized modules for flexibility.
+
+![ALU Top Level](documents/schematics/alu.drawio.png)
+<p align="center">
+  <b>Figure 3:</b> <i>full RTL architecture</i>
+</p>
+
+### 2. Functional Verification & Coverage Tests
+Before synthesis, the logic was rigorously verified using **Cadence Xcelium & Vivado 2025.2**.
+* **Constrained-Random Verification:** Developed a testbench to inject random instructions and data to cover corner cases.
+* **Self-Checking Scoreboard:** Implemented a real-time "Golden Model" comparator to validate ALU outputs against a reference C-model.
+* **100% Sign-off Coverage:** Achieved 100% in Toggle, Block, and Functional coverage metrics.
+
+
+### 3. Synthesis & Physical Implementation
+The design was synthesized using **Cadence Genus** to map RTL to the target technology library, optimizing for a positive slack margin. The netlist was then transferred to **Cadence Innovus** for the physical implementation phase, which included:
+* **Floorplanning:** Core sizing and pin placement to minimize I/O delays.
+* **Placement & Routing:** Congestion-aware cell placement and timing-driven routing.
+* **Clock Tree Synthesis (CTS):** Balancing the clock skew across the pipeline registers to maintain setup/hold timing at 1.66 GHz.
+
+---
+
+## Final PPA & Performance Metrics (Pre-Sign-off)
+The following metrics were extracted after physical routing (Innovus) and RC extraction (Quantus).
+
+| Metric | Results | Description / Context |
 | :--- | :--- | :--- |
-| **RTL Simulation** | Vivado / Cadence Xcelium | Functional verification before synthesis. |
-| **Synthesis & Gate-Level Sim** | Cadence Genus | Logic translation and optimization for timing/area. |
-| **Layout & CTS** | Cadence Innovus | Placement, Routing, and Clock Tree Synthesis. |
-| **Final Timing Closure** | Cadence Quantus | Full RC Parasitic Extraction and Sign-off. |
+| **Architecture** | **32bit pipeline** | Architecture |
+| **opcodes** | **22 OPCODES** | unique opcode number |
+| **Operating Frequency** | **1.66 GHz** | Turbo Mode Target (602.4 ps period) |
+| **Peak Throughput** | **1.66 GOPS** | 1.0 Operation per Cycle | 
+| **Pipeline Latency** | **7-1-0 Cycles** | Variable latency (Mul-Logic-Bypass) |
+| **Worst Negative Slack** | **+27 ps** | Timing margin (Setup) |
+| **Worst Negative Slack** | **+7 ps** | Timing margin (Hold)|
+| **Total Power (Turbo)** | **51.94 mW** | @ 1.66 GHz, 1.2V (High Performance) |
+| **Total Power (Low)** | **3.30 mW** | @ 180 MHz, 1.0V (Power Saving) |
+| **Power Density (Turbo)**| **100 W/cm²** | High thermal density due to frequency/voltage |
+| **Power Density (Low)** | **6.35 W/cm²** | Reduced density in power-saving mode |
+| **Energy per Op** | **31.29 pJ/Op** | Efficiency ($51.94mW / 1.66GHz$) |
+| **Total Cell Area** | **52,380 µm²** | Standard Cell + Filler Area |
+| **Gate Count** | **10,496 Gates** | NAND2 Equivalent Area |
+| **Est. Transistors** | **~84,000** | Estimated count (High flip-flop density) |
+| **Gate Density** | **198.4 kG/mm²** | Physical packing efficiency |
+| **Cell Utilization** | **%77.36** | Final utilization including timing/clock buffers |
+| **Cell Utilization** | **%64.39** | Area occupied specifically by ALU logic cells |
+| **Clock Tree Power** | **%9.61** | this amount of power is used by CT* |
 
-
-
-
-I want you to edit the ALU_FAST_TB.sv
-
-after cmd is 00000 after being 11111 once (after one full loop).
-
-make the test of "pipeline conflicts"
-give 1 cycle operation like SHIFTER & LOGIC BLOCK one cycle after 
-
-prompt later
