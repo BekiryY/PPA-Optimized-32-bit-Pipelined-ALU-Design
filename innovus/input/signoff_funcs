@@ -1,0 +1,15 @@
+ verifyConnectivity -type special -noAntenna 
+
+
+
+checkFPlan -reportUtil 
+
+
+
+
+verifyProcessAntenna -report verifications/antenna.rpt
+
+
+
+verify_drc  -report verifications/drc.rpt -limit 10000
+

@@ -1,0 +1,8 @@
+
+Description:
+Intelligent timing robustness reporting
+
+Usage: report_timing_robustness [-help] -check_type {setup hold} [-opt_list <string>] [-path_group <string>]
+                                -run_time_limit <integer> -target_PTR <float>
+
+**ERROR: (IMPTCM-46):	Argument "-check_type" is required for command "report_timing_robustness", either this option is not specified or an option prior to it is not specified correctly.
