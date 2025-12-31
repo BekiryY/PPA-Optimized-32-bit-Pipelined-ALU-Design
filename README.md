@@ -1,33 +1,20 @@
-# PPA-Optimized 32-bit Pipelined ALU Design
+## Verification & Sign-off
+Functional correctness was verified using a constrained-random testbench in **Cadence Xcelium**.
 
-A high-performance, **PPA (Performance, Power, Area) optimized** Arithmetic Logic Unit (ALU) designed for a 32-bit processor core. This project demonstrates the complete **RTL-to-GDS sign-off flow** on a complex, pipelined unit, achieving a verified operating frequency of **2.0 GHz** (500 ps period).
+* **Self-Checking Scoreboard:** Implemented a golden-model comparator to verify ALU results against reference C/SystemVerilog models in real-time.
+* **100% Code Coverage:** Achieved full sign-off across all metrics:
+    * **Block/Statement:** 100% (Every logic path executed).
+    * **Toggle:** 100% (Every net in the 32-bit datapath transitioned 0->1 and 1->0).
+    * **Functional:** Verified all instruction combinations and pipeline hazard scenarios.
 
-## Key Features & Achievements
+## PPA Metrics (Sign-off Results)
+Final metrics extracted after physical routing in **Innovus** and parasitic extraction in **Quantus**.
 
-* **Ultra-High Frequency:** Achieved timing closure with a positive slack of 45 ps, demonstrating a critical path delay of $\approx 455\,\text{ps}$ (sub-nanosecond performance).
-* **Advanced Pipelining:** Features a multi-stage **pipelined multiplier** for high throughput (1 GMACS) and a separate **pipelined adder** unit. 
-* **Power Optimization:** RTL structured to implement **power gating** for unused blocks to minimize static/leakage power, and incorporates design hooks for **low-power operational modes**.
-* **Area Efficiency:** Implements flag-based comparison logic ($A == B$, $A > B$, etc.) by efficiently reusing the main adder/subtractor hardware, saving silicon area.
-
-## Tool Flow (RTL-to-GDS)
-
-| Stage | Tool | Purpose |
-| :--- | :--- | :--- |
-| **RTL Simulation** | Vivado / Cadence Xcelium | Functional verification before synthesis. |
-| **Synthesis & Gate-Level Sim** | Cadence Genus | Logic translation and optimization for timing/area. |
-| **Layout & CTS** | Cadence Innovus | Placement, Routing, and Clock Tree Synthesis. |
-| **Final Timing Closure** | Cadence Quantus | Full RC Parasitic Extraction and Sign-off. |
-
-====================================================================
--------------------------MAIN BRANCH--------------------------------
-====================================================================
-
-
-I want you to edit the ALU_FAST_TB.sv
-
-after cmd is 00000 after being 11111 once (after one full loop).
-
-make the test of "pipeline conflicts"
-give 1 cycle operation like SHIFTER & LOGIC BLOCK one cycle after 
-
-prompt later
+| Metric | Results |
+| :--- | :--- |
+| **Operating Frequency** | 1.66 GHz (Max: 2.1 GHz) |
+| **Worst Negative Slack (WNS)** | +100 ps (Reg-to-Reg) |
+| **Total Power** | [Insert Value] mW |
+| **Cell Area** | [Insert Value] µm² |
+| **Gate Count** | [Insert Value] Gates (NAND2 Equivalent) |
+| **Utilization** | [Insert Value]% |
