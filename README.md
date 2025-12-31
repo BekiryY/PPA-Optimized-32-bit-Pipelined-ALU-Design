@@ -4,7 +4,7 @@ This repository documents the complete **RTL-to-GDSII** implementation of a high
 
 The design achieves a verified **Turbo Mode frequency of 1.66 GHz** (sub-nanosecond timing) while supporting a dynamic **Low Power Mode** for energy efficiency.
 
-![Alt Text](documents/screenshots/ALU_main_gpdk045.png)
+!Layout view of final view(documents/screenshots/ALU_main_gpdk045.png)
 
 
 ## Design Flow & Methodology
@@ -47,5 +47,5 @@ The following metrics were extracted after physical routing (Innovus) and RC ext
 | **Gate Count** | **10,496 Gates** | NAND2 Equivalent Area |
 | **Est. Transistors** | **~84,000** | Estimated count (High flip-flop density) |
 | **Gate Density** | **198.4 kG/mm²** | Physical packing efficiency |
-| **Cell Utilization** | **%74.7** | *Run `report_density` in Innovus* |
-| **Clock Tree Power** | **%9.61** | *Run `report_power` and check clock net %* |
+| **Cell Utilization** | **%74.7** | Final utilization of floorplan area|
+| **Clock Tree Power** | **%9.61** | this amount of power is used by CT* |
