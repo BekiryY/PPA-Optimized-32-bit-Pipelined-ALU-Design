@@ -50,7 +50,7 @@ module LOGIC_BLOCK_CT;
         forever #5 clk = ~clk;
     end
 
-    covergroup logic_cg @(posedge clk);
+    covergroup logic_cg;
         option.per_instance = 1;
         
         CMD_CP: coverpoint CMD {
@@ -126,6 +126,7 @@ module LOGIC_BLOCK_CT;
             
             // Allow for combinational propagation (this is a combinational block)
             #1; 
+            cg_inst.sample();
             
             // Check Output
             if (Y !== expected_comb) begin
