@@ -1,0 +1,156 @@
+==================================================================================================================================
+-------------------------------------------------------TOP_MODULE----------------------------------------------------------
+==================================================================================================================================
+xcelium> run
+Starting ALU_TOP Coverage Test...
+xmsim: *W,OLDURR: The default algorithm for $urandom_range and randcase is used. It can have distribution problems..
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 23367 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 23367000! Exp=zzzzzzzz Got=6806171b
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 23367 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 23367000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 24807 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 24807000! Exp=zzzzzzzz Got=04c3515b
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 24807 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 24807000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 27157 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 27157000! Exp=zzzzzzzz Got=0000001f
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 27157 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 27157000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 27187 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 27187000! Exp=zzzzzzzz Got=1da65afe
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 27187 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 27187000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 27207 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 27207000! Exp=zzzzzzzz Got=2762bc30
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 27207 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 27207000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 27517 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 27517000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 27537 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 27537000! Exp=zzzzzzzz Got=00000008
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 27537 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 27537000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 34757 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 34757000! Exp=zzzzzzzz Got=00000002
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 34757 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 34757000! Exp=0 Got=1
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,429): (time 36897 NS).
+ALU_TOP_CT.unmblk4.unmblk1
+Result Aux Mismatch at 36897000! Exp=zzzzzzzz Got=00000001
+xmsim: *E,ERRSEV (./ALU_TOP_CT.sv,436): (time 36897 NS).
+ALU_TOP_CT.unmblk4
+Conflict Valid Mismatch at 36897000! Exp=0 Got=1
+---------------------------------------------------
+ Coverage: 100.00%
+ TEST FAILED with 17 errors
+ Note: errors are: due to not finished multiplication and addition before going into low_power mode.
+ Note: errors are: triple conflict, adder multiplication and combinational blocks are giving valid input at the same time.
+---------------------------------------------------
+Simulation complete via $finish(1) at time 50097 NS + 0
+./ALU_TOP_CT.sv:462         $finish;
+
+
+
+==================================================================================================================================
+----------------------------------------------------ADDER32_FAST---------------------------------------------------------
+==================================================================================================================================
+xcelium> run
+Starting Randomized Coverage Test (1000 cycles)...
+---------------------------------------------------
+ TEST PASSED
+ Coverage: 100.00%
+---------------------------------------------------
+Simulation complete via $finish(1) at time 10065100 PS + 0
+./ADDER32_FAST_CT.sv:165         $finish;
+xcelium> exit
+xmsim: *N,COVCGN: Coverage configuration file command "set_covergroup -new_instance_reporting" can be specified to improve the scoping and naming of covergroup instances. It may be noted that subsequent merging of a coverage database saved with this command and a coverage database saved without this command is not allowed.
+xmsim: *W,CGDEFN: Default name "ADDER32_FAST_CT.cg_inst" will be generated for covergroup instance "cg_inst" as the name of the covergroup instance is not specified explicitly: ./ADDER32_FAST_CT.sv, 82.
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  ADDER32_FAST_CT(ADDER32_FAST_CT)
+  scope    :  scope
+  testname :  test
+
+==================================================================================================================================
+------------------------------------------------------MULT32_FAST--------------------------------------------------------
+==================================================================================================================================
+#command:
+xrun MULT32_FAST.sv MULT32_FAST_CT.sv -64bit -access +rwc -coverage all -covoverwrite
+#output:
+
+Starting MULT32_FAST Coverage Test (1000 cycles)...
+---------------------------------------------------
+ TEST PASSED
+ Coverage: 100.00%
+---------------------------------------------------
+Simulation complete via $finish(1) at time 10175100 PS + 0
+./MULT32_FAST_CT.sv:151         $finish;
+xcelium> exit
+xmsim: *N,COVCGN: Coverage configuration file command "set_covergroup -new_instance_reporting" can be specified to improve the scoping and naming of covergroup instances. It may be noted that subsequent merging of a coverage database saved with this command and a coverage database saved without this command is not allowed.
+xmsim: *W,CGDEFN: Default name "MULT32_FAST_CT.cg_inst" will be generated for covergroup instance "cg_inst" as the name of the covergroup instance is not specified explicitly: ./MULT32_FAST_CT.sv, 79.
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  MULT32_FAST_CT(MULT32_FAST_CT)
+  scope    :  scope
+  testname :  test
+
+==================================================================================================================================
+--------------------------------------------------------SHIFTER----------------------------------------------------------
+==================================================================================================================================
+
+xcelium> run
+Starting SHIFTER Coverage Test...
+---------------------------------------------------
+ TEST PASSED
+ Coverage: 100.00%
+---------------------------------------------------
+Simulation complete via $finish(1) at time 20006 NS + 0
+./SHIFTER_CT.sv:175         $finish;
+xcelium> exit
+xmsim: *N,COVCGN: Coverage configuration file command "set_covergroup -new_instance_reporting" can be specified to improve the scoping and naming of covergroup instances. It may be noted that subsequent merging of a coverage database saved with this command and a coverage database saved without this command is not allowed.
+xmsim: *W,CGDEFN: Default name "SHIFTER_CT.cg_inst" will be generated for covergroup instance "cg_inst" as the name of the covergroup instance is not specified explicitly: ./SHIFTER_CT.sv, 117.
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  SHIFTER_CT(SHIFTER_CT)
+  scope    :  scope
+  testname :  test
+
+==================================================================================================================================
+-------------------------------------------------------LOGIC_BLOCK-------------------------------------------------------
+==================================================================================================================================
+
+xcelium> run
+Starting LOGIC_BLOCK Coverage Test...
+---------------------------------------------------
+ TEST PASSED
+ Coverage: 100.00%
+---------------------------------------------------
+Simulation complete via $finish(1) at time 10006 NS + 0
+./LOGIC_BLOCK_CT.sv:149         $finish;
+xcelium> exit
+xmsim: *N,COVCGN: Coverage configuration file command "set_covergroup -new_instance_reporting" can be specified to improve the scoping and naming of covergroup instances. It may be noted that subsequent merging of a coverage database saved with this command and a coverage database saved without this command is not allowed.
+xmsim: *W,CGDEFN: Default name "LOGIC_BLOCK_CT.cg_inst" will be generated for covergroup instance "cg_inst" as the name of the covergroup instance is not specified explicitly: ./LOGIC_BLOCK_CT.sv, 85.
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  LOGIC_BLOCK_CT(LOGIC_BLOCK_CT)
+  scope    :  scope
+  testname :  test
