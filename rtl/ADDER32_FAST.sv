@@ -1,7 +1,6 @@
 module ADDER32 (
     input  logic        clk,
     input  logic        reset_n,
-    input  logic        power_en,
     input  logic        MODE_SEL,
     input  logic        C0,
     input  logic [31:0] A,
@@ -105,14 +104,12 @@ module ADDER32 (
     // -------------------------------------------------------------------------
     
     SUM16 SUM16_0 (
-        .power_en (power_en),
         .P        (P_lower_REG),            // Use registered P to match C_REG timing
         .C        ({C_REG[14:0], C0_REG}),
         .S        (Y[15:0])
     );
 
     SUM16 SUM16_1 (
-        .power_en (power_en),
         .P        (P_REG[15:0]),
         .C        ({C[30:16], C15_REG}),
         .S        (Y[31:16])
@@ -121,7 +118,7 @@ module ADDER32 (
     // -------------------------------------------------------------------------
     // Output Logic
     // -------------------------------------------------------------------------
-    assign Y[32] = power_en ? C[31] : 1'b0; // Carry out of the ADDER
+    assign Y[32] = C[31]; // Carry out of the ADDER
 
 endmodule
 
@@ -245,10 +242,9 @@ module CLA4 (
 endmodule
 
 module SUM16 (
-    input  logic        power_en,
     input  logic [15:0] P,
     input  logic [15:0] C,
     output logic [15:0] S
 );
-    assign S = power_en ? (C ^ P) : 16'b0;
+    assign S = (C ^ P);
 endmodule

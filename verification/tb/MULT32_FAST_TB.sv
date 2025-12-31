@@ -5,7 +5,6 @@ module MULT32_FAST_TB;
     // Signals
     logic clk;
     logic reset_n;
-    logic power_en;
     logic [31:0] A;
     logic [31:0] B;
     logic [63:0] P_REG;
@@ -15,7 +14,6 @@ module MULT32_FAST_TB;
     MULT32 uut (
         .clk(clk),
         .reset_n(reset_n),
-        .power_en(power_en),
         .A(A),
         .B(B),
         .P_REG(P_REG)
@@ -31,7 +29,6 @@ module MULT32_FAST_TB;
     initial begin
         // Initialize Inputs
         reset_n = 0;
-        power_en = 0;
         A = 0;
         B = 0;
 
@@ -39,7 +36,7 @@ module MULT32_FAST_TB;
         $display("Applying Reset...");
         #20;
         reset_n = 1;
-        power_en = 1; // Enable power (though currently unused in RTL)
+
         #20;
 
         $display("Starting MULT32_FAST Testbench (Simple Inputs)...");

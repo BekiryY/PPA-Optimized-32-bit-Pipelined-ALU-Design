@@ -1,7 +1,6 @@
 module MULT32 (
     input  logic        clk,
     input  logic        reset_n,
-    input  logic        power_en,
     input  logic [31:0] A,
     input  logic [31:0] B,
     output logic [63:0] P_REG
@@ -132,12 +131,7 @@ module MULT32 (
         if (!reset_n) begin
             P_REG <= '0;
         end else begin 
-            if(power_en) begin
-                P_REG <= p_comb;
-            end
-            else begin
-                P_REG <= '0;
-            end
+            P_REG <= p_comb;
         end
     end
 

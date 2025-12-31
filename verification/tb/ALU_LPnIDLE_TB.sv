@@ -12,7 +12,6 @@ module ALU_LPnIDLE_TB;
     // Performance control
     logic idle;
     logic input_valid;
-    logic [1:0] branch;
     logic low_power;
     
     // Outputs
@@ -30,7 +29,6 @@ module ALU_LPnIDLE_TB;
         .CMD(CMD),
         .input_valid(input_valid),
         .idle(idle),
-        .branch(branch),
         .low_power(low_power),
         .Y(Y),
         .result_aux(result_aux),
@@ -55,7 +53,7 @@ module ALU_LPnIDLE_TB;
         CMD = 0;
         input_valid = 0;
         idle = 0;
-        branch = 0;
+
         low_power = 0;
 
         // Reset Pulse
@@ -72,7 +70,7 @@ module ALU_LPnIDLE_TB;
         // Test Adder in LP
         $display("  -> Adder (LP)");
         
-        branch = 2'b00;       // Set branch 2 cycles early
+        // branch = 2'b00;       // Set branch 2 cycles early
         repeat(2) @(posedge clk); 
         #1;
 
@@ -90,7 +88,7 @@ module ALU_LPnIDLE_TB;
         // Test Multiplier in LP
         $display("  -> Multiplier (LP)");
         
-        branch = 2'b01;       // Set branch 2 cycles early
+        // branch = 2'b01;       // Set branch 2 cycles early
         repeat(2) @(posedge clk); 
         #1;
 
@@ -110,7 +108,7 @@ module ALU_LPnIDLE_TB;
         // ---------------------------------------------------------
         $display("  -> Shifter (LP)");
         
-        branch = 2'b10;       // Set branch for Shifter
+        // branch = 2'b10;       // Set branch for Shifter
         repeat(2) @(posedge clk); 
         #1;
 
@@ -142,7 +140,7 @@ module ALU_LPnIDLE_TB;
         // ---------------------------------------------------------
         $display("  -> Logic Block (LP)");
         
-        branch = 2'b11;       // Set branch for Logic
+        // branch = 2'b11;       // Set branch for Logic
         repeat(2) @(posedge clk); 
         #1;
 
@@ -187,7 +185,7 @@ module ALU_LPnIDLE_TB;
            A = $urandom; 
            B = $urandom;
            CMD = $urandom;
-           branch = CMD[4:3];
+           // branch = CMD[4:3];
            #1;
         end
         idle = 0;

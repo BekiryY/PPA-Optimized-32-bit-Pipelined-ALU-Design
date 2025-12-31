@@ -1,5 +1,4 @@
 module LOGIC_BLOCK(
-    input logic power_en,
     input [31:0] A,
     input [31:0] B,
     input [2:0] CMD,
@@ -51,17 +50,12 @@ end
 assign Y2 = ~Y1;
 //4-1 MUX (32BITWIDE) SECOND_MUX
 always @(*) begin
-    if(!power_en) begin
-        Y = 32'b0;
-    end
-    else begin
-        case (mux2_sel)
-            2'b00: Y = Y2;
-            2'b01: Y = XNOR_o;
-            2'b10: Y = NOR_o;
-            2'b11: Y = NAND_o;
-        endcase
-    end
+    case (mux2_sel)
+        2'b00: Y = Y2;
+        2'b01: Y = XNOR_o;
+        2'b10: Y = NOR_o;
+        2'b11: Y = NAND_o;
+    endcase
 end
 
 endmodule

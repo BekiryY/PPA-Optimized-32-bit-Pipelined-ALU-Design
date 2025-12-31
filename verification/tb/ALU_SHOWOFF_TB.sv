@@ -12,7 +12,6 @@ module ALU_SHOWOFF_TB;
 
     // Performance control
     logic idle;
-    logic [1:0] branch;
     logic low_power;
     
     // Outputs
@@ -30,7 +29,6 @@ module ALU_SHOWOFF_TB;
         .CMD(CMD),
         .input_valid(input_valid),
         .idle(idle),
-        .branch(branch),
         .low_power(low_power),
         .Y(Y),
         .result_aux(result_aux),
@@ -64,8 +62,7 @@ module ALU_SHOWOFF_TB;
         A = t_a;
         B = t_b;
         input_valid = 1;
-        branch = t_cmd[4:3]; // Predict same cycle (Bypass supported in RTL)
-
+        
         // Pulse valid for 1 cycle
         @(posedge clk);
         #1;
@@ -91,7 +88,6 @@ module ALU_SHOWOFF_TB;
         CMD = 0;
         input_valid = 0;
         idle = 0;
-        branch = 0;
         low_power = 0;
 
         // Reset Pulse
