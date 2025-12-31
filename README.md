@@ -4,7 +4,7 @@ This repository documents the complete **RTL-to-GDSII** implementation of a high
 
 The design achieves a verified **Turbo Mode frequency of 1.66 GHz** (sub-nanosecond timing) while supporting a dynamic **Low Power Mode** for energy efficiency.
 
-!Layout view of final view(documents/screenshots/ALU_main_gpdk045.png)
+![Layout view of final view9](documents/screenshots/ALU_main_gpdk045.png)
 
 
 ## Design Flow & Methodology
