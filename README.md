@@ -10,11 +10,15 @@ Functional correctness was verified using a constrained-random testbench in **Ca
 ## PPA Metrics (Sign-off Results)
 Final metrics extracted after physical routing in **Innovus** and parasitic extraction in **Quantus**.
 
-| Metric | Results |
-| :--- | :--- |
-| **Operating Frequency** | 1.66 GHz (Max: 2.1 GHz) |
-| **Worst Negative Slack (WNS)** | +100 ps (Reg-to-Reg) |
-| **Total Power** | [Insert Value] mW |
-| **Cell Area** | [Insert Value] µm² |
-| **Gate Count** | [Insert Value] Gates (NAND2 Equivalent) |
-| **Utilization** | [Insert Value]% |
+Metric,Results,Description / Context
+Operating Frequency,1.66 GHz (Max: 2.1 GHz),Target frequency achieved with sign-off margins.
+Throughput,1.66 GOPS,1 Operation per Cycle (1660 Million Ops/sec).
+Latency,[X] Cycles,Cycle count from input sampling to valid output.
+Worst Negative Slack,+100 ps,Timing margin after RC parasitic extraction.
+Total Power,[Value] mW,"Measured at 1.66 GHz, 1.1V (Turbo Mode)."
+Energy per Operation,[Value] pJ/Op,Calculated as Total Power/Frequency.
+Total Cell Area,[Value] µm²,Total silicon footprint (Standard Cells + Macros).
+Gate Count,[Value] Gates,NAND2 equivalent (Area / Area of 1 NAND2 gate).
+Gate Density,[Value] kG/mm²,Measure of physical packing efficiency in Innovus.
+Cell Utilization,[Value] %,Percentage of the core area occupied by active cells.
+Clock Tree Power,[Value] %,Percentage of total power consumed by the clock net.
