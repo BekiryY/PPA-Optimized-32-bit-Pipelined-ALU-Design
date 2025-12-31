@@ -20,9 +20,12 @@ Final metrics extracted after physical routing in **Innovus** and parasitic extr
 | **Worst Negative Slack** | **+100 ps** | Timing margin (Reg-to-Reg) |
 | **Total Power** | **51.94 mW** | Measured @Turbo @1.66 GHz, 1.2V |
 | **Total Power** | **3.3 mW** | Measured @LowPower 180 MHz, 1.0V |
+| **Power Density** | **100 W/cm²** | Measured @Turbo 1.66GHz, 1.2V |
+| **Power Density** | **6.35 W/cm²** | Measured @LowPower 180 MHz, 1.0V |
 | **Energy per Op** | **31.1pJ** | Efficiency (51.94mW / 1.66GHz) |
 | **Total Cell Area** | **52900 µm²** | Standard Cell + Filler Area |
 | **Gate Count** | **10496 Gates** | NAND2 Equivalent Area |
+| **Transistor Count** | **84000** | Transistor count (estimation *8) |
 | **Gate Density** | **198412 kG/mm²** | Physical packing efficiency |
 | **Cell Utilization** | **unknown %** | Active cell vs. Core area ratio |
 | **Clock Tree Power** | **unknown %** | Power consumed by CTS buffers |
