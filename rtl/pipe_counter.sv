@@ -22,8 +22,8 @@ module pipe_counter (
             cmd_mul_r <= 14'd0;
         end else begin
             // Pipeline valid signals
-            v_add_r <=  input_valid & (CMD[4:3] == 2'b00) & !low_power;
-            v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01) & !low_power};
+            v_add_r <=  input_valid & (CMD[4:3] == 2'b00) & !low_power & !idle;
+            v_mul_r <= {v_mul_r[5:0], input_valid & (CMD[4:3] == 2'b01) & !low_power & !idle};
             
             // Pipeline command bits (CMD[4:3]) to match latency
             // Adder path: 1 cycle delay

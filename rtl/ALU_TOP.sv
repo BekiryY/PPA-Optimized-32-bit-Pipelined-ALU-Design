@@ -122,23 +122,27 @@ assign result_aux = (valid_mult) ? final_mult_out[63:32] : 32'dz;
 always_comb begin
     Y_conflict = 32'd0;
     conflict_valid = 1'b0;
-
-    if (valid_mult) begin
-        if (valid_comb) begin
-            // Conflict Mult vs Comb. Comb is least important.
-            Y_conflict = comb_out;
-            conflict_valid = 1'b1;
+    if(!idle) begin
+        if (valid_mult) begin
+            if (valid_comb) begin
+                // Conflict Mult vs Comb. Comb is least important.
+                Y_conflict = comb_out;
+                conflict_valid = 1'b1;
+            end else if (valid_adder) begin
+                // Conflict Mult vs Adder. Adder is least important.
+                Y_conflict = final_adder_out;
+                conflict_valid = 1'b1;
+            end
         end else if (valid_adder) begin
-            // Conflict Mult vs Adder. Adder is least important.
-            Y_conflict = final_adder_out;
-            conflict_valid = 1'b1;
+            if (valid_comb) begin
+                // Conflict Adder vs Comb. Comb is least important.
+                Y_conflict = comb_out;
+                conflict_valid = 1'b1;
+            end
         end
-    end else if (valid_adder) begin
-        if (valid_comb) begin
-            // Conflict Adder vs Comb. Comb is least important.
-            Y_conflict = comb_out;
-            conflict_valid = 1'b1;
-        end
+    end else begin
+        Y_conflict = 32'd0;
+        conflict_valid = 1'b0;
     end
 end
 

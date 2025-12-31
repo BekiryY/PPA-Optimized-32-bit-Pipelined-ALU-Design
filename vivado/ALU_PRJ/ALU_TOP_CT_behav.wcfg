@@ -12,13 +12,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="4,851.875 ns"></ZoomStartTime>
-      <ZoomEndTime time="4,931.826 ns"></ZoomEndTime>
-      <Cursor1Time time="4,876.000 ns"></Cursor1Time>
+      <ZoomStartTime time="4,548.400 ns"></ZoomStartTime>
+      <ZoomEndTime time="4,708.801 ns"></ZoomEndTime>
+      <Cursor1Time time="4,617.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="190"></NameColumnWidth>
-      <ValueColumnWidth column_width="87"></ValueColumnWidth>
+      <ValueColumnWidth column_width="82"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="24" />
    <wvobject fp_name="/ALU_TOP_CT/clk" type="logic">
@@ -53,13 +53,13 @@
    <wvobject fp_name="/ALU_TOP_CT/idle" type="logic">
       <obj_property name="ElementShortName">idle</obj_property>
       <obj_property name="ObjectShortName">idle</obj_property>
-      <obj_property name="CustomSignalColor">#DCDCDC</obj_property>
+      <obj_property name="CustomSignalColor">#FFFFFF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/low_power" type="logic">
       <obj_property name="ElementShortName">low_power</obj_property>
       <obj_property name="ObjectShortName">low_power</obj_property>
-      <obj_property name="CustomSignalColor">#A0A0A4</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/ALU_TOP_CT/Y" type="array">

@@ -117,3 +117,18 @@ Compiling module xil_defaultlib.pipe_counter
 Compiling module xil_defaultlib.PG16
 Compiling module xil_defaultlib.carry_calculator
 Compiling module xil_defaultlib.CLA4
+Compiling module xil_defaultlib.CLA16
+Compiling module xil_defaultlib.SUM16
+Compiling module xil_defaultlib.ADDER32
+Compiling module xil_defaultlib.ADDER32_LP
+Compiling module xil_defaultlib.MULT4
+Compiling module xil_defaultlib.MULT8
+Compiling module xil_defaultlib.MULT16
+Compiling module xil_defaultlib.MULT32
+Compiling module xil_defaultlib.MULT32_LP
+Compiling module xil_defaultlib.SHIFTER
+Compiling module xil_defaultlib.LOGIC_BLOCK
+Compiling module xil_defaultlib.ALU_TOP
+Compiling module xil_defaultlib.ALU_TOP_CT
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot ALU_TOP_CT_behav
