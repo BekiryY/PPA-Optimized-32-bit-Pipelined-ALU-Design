@@ -8,9 +8,10 @@ sv xil_defaultlib  --include "B:/VIVADO/2025.2/Vivado/data/rsb/busdef" \
 "../../../../../../rtl/MULT32_LP.sv" \
 "../../../../../../rtl/SHIFTER.sv" \
 "../../../../../../rtl/c0_calculator.sv" \
+"../../../../../../rtl/conflict_handler.sv" \
 "../../../../../../rtl/flag_controller.sv" \
 "../../../../../../rtl/pipe_counter.sv" \
-"../../../../../../verification/coverage_tests/ALU_TOP_CT.sv" \
+"../../../../../../verification/tb/ALU_specific_TB.sv" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

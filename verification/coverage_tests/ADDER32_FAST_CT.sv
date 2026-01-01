@@ -60,7 +60,8 @@ module ADDER32_FAST_CT;
         MODE: coverpoint MODE_SEL {
             bins add = {0};
             bins sub = {1};
-
+        }
+        
         A_VAL: coverpoint A {
             bins val_small = {[0:255]};
             bins val_mid   = {[256:32'hFFFF_FEFF]};

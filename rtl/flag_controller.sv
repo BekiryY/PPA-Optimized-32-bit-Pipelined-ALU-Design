@@ -46,8 +46,8 @@ module flag_controller (
             ZF_reg  <= (Y_reg == 32'h0);
             SF_flag <= Y[31];
             // Standard Overflow: (Operand1_Sign == Operand2_Sign) && (Result_Sign != Operand1_Sign)
-            // Note: Preserving existing logic which seems incomplete but requested to move "as is"
-            OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)); 
+            // Fixed logic to include result sign check
+            OF_flag <= (CMD[4:3] == 2'b00) & (A[31] == (B[31] ^ adder_mode)) & (Y[31] != A[31]); 
             CF_reg  <= CF_flag;
         end
     end
