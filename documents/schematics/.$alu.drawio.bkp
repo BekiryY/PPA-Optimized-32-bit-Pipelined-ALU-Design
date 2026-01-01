@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
   <diagram name="Page-1" id="aOeyKOqMOkMBf1CdZOmT">
-    <mxGraphModel dx="2339" dy="2053" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3096" dy="2594" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -256,6 +256,9 @@
         </mxCell>
         <mxCell id="-cZpsceezmw07lLLf7yc-88" value="&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(27, 29, 30); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;logic_block_EN&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="-cZpsceezmw07lLLf7yc-13" vertex="1">
           <mxGeometry x="70" y="515" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-cZpsceezmw07lLLf7yc-97" value="flag register" style="rounded=0;whiteSpace=wrap;html=1;" parent="-cZpsceezmw07lLLf7yc-13" vertex="1">
+          <mxGeometry x="100" y="40" width="110" height="30" as="geometry" />
         </mxCell>
         <mxCell id="T89DXA8yLcH_9zjJ7A6Q-73" value="" style="triangle;whiteSpace=wrap;html=1;" parent="-cZpsceezmw07lLLf7yc-13" vertex="1">
           <mxGeometry x="290" y="345" width="40" height="50" as="geometry" />
@@ -654,7 +657,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="T89DXA8yLcH_9zjJ7A6Q-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.52;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="T89DXA8yLcH_9zjJ7A6Q-9" target="T89DXA8yLcH_9zjJ7A6Q-34" edge="1">
+        <mxCell id="T89DXA8yLcH_9zjJ7A6Q-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.52;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="T89DXA8yLcH_9zjJ7A6Q-34" edge="1" source="T89DXA8yLcH_9zjJ7A6Q-9">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-520" y="-680" as="sourcePoint" />
             <mxPoint x="-450" y="-676" as="targetPoint" />
