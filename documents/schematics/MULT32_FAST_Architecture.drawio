@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
   <diagram name="Page-1" id="A8_xr0zb0NzI4yBR2w-8">
-    <mxGraphModel dx="1389" dy="889" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2233" dy="1409" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -872,16 +872,16 @@
         <mxCell id="QwZr02xYWKI4WBK6gveA-185" value="HENCE:" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry y="120" width="220" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="QwZr02xYWKI4WBK6gveA-186" value="1 MULT32 has 64 MULT4" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="QwZr02xYWKI4WBK6gveA-186" value="64 MULT4" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="10" y="222.5" width="220" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="QwZr02xYWKI4WBK6gveA-187" value="1 MULT32 has 2 24B 1 32B ADDERS&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="QwZr02xYWKI4WBK6gveA-187" value="1 MULT32 has 2 24B, 1 32B ADDERS&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="220" width="220" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="QwZr02xYWKI4WBK6gveA-188" value="1 MULT16 has 1 16B 1 24B ADDERS&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="QwZr02xYWKI4WBK6gveA-188" value="1 MULT16 has 1 16B, 1 24B ADDERS&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="220" y="40" width="220" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="QwZr02xYWKI4WBK6gveA-189" value="1 MULT8 has 1 8B 1 12B ADDERS&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="QwZr02xYWKI4WBK6gveA-189" value="1 MULT8 has 1 8B, 1 12B ADDERS&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="220" y="80" width="220" height="40" as="geometry" />
         </mxCell>
         <mxCell id="QwZr02xYWKI4WBK6gveA-190" value="HENCE:" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
