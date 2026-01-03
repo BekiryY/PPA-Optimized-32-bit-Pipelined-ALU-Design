@@ -30,5 +30,7 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimi
 INFO: [VRFC 10-311] analyzing module flag_controller
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/pipe_counter.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module pipe_counter
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ALU_specific_TB.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module ALU_specific_TB
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ALU_FAST_TB.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU_FAST_TB
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

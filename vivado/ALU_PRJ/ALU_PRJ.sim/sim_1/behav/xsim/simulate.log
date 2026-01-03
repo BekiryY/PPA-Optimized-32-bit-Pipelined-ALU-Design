@@ -1,15 +1,22 @@
 Time resolution is 1 ps
----------------------------------------------------------------
-Starting Specific ALU Testbench
-Input A fixed at: 11 (0x0000000b)
----------------------------------------------------------------
-Time: 46000Ns | Op: ADD (85 + A) | A: 11 | B: 85 | Result (Y): 96 (0x00000060)
-Time: 66000Ns | Op: SUB (A - 1) | A: 11 | B: 1 | Result (Y): 10 (0x0000000a)
-Time: 145000Ns | Op: MUL (A * 21) | A: 11 | B: 21 | Result (Y): 231 (0x000000e7)
-Time: 166000Ns | Op: EQ  (A == 5) | A: 11 | B: 5 | Result (Y): 14 (0x0000000e)
-Time: 186000Ns | Op: GT  (A > 5) | A: 11 | B: 5 | Result (Y): 6 (0x00000006)
-Time: 206000Ns | Op: LT  (A < 5) | A: 11 | B: 5 | Result (Y): 6 (0x00000006)
-Time: 226000Ns | Op: SLA (A <<< 1) | A: 11 | B: 1 | Result (Y): 22 (0x00000016)
----------------------------------------------------------------
-Testbench Completed
-$finish called at time : 235 ns : File "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ALU_specific_TB.sv" Line 124
+Loop 3 Iteration: 0 / 200 at time 136000
+Loop 3 Iteration: 20 / 200 at time 336000
+Loop 3 Iteration: 40 / 200 at time 536000
+Loop 3 Iteration: 60 / 200 at time 736000
+Loop 3 Iteration: 80 / 200 at time 936000
+Loop 3 Iteration: 100 / 200 at time 1136000
+Loop 3 Iteration: 120 / 200 at time 1336000
+Loop 3 Iteration: 140 / 200 at time 1536000
+Loop 3 Iteration: 160 / 200 at time 1736000
+Loop 3 Iteration: 180 / 200 at time 1936000
+$finish called at time : 2157 ns : File "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/verification/tb/ALU_FAST_TB.sv" Line 155
+Loop 3 Iteration: 0 / 200 at time 136000
+Loop 3 Iteration: 20 / 200 at time 336000
+Loop 3 Iteration: 40 / 200 at time 536000
+Loop 3 Iteration: 60 / 200 at time 736000
+Loop 3 Iteration: 80 / 200 at time 936000
+Loop 3 Iteration: 100 / 200 at time 1136000
+Loop 3 Iteration: 120 / 200 at time 1336000
+Loop 3 Iteration: 140 / 200 at time 1536000
+Loop 3 Iteration: 160 / 200 at time 1736000
+Loop 3 Iteration: 180 / 200 at time 1936000

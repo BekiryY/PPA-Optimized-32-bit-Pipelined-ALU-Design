@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1/MULT32.tcl"
+  variable script "C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1/ALU_TOP.tcl"
   variable category "vivado_synth"
 }
 
@@ -58,7 +58,7 @@ if {$::dispatch::connected} {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param checkpoint.writeSynthRtdsInDcp 1
 set_param general.usePosixSpawnForFork 1
-set_param synth.incrementalSynthesisCache C:/Users/BEK/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-2052-BEK-PC/incrSyn
+set_param synth.incrementalSynthesisCache C:/Users/BEK/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-20176-DESKTOP-T8LGAKK/incrSyn
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
@@ -75,7 +75,19 @@ set_property ip_output_repo c:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-AL
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib -sv C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv
+read_verilog -library xil_defaultlib -sv {
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ADDER32_FAST.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ADDER32_LP.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/LOGIC_BLOCK.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_FAST.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/MULT32_LP.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/SHIFTER.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/c0_calculator.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/conflict_handler.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/flag_controller.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/pipe_counter.sv
+  C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/rtl/ALU_TOP.sv
+}
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -86,10 +98,12 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.srcs/utils_1/imports/synth_1/MULT32.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top MULT32 -part xc7k70tfbv676-1
+synth_design -top ALU_TOP -part xc7k70tfbv676-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -99,10 +113,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef MULT32.dcp
+write_checkpoint -force -noxdef ALU_TOP.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-generate_parallel_reports -reports { "report_utilization -file MULT32_utilization_synth.rpt -pb MULT32_utilization_synth.pb"  } 
+generate_parallel_reports -reports { "report_utilization -file ALU_TOP_utilization_synth.rpt -pb ALU_TOP_utilization_synth.pb"  } 
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

@@ -11,7 +11,7 @@ sv xil_defaultlib  --include "B:/VIVADO/2025.2/Vivado/data/rsb/busdef" \
 "../../../../../../rtl/conflict_handler.sv" \
 "../../../../../../rtl/flag_controller.sv" \
 "../../../../../../rtl/pipe_counter.sv" \
-"../../../../../../verification/tb/ALU_specific_TB.sv" \
+"../../../../../../verification/tb/ALU_FAST_TB.sv" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

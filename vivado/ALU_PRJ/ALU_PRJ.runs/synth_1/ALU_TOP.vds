@@ -1,17 +1,26 @@
-
-*** Running vivado
-    with args -log ALU_TOP.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source ALU_TOP.tcl
-
-
-
-****** Vivado v2025.2 (64-bit)
-  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
-  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
-  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Sat Jan  3 20:29:49 2026
-    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
-
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Jan  3 20:29:49 2026
+# Process ID         : 18588
+# Current directory  : C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1
+# Command line       : vivado.exe -log ALU_TOP.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ALU_TOP.tcl
+# Log file           : C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1/ALU_TOP.vds
+# Journal file       : C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.runs/synth_1\vivado.jou
+# Running On         : DESKTOP-T8LGAKK
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : AMD Ryzen 5 5600H with Radeon Graphics         
+# CPU Frequency      : 3294 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 14877 MB
+# Swap memory        : 3912 MB
+# Total Virtual      : 18789 MB
+# Available Virtual  : 2791 MB
+#-----------------------------------------------------------
 source ALU_TOP.tcl -notrace
 create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:07 . Memory (MB): peak = 528.648 ; gain = 223.559
 Command: read_checkpoint -auto_incremental -incremental C:/Users/BEK/repos/PPA-Optimized-32-bit-Pipelined-ALU-Design/vivado/ALU_PRJ/ALU_PRJ.srcs/utils_1/imports/synth_1/MULT32.dcp

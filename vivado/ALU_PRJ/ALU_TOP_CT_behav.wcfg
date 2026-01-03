@@ -3,72 +3,81 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="ALU_specific_TB_behav.wdb" id="1">
+      <db_ref path="ALU_FAST_TB_behav.wdb" id="1">
          <top_modules>
-            <top_module name="ALU_specific_TB" />
+            <top_module name="ALU_FAST_TB" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="160.901 ns"></ZoomEndTime>
-      <Cursor1Time time="35.200 ns"></Cursor1Time>
+      <ZoomStartTime time="201.179 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,423.180 ns"></ZoomEndTime>
+      <Cursor1Time time="276.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="190"></NameColumnWidth>
-      <ValueColumnWidth column_width="77"></ValueColumnWidth>
+      <NameColumnWidth column_width="188"></NameColumnWidth>
+      <ValueColumnWidth column_width="74"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="11" />
-   <wvobject fp_name="/ALU_specific_TB/clk" type="logic">
+   <WVObjectSize size="15" />
+   <wvobject fp_name="/ALU_FAST_TB/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/reset_n" type="logic">
+   <wvobject fp_name="/ALU_FAST_TB/reset_n" type="logic">
       <obj_property name="ElementShortName">reset_n</obj_property>
       <obj_property name="ObjectShortName">reset_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/A" type="array">
+   <wvobject fp_name="/ALU_FAST_TB/A" type="array">
       <obj_property name="ElementShortName">A[31:0]</obj_property>
       <obj_property name="ObjectShortName">A[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/B" type="array">
+   <wvobject fp_name="/ALU_FAST_TB/B" type="array">
       <obj_property name="ElementShortName">B[31:0]</obj_property>
       <obj_property name="ObjectShortName">B[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/CMD" type="array">
-      <obj_property name="ElementShortName">CMD[4:0]</obj_property>
-      <obj_property name="ObjectShortName">CMD[4:0]</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/input_valid" type="logic">
+   <wvobject fp_name="/ALU_FAST_TB/input_valid" type="logic">
       <obj_property name="ElementShortName">input_valid</obj_property>
       <obj_property name="ObjectShortName">input_valid</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/Y" type="array">
+   <wvobject fp_name="/ALU_FAST_TB/CMD" type="array">
+      <obj_property name="ElementShortName">CMD[4:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_FAST_TB/Y" type="array">
       <obj_property name="ElementShortName">Y[31:0]</obj_property>
       <obj_property name="ObjectShortName">Y[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/output_valid" type="logic">
-      <obj_property name="ElementShortName">output_valid</obj_property>
-      <obj_property name="ObjectShortName">output_valid</obj_property>
+   <wvobject fp_name="/ALU_FAST_TB/result_aux" type="array">
+      <obj_property name="ElementShortName">result_aux[31:0]</obj_property>
+      <obj_property name="ObjectShortName">result_aux[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/idle" type="logic">
+   <wvobject fp_name="/ALU_FAST_TB/idle" type="logic">
       <obj_property name="ElementShortName">idle</obj_property>
       <obj_property name="ObjectShortName">idle</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/low_power" type="logic">
+   <wvobject fp_name="/ALU_FAST_TB/low_power" type="logic">
       <obj_property name="ElementShortName">low_power</obj_property>
       <obj_property name="ObjectShortName">low_power</obj_property>
    </wvobject>
-   <wvobject fp_name="/ALU_specific_TB/flag_reg" type="array">
+   <wvobject fp_name="/ALU_FAST_TB/output_valid" type="logic">
+      <obj_property name="ElementShortName">output_valid</obj_property>
+      <obj_property name="ObjectShortName">output_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_FAST_TB/flag_reg" type="array">
       <obj_property name="ElementShortName">flag_reg[7:0]</obj_property>
       <obj_property name="ObjectShortName">flag_reg[7:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_FAST_TB/cmd_counter" type="array">
+      <obj_property name="ElementShortName">cmd_counter[31:0]</obj_property>
+      <obj_property name="ObjectShortName">cmd_counter[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_FAST_TB/gen_cmd" type="array">
+      <obj_property name="ElementShortName">gen_cmd[4:0]</obj_property>
+      <obj_property name="ObjectShortName">gen_cmd[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ALU_FAST_TB/i" type="array">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
    </wvobject>
 </wave_config>
