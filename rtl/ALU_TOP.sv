@@ -15,7 +15,7 @@ module ALU_TOP(
     input low_power,
     //low power table
     //0 - normal (upto 1.66GHZ)
-    //1 - low power (upto 120MHZ)
+    //1 - low power (upto 180MHZ)
 
     //outputs
     output logic [31:0] Y,
@@ -132,8 +132,6 @@ assign result_aux = (valid_mult) ? final_mult_out[63:32] : 32'dz;
         .conflict_valid(conflict_valid)
     );
 
-// Even tough these look like spagetthi, tristates are faster than muxes in order of 1-2 logic levels
-
 // Flag Register Update (including CF)
     flag_controller flags (
         .clk(clk),
@@ -149,10 +147,8 @@ assign result_aux = (valid_mult) ? final_mult_out[63:32] : 32'dz;
         .CF_reg(CF_reg)
     );
 
-
     // Output Valid Handling and Command Pipelining
 
-    
     pipe_counter pipe_cnt (
         .clk(clk),
         .reset_n(reset_n),
@@ -164,7 +160,6 @@ assign result_aux = (valid_mult) ? final_mult_out[63:32] : 32'dz;
         .v_add_r(v_add_r),
         .v_mul_r(v_mul_r)
     );  
-
 
 //counter (NOT used currently but can be used in future)
 logic [15:0] count;
@@ -201,8 +196,8 @@ always_comb begin
     end
 end
 
-//used for <, >, ADD, SUB, ADDC, SUBC
-//6 IMPLEMENTED
+//used for ADD, SUB, <, >, ADDC, SUBC
+//6 operationsIMPLEMENTED
 ADDER32 adder(
     .clk(clk),
     .reset_n(reset_n),
@@ -246,7 +241,7 @@ SHIFTER shifter(
 );
 
 //used for AND, OR, XOR, NOT, NAND, NOR, XNOR, EQ
-//8 IMPLEMENTED
+//8 operations IMPLEMENTED
 LOGIC_BLOCK logic_block(
     .A(A_gated),
     .B(B_gated),
